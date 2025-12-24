@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网文 - English Novel Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for webnovels */
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .webnovel-content {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+        }
+        
+        .webnovel-article {
+            margin-bottom: 30px;
+        }
+        
+        .webnovel-title {
+            color: #5a3e2b;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .webnovel-link {
+            color: #17a2b8;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .webnovel-link:hover {
+            color: #138496;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">小说</a></li>
+            <li><a href="webnovels.html" class="active">网文</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Webnovel List Sidebar -->
+        <aside class="novel-sidebar" id="novelSidebar">
+            <div class="sidebar-header">
+                <h2>网文列表</h2>
+                <button class="toggle-btn" id="toggleSidebar">☰</button>
+            </div>
+            <div class="novel-list" id="novelList">
+                <div class="novel-item active" data-novel="article1">
+                    <h3>AI Models Analyze Language</h3>
+                </div>
+                <div class="novel-item" data-novel="article2">
+                    <h3>AI Image Generators</h3>
+                </div>
+                <div class="novel-item" data-novel="article3">
+                    <h3>EU Probes Meta</h3>
+                </div>
+                <div class="novel-item" data-novel="article4">
+                    <h3>Next Frontier for AI</h3>
+                </div>
+                <div class="novel-item" data-novel="article5">
+                    <h3>AI Scaling</h3>
+                </div>
+                <div class="novel-item" data-novel="article6">
+                    <h3>Meta Limitless AI Wearable</h3>
+                </div>
+                <div class="novel-item" data-novel="article7">
+                    <h3>Apple Leadership Changes</h3>
+                </div>
+                <div class="novel-item" data-novel="article8">
+                    <h3>AI Data Center Boom</h3>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1 id="novelTitle">网文阅读</h1>
+                <p id="novelAuthor">精选网络文章</p>
+            </header>
+            
+            <main>
+                <div class="webnovel-content" id="webnovelContent">
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">AI Models Analyze Language as Well as a Human Expert</h2>
+                        <p><a href="https://www.wired.com/story/in-a-first-ai-models-analyze-language-as-well-as-a-human-expert/" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>这是一篇关于AI语言模型的文章，探讨了AI模型如何像人类专家一样分析语言。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">AI Image Generators: Better or Worse?</h2>
+                        <p><a href="https://www.theverge.com/column/843883/ai-image-generators-better-worse" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>这篇文章讨论了AI图像生成器的发展，分析了其优缺点和未来趋势。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">EU Probes Meta Over Potential AI Restrictions on WhatsApp</h2>
+                        <p><a href="https://www.pymnts.com/cpi-posts/eu-probes-meta-over-potential-ai-restrictions-on-whatsapp/" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>欧盟正在调查Meta在WhatsApp上的潜在AI限制，这篇文章详细介绍了相关情况。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">The Next Frontier for AI Is the Human Brain</h2>
+                        <p><a href="https://www.forbes.com/sites/robtoews/2025/12/07/the-next-frontier-for-ai-is-the-human-brain/" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>这篇文章探讨了AI的下一个前沿领域——人类大脑，分析了脑机接口和神经AI的发展。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">Demis Hassabis: AI Scaling Pushed to Maximum Data</h2>
+                        <p><a href="https://www.businessinsider.com/demis-hassabis-ai-scaling-pushed-to-maximum-data-2025-12" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>DeepMind创始人Demis Hassabis讨论了AI扩展到最大数据的问题，分享了他对AI未来的看法。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">Meta's Limitless AI Wearable</h2>
+                        <p><a href="https://www.cnbc.com/2025/12/05/meta-limitless-ai-wearable.html" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>Meta发布了名为Limitless的AI可穿戴设备，这篇文章介绍了其功能和潜在影响。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">Apple Tim Cook Leadership Changes</h2>
+                        <p><a href="https://www.cnn.com/2025/12/06/tech/apple-tim-cook-leadership-changes" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>苹果公司CEO Tim Cook宣布了领导层变动，这篇文章分析了这一变化的影响。</p>
+                    </div>
+                    
+                    <div class="webnovel-article">
+                        <h2 class="webnovel-title">AI Data Center Boom's Unexpected Winner</h2>
+                        <p><a href="https://www.fastcompany.com/91450218/ai-data-center-boom-unexpected-winner" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                        <p>AI数据中心的繁荣带来了意想不到的赢家，这篇文章揭示了其中的故事。</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const novelSidebar = document.getElementById('novelSidebar');
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const novelList = document.getElementById('novelList');
+        const container = document.querySelector('.container');
+        const webnovelContent = document.getElementById('webnovelContent');
+        
+        // Initialize the application
+        function init() {
+            // Add sidebar toggle functionality
+            addSidebarToggle();
+            
+            // Add novel selection event listeners
+            addNovelSelectionListeners();
+        }
+        
+        // Add sidebar toggle functionality
+        function addSidebarToggle() {
+            toggleSidebar.addEventListener('click', () => {
+                novelSidebar.classList.toggle('collapsed');
+                container.classList.toggle('sidebar-collapsed');
+            });
+        }
+        
+        // Add novel selection event listeners
+        function addNovelSelectionListeners() {
+            const novelItems = document.querySelectorAll('.novel-item');
+            
+            novelItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    // Update active state
+                    novelItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                });
+            });
+        }
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
