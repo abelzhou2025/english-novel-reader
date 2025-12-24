@@ -1,0 +1,102 @@
+name: Daily Novel Update
+
+on:
+  schedule:
+    # Run daily at 8:00 AM UTC
+    - cron: '0 8 * * *'
+  workflow_dispatch:
+    # Allow manual trigger
+    inputs:
+      reason:
+        description: 'Reason for manual update'
+        required: false
+        default: 'Manual update'
+
+jobs:
+  update-novel:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+        if: github.event_name != 'schedule' || hashFiles('package-lock.json') != ''
+
+      - name: Generate new novel content
+        run: |
+          # Create a script to generate new content
+          # This is a placeholder - you can replace this with your own logic
+          echo "Generating new novel content..."
+          
+          # Example: Append a new paragraph to existing novel
+          # You can customize this to fetch from an API, database, or other source
+          cat > generate-content.js << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          
+          // Read current script.js to get novel data
+          const scriptPath = path.join(__dirname, 'script.js');
+          let scriptContent = fs.readFileSync(scriptPath, 'utf8');
+          
+          // Simple example: Add a new paragraph to Jane Eyre
+          // In production, you would fetch new content from a reliable source
+          const newParagraph = 'This is a new paragraph added automatically by GitHub Actions.';
+          
+          // Update the novel content in script.js
+          scriptContent = scriptContent.replace(
+            /jane_eyre:\s*\{[^}]*content:\s*\[(.*?)\]/s,
+            (match, content) => {
+              // Parse the content array
+              const paragraphs = JSON.parse(`[${content}]`);
+              // Add new paragraph at the end
+              paragraphs.push(newParagraph);
+              // Return the updated match
+              return match.replace(content, JSON.stringify(paragraphs).slice(1, -1));
+            }
+          );
+          
+          // Write back the updated script.js
+          fs.writeFileSync(scriptPath, scriptContent, 'utf8');
+          console.log('Novel content updated successfully!');
+          EOF
+          
+          # Run the content generation script
+          node generate-content.js
+          
+          # Generate RSS feed
+          node rss-generator.js
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          
+          # Check if there are any changes
+          git status
+          
+          # Add changes
+          git add script.js
+          
+          # Commit changes
+          git commit -m 'Daily novel update: $(date +"%Y-%m-%d")'
+          
+          # Push changes
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Notify on success
+        if: success()
+        run: echo "Novel updated successfully!"
+
+      - name: Notify on failure
+        if: failure()
+        run: echo "Novel update failed!"

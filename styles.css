@@ -9,12 +9,112 @@ body {
     background-color: #f8f4e9;
     color: #333;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .container {
-    max-width: 900px;
+    display: flex;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Novel Sidebar */
+.novel-sidebar {
+    width: 300px;
+    background-color: #5a3e2b;
+    color: #fff;
     padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 100;
+}
+
+.novel-sidebar.collapsed {
+    transform: translateX(-100%);
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+    color: #f8f4e9;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: none;
+    transition: color 0.2s ease;
+}
+
+.toggle-btn:hover {
+    color: #d4a76a;
+}
+
+.novel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.novel-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.novel-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.novel-item.active {
+    background-color: rgba(212, 167, 106, 0.3);
+    border-color: #d4a76a;
+}
+
+.novel-item h3 {
+    font-size: 1.2rem;
+    margin: 0 0 5px 0;
+    color: #f8f4e9;
+}
+
+.novel-item p {
+    font-size: 0.9rem;
+    margin: 0;
+    color: rgba(248, 244, 233, 0.8);
+    font-style: italic;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 300px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.container.sidebar-collapsed .main-content {
+    margin-left: 0;
 }
 
 header {
@@ -174,8 +274,27 @@ header p {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .novel-sidebar {
+        width: 250px;
+    }
+    
+    .main-content {
+        margin-left: 250px;
+    }
+}
+
 @media (max-width: 768px) {
-    .container {
+    .novel-sidebar {
+        width: 280px;
+    }
+    
+    .toggle-btn {
+        display: block;
+    }
+    
+    .main-content {
+        margin-left: 0;
         padding: 10px;
     }
     
@@ -194,5 +313,19 @@ header p {
     .popup-content {
         width: 95%;
         margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .novel-item h3 {
+        font-size: 1.1rem;
+    }
+    
+    .novel-item p {
+        font-size: 0.8rem;
     }
 }
