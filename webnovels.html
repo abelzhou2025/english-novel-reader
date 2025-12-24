@@ -201,6 +201,8 @@
                         </h2>
                         <div class="article-tags">
                             <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
                     <div class="webnovel-article" data-tags="ai openai google meta microsoft">
                         <h2 class="webnovel-title">
                             <a href="articles/godfather_of_ai_says_google_is_beginnmd.html" class="webnovel-title-link">
@@ -354,16 +356,7 @@
                     <div class="webnovel-article" data-tags="ai amazon apple">
                         <h2 class="webnovel-title">
                             <a href="articles/ai_helps_drive_record_118_billion_in_bmd.html" class="webnovel-title-link">
-                                AI helps drive record 
-                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft deepmind anthropic tesla">
-                        <h2 class="webnovel-title">
-                            <a href="articles/10_ai_predictions_for_2026md.html" class="webnovel-title-link">
-                                10 AI Predictions For 2026
-                            </a>
-                        </h2>
-                        <div class="article-tags">
-                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
-                        1.8 billion in Black Friday online spending
+                                AI helps drive record 1.8 billion in Black Friday online spending
                             </a>
                         </h2>
                         <div class="article-tags">
@@ -773,16 +766,7 @@
                     <div class="webnovel-article" data-tags="ai meta">
                         <h2 class="webnovel-title">
                             <a href="articles/fei-fei_li_the_godmother_of_ai_got_hmd.html" class="webnovel-title-link">
-                                Fei-Fei Li, the 'Godmother of AI' whose startup is now valued at north of 
-                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft deepmind anthropic tesla">
-                        <h2 class="webnovel-title">
-                            <a href="articles/10_ai_predictions_for_2026md.html" class="webnovel-title-link">
-                                10 AI Predictions For 2026
-                            </a>
-                        </h2>
-                        <div class="article-tags">
-                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
-                         billion, got her start as a dry cleaner
+                                Fei-Fei Li, the 'Godmother of AI' whose startup is now valued at north of billion, got her start as a dry cleaner
                             </a>
                         </h2>
                         <div class="article-tags">
@@ -2091,18 +2075,54 @@
             });
             paginationContainer.appendChild(prevButton);
             
-            // Create page number buttons
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.textContent = i;
-                pageButton.className = `pagination-btn ${currentPage === i ? 'active' : ''}`;
-                pageButton.addEventListener('click', () => {
-                    currentPage = i;
-                    renderArticles();
-                    renderPagination();
-                });
-                paginationContainer.appendChild(pageButton);
-            }
+            // Create page input container
+            const pageInputContainer = document.createElement('div');
+            pageInputContainer.className = 'page-input-container';
+            pageInputContainer.style.display = 'flex';
+            pageInputContainer.style.alignItems = 'center';
+            pageInputContainer.style.gap = '8px';
+            pageInputContainer.style.margin = '0 15px';
+            
+            // Create page input label
+            const pageLabel = document.createElement('span');
+            pageLabel.textContent = '第';
+            pageLabel.style.color = '#5a3e2b';
+            pageLabel.style.fontWeight = 'bold';
+            pageInputContainer.appendChild(pageLabel);
+            
+            // Create page input box
+            const pageInput = document.createElement('input');
+            pageInput.type = 'number';
+            pageInput.className = 'page-input';
+            pageInput.value = currentPage;
+            pageInput.min = '1';
+            pageInput.max = totalPages;
+            pageInput.style.width = '60px';
+            pageInput.style.padding = '5px 8px';
+            pageInput.style.border = '1px solid #d4a76a';
+            pageInput.style.borderRadius = '4px';
+            pageInput.style.fontSize = '0.9rem';
+            pageInput.style.textAlign = 'center';
+            pageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    const pageNum = parseInt(pageInput.value);
+                    if (pageNum >= 1 && pageNum <= totalPages) {
+                        currentPage = pageNum;
+                        renderArticles();
+                        renderPagination();
+                    }
+                }
+            });
+            pageInputContainer.appendChild(pageInput);
+            
+            // Create page total label
+            const pageTotalLabel = document.createElement('span');
+            pageTotalLabel.textContent = `页 / 共 ${totalPages} 页`;
+            pageTotalLabel.style.color = '#5a3e2b';
+            pageTotalLabel.style.fontWeight = 'bold';
+            pageInputContainer.appendChild(pageTotalLabel);
+            
+            paginationContainer.appendChild(pageInputContainer);
             
             // Create next button
             const nextButton = document.createElement('button');
