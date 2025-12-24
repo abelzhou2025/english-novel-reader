@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Novel Reader with Translation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="novels.html" class="active">小说</a></li>
+            <li><a href="webnovels.html">网文</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Novel List Sidebar -->
+        <aside class="novel-sidebar" id="novelSidebar">
+            <div class="sidebar-header">
+                <h2>Novel Library</h2>
+                <button class="toggle-btn" id="toggleSidebar">☰</button>
+            </div>
+            <div class="novel-list" id="novelList">
+                <div class="novel-item active" data-novel="jane_eyre">
+                    <h3>Jane Eyre</h3>
+                </div>
+                <div class="novel-item" data-novel="pride_and_prejudice">
+                    <h3>Pride and Prejudice</h3>
+                </div>
+                <div class="novel-item" data-novel="moby_dick">
+                    <h3>Moby Dick</h3>
+                </div>
+                <div class="novel-item" data-novel="the_count_of_monte_cristo">
+                    <h3>The Count of Monte Cristo</h3>
+                </div>
+                <div class="novel-item" data-novel="gullivers_travels_into_several_remote_nations_of_the_world">
+                    <h3>Gulliver's Travels</h3>
+                </div>
+                <div class="novel-item" data-novel="the_railway_children">
+                    <h3>The Railway Children</h3>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <header>
+                <h1 id="novelTitle">Jane Eyre</h1>
+                <p id="novelAuthor">By Charlotte Brontë</p>
+            </header>
+            
+            <main>
+                <div class="novel-content" id="novelContent">
+                    <p><span class="selectable">Conventionality is not morality. Self-righteousness is not religion. To attack the first is not to assail the last. To pluck the mask from the face of the Pharisee, is not to lift an impious hand to the Crown of Thorns.</span></p>
+                    <p><span class="selectable">These things and deeds are diametrically opposed: they are as distinct as is vice from virtue. Men too often confound them: they should not be confounded: appearance should not be mistaken for truth; narrow human doctrines, that only tend to elate and magnify a few, should not be substituted for the world-redeeming creed of Christ.</span></p>
+                    <p><span class="selectable">There is—I repeat it—a difference; and it is a good, and not a bad action to mark broadly and clearly the line of separation between them.</span></p>
+                    <p><span class="selectable">The world may not like to see these ideas dissevered, for it has been accustomed to blend them; finding it convenient to make external show pass for sterling worth—to let white-washed walls vouch for clean shrines. It may hate him who dares to scrutinise and expose—to rase the gilding, and show base metal under it—to penetrate the sepulchre, and reveal charnel relics: but, hate as it will, it is indebted to him.</span></p>
+                </div>
+            </main>
+            
+            <div class="translation-popup" id="translationPopup">
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <h3>Translation</h3>
+                        <button class="close-btn" id="closeBtn">&times;</button>
+                    </div>
+                    <div class="popup-body">
+                        <div class="original-text" id="originalText"></div>
+                        <div class="translated-text" id="translatedText"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
