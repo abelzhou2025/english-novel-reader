@@ -19,34 +19,41 @@
             min-height: 600px;
         }
         
-        /* Tags Filter */
-        .tags-filter {
+        /* Sidebar Tags */
+        .tags-sidebar {
             display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
+            flex-direction: row;
+            gap: 8px;
             flex-wrap: wrap;
+            align-items: flex-start;
         }
         
         .tag-btn {
-            background-color: #e8f4f8;
-            color: #17a2b8;
-            border: 1px solid #17a2b8;
-            padding: 8px 16px;
-            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 10px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 0.9rem;
             transition: all 0.3s ease;
             font-family: 'Microsoft YaHei', sans-serif;
+            text-align: center;
+            display: inline-block;
+            width: auto;
+            min-width: auto;
+            white-space: nowrap;
         }
         
         .tag-btn:hover {
-            background-color: #17a2b8;
-            color: #fff;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: #d4a76a;
         }
         
         .tag-btn.active {
-            background-color: #17a2b8;
-            color: #fff;
+            background-color: rgba(212, 167, 106, 0.3);
+            border-color: #d4a76a;
+            color: #d4a76a;
         }
         
         .webnovel-article {
@@ -105,37 +112,19 @@
     </nav>
     
     <div class="container">
-        <!-- Webnovel List Sidebar -->
+        <!-- Webnovel Tags Sidebar -->
         <aside class="novel-sidebar" id="novelSidebar">
             <div class="sidebar-header">
-                <h2>网文列表</h2>
+                <h2>网文分类</h2>
                 <button class="toggle-btn" id="toggleSidebar">☰</button>
             </div>
-            <div class="novel-list" id="novelList">
-                <div class="novel-item active" data-novel="article1">
-                    <h3>AI Models Analyze Language</h3>
-                </div>
-                <div class="novel-item" data-novel="article2">
-                    <h3>AI Image Generators</h3>
-                </div>
-                <div class="novel-item" data-novel="article3">
-                    <h3>EU Probes Meta</h3>
-                </div>
-                <div class="novel-item" data-novel="article4">
-                    <h3>Next Frontier for AI</h3>
-                </div>
-                <div class="novel-item" data-novel="article5">
-                    <h3>AI Scaling</h3>
-                </div>
-                <div class="novel-item" data-novel="article6">
-                    <h3>Meta Limitless AI Wearable</h3>
-                </div>
-                <div class="novel-item" data-novel="article7">
-                    <h3>Apple Leadership Changes</h3>
-                </div>
-                <div class="novel-item" data-novel="article8">
-                    <h3>AI Data Center Boom</h3>
-                </div>
+            <div class="tags-sidebar">
+                <button class="tag-btn active" data-tag="all">全部</button>
+                <button class="tag-btn" data-tag="latest">最新</button>
+                <button class="tag-btn" data-tag="ai">AI</button>
+                <button class="tag-btn" data-tag="meta">Meta</button>
+                <button class="tag-btn" data-tag="apple">Apple</button>
+                <button class="tag-btn" data-tag="deepmind">DeepMind</button>
             </div>
         </aside>
         
@@ -148,15 +137,6 @@
             
             <main>
                 <div class="webnovel-content" id="webnovelContent">
-                    <!-- Tags Filter -->
-                    <div class="tags-filter">
-                        <button class="tag-btn active" data-tag="all">全部</button>
-                        <button class="tag-btn" data-tag="latest">最新</button>
-                        <button class="tag-btn" data-tag="ai">AI</button>
-                        <button class="tag-btn" data-tag="meta">Meta</button>
-                        <button class="tag-btn" data-tag="apple">Apple</button>
-                        <button class="tag-btn" data-tag="deepmind">DeepMind</button>
-                    </div>
                     
                     <div class="webnovel-article" data-tags="ai">
                         <h2 class="webnovel-title">

@@ -64,6 +64,7 @@ body {
     font-size: 1.1rem;
     font-weight: bold;
     transition: color 0.3s ease;
+    font-family: 'Microsoft YaHei', sans-serif;
 }
 
 .top-nav a:hover {
@@ -101,7 +102,7 @@ body {
     color: #fff;
     font-size: 1.3rem;
     cursor: pointer;
-    display: none;
+    display: block;
     transition: color 0.2s ease;
 }
 
@@ -186,6 +187,8 @@ header p {
     margin-bottom: 20px;
     font-size: 1.1rem;
     text-align: justify;
+    font-family: 'Microsoft YaHei', sans-serif;
+    color: #333;
 }
 
 .selectable {
@@ -193,6 +196,8 @@ header p {
     transition: background-color 0.2s ease;
     padding: 2px 4px;
     border-radius: 3px;
+    font-family: Georgia, serif;
+    color: #333;
 }
 
 .selectable:hover {
@@ -209,20 +214,32 @@ body {
     font-family: 'Microsoft YaHei', 'Georgia', serif;
 }
 
+/* Ensure all Chinese text uses Microsoft YaHei */
+h1, h2, h3, h4, h5, h6, p, a, span, button {
+    font-family: 'Microsoft YaHei', sans-serif;
+}
+
+/* Novel content English text should match sidebar font */
+.novel-content .selectable {
+    font-family: Georgia, serif;
+}
+
 /* Translation Popup */
 .translation-popup {
     display: none;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: auto;
+    bottom: 60px;
+    right: 20px;
+    transform: none;
     z-index: 1000;
     animation: fadeIn 0.2s ease;
-    width: 80%;
-    max-width: 600px;
-    max-height: 60%;
+    width: 60%;
+    max-width: 400px;
+    max-height: 30%;
     background-color: transparent;
     pointer-events: none;
+    left: auto;
 }
 
 .translation-popup.show {
@@ -265,7 +282,7 @@ body {
 }
 
 .popup-body {
-    padding: 12px 15px;
+    padding: 10px 12px;
 }
 
 .original-text {
@@ -273,15 +290,15 @@ body {
 }
 
 .translated-text {
-    padding: 12px;
+    padding: 10px;
     background-color: #e8f4f8;
     border-left: 3px solid #17a2b8;
     font-family: 'Microsoft YaHei', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #333;
-    line-height: 1.5;
+    line-height: 1.4;
     margin: 0;
-    max-height: 40vh;
+    max-height: 25vh;
     overflow-y: auto;
 }
 
