@@ -1931,6 +1931,11 @@
         const webnovelContent = document.getElementById('webnovelContent');
         const tagButtons = document.querySelectorAll('.tag-btn');
         
+        // Pagination variables
+        let currentPage = 1;
+        const articlesPerPage = 20;
+        let filteredArticles = [];
+        
         // Track selected tags for multi-select functionality
         const selectedTags = new Set();
         
@@ -1938,6 +1943,13 @@
         function init() {
             // Add tags filter functionality
             addTagsFilter();
+            // Initialize articles
+            initializeArticles();
+        }
+        
+        // Initialize articles for filtering and pagination
+        function initializeArticles() {
+            filterArticles();
         }
         
         // Add tags filter functionality
@@ -1984,6 +1996,8 @@
                         }
                     }
                     
+                    // Reset to first page when filters change
+                    currentPage = 1;
                     // Filter articles based on selected tags
                     filterArticles();
                 });
@@ -1992,9 +2006,10 @@
         
         // Filter articles by selected tags
         function filterArticles() {
-            const articles = document.querySelectorAll('.webnovel-article');
+            const allArticles = Array.from(document.querySelectorAll('.webnovel-article'));
             
-            articles.forEach(article => {
+            // Filter articles based on selected tags
+            filteredArticles = allArticles.filter(article => {
                 const articleTags = article.dataset.tags.split(' ');
                 let shouldShow = false;
                 
@@ -2016,8 +2031,92 @@
                     shouldShow = true;
                 }
                 
-                article.style.display = shouldShow ? 'block' : 'none';
+                return shouldShow;
             });
+            
+            // Render the filtered articles with pagination
+            renderArticles();
+            // Update pagination controls
+            renderPagination();
+        }
+        
+        // Render articles for the current page
+        function renderArticles() {
+            const allArticles = document.querySelectorAll('.webnovel-article');
+            
+            // Hide all articles first
+            allArticles.forEach(article => {
+                article.style.display = 'none';
+            });
+            
+            // Calculate start and end indices for current page
+            const startIndex = (currentPage - 1) * articlesPerPage;
+            const endIndex = startIndex + articlesPerPage;
+            
+            // Show only the articles for the current page
+            const articlesToShow = filteredArticles.slice(startIndex, endIndex);
+            articlesToShow.forEach(article => {
+                article.style.display = 'block';
+            });
+        }
+        
+        // Render pagination controls
+        function renderPagination() {
+            // Calculate total pages
+            const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+            
+            // Check if pagination container exists, if not create it
+            let paginationContainer = document.getElementById('pagination');
+            if (!paginationContainer) {
+                paginationContainer = document.createElement('div');
+                paginationContainer.id = 'pagination';
+                paginationContainer.className = 'pagination';
+                webnovelContent.parentNode.appendChild(paginationContainer);
+            }
+            
+            // Clear existing pagination controls
+            paginationContainer.innerHTML = '';
+            
+            // Create previous button
+            const prevButton = document.createElement('button');
+            prevButton.textContent = '上一页';
+            prevButton.className = 'pagination-btn';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderArticles();
+                    renderPagination();
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+            
+            // Create page number buttons
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.textContent = i;
+                pageButton.className = `pagination-btn ${currentPage === i ? 'active' : ''}`;
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    renderArticles();
+                    renderPagination();
+                });
+                paginationContainer.appendChild(pageButton);
+            }
+            
+            // Create next button
+            const nextButton = document.createElement('button');
+            nextButton.textContent = '下一页';
+            nextButton.className = 'pagination-btn';
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderArticles();
+                    renderPagination();
+                }
+            });
+            paginationContainer.appendChild(nextButton);
         }
         
         // Initialize the application when DOM is loaded
