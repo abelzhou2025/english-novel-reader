@@ -19,23 +19,26 @@
             min-height: 600px;
         }
         
-        /* Sidebar Tags */
+        /* Tags Styles */
         .tags-sidebar {
             display: flex;
             flex-direction: row;
             gap: 8px;
             flex-wrap: wrap;
-            align-items: flex-start;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
         }
         
         .tag-btn {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 6px 10px;
-            border-radius: 6px;
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            padding: 4px 12px;
+            border-radius: 15px;
             cursor: pointer;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             transition: all 0.3s ease;
             font-family: 'Microsoft YaHei', sans-serif;
             text-align: center;
@@ -46,14 +49,16 @@
         }
         
         .tag-btn:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: #e9ecef;
             border-color: #d4a76a;
+            color: #5a3e2b;
         }
         
         .tag-btn.active {
-            background-color: rgba(212, 167, 106, 0.3);
+            background-color: rgba(212, 167, 106, 0.2);
             border-color: #d4a76a;
-            color: #d4a76a;
+            color: #5a3e2b;
+            font-weight: bold;
         }
         
         .webnovel-article {
@@ -113,34 +118,27 @@
     </nav>
     
     <div class="container">
-        <!-- Webnovel Tags Sidebar -->
-        <aside class="novel-sidebar" id="novelSidebar">
-            <div class="sidebar-header">
-                <h2>网文分类</h2>
-                <button class="toggle-btn" id="toggleSidebar">☰</button>
-            </div>
-            <div class="tags-sidebar">
-                <button class="tag-btn active" data-tag="all">全部</button>
-                <button class="tag-btn" data-tag="latest">最新</button>
-                <button class="tag-btn" data-tag="ai">ai</button>
-                <button class="tag-btn" data-tag="amazon">amazon</button>
-                <button class="tag-btn" data-tag="openai">openai</button>
-                <button class="tag-btn" data-tag="google">google</button>
-                <button class="tag-btn" data-tag="meta">meta</button>
-                <button class="tag-btn" data-tag="apple">apple</button>
-                <button class="tag-btn" data-tag="microsoft">microsoft</button>
-                <button class="tag-btn" data-tag="deepmind">deepmind</button>
-                <button class="tag-btn" data-tag="anthropic">anthropic</button>
-                <button class="tag-btn" data-tag="tesla">tesla</button>
-                <button class="tag-btn" data-tag="youtube">youtube</button>
-            </div>
-        </aside>
-        
         <!-- Main Content -->
-        <div class="main-content">
+        <div class="main-content" style="width: 100%; margin-left: 0;">
             <header>
                 <h1 id="novelTitle">网文阅读</h1>
                 <p id="novelAuthor">精选网络文章</p>
+                <!-- Webnovel Tags - Moved from sidebar -->
+                <div class="tags-sidebar">
+                    <button class="tag-btn active" data-tag="all">全部</button>
+                    <button class="tag-btn" data-tag="latest">最新</button>
+                    <button class="tag-btn" data-tag="ai">ai</button>
+                    <button class="tag-btn" data-tag="amazon">amazon</button>
+                    <button class="tag-btn" data-tag="openai">openai</button>
+                    <button class="tag-btn" data-tag="google">google</button>
+                    <button class="tag-btn" data-tag="meta">meta</button>
+                    <button class="tag-btn" data-tag="apple">apple</button>
+                    <button class="tag-btn" data-tag="microsoft">microsoft</button>
+                    <button class="tag-btn" data-tag="deepmind">deepmind</button>
+                    <button class="tag-btn" data-tag="anthropic">anthropic</button>
+                    <button class="tag-btn" data-tag="tesla">tesla</button>
+                    <button class="tag-btn" data-tag="youtube">youtube</button>
+                </div>
             </header>
             
             <main>
@@ -262,9 +260,6 @@
     
     <script>
         // DOM Elements
-        const novelSidebar = document.getElementById('novelSidebar');
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const container = document.querySelector('.container');
         const webnovelContent = document.getElementById('webnovelContent');
         const tagButtons = document.querySelectorAll('.tag-btn');
         
@@ -273,19 +268,8 @@
         
         // Initialize the application
         function init() {
-            // Add sidebar toggle functionality
-            addSidebarToggle();
-            
             // Add tags filter functionality
             addTagsFilter();
-        }
-        
-        // Add sidebar toggle functionality
-        function addSidebarToggle() {
-            toggleSidebar.addEventListener('click', () => {
-                novelSidebar.classList.toggle('collapsed');
-                container.classList.toggle('sidebar-collapsed');
-            });
         }
         
         // Add tags filter functionality
