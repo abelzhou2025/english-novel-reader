@@ -22,7 +22,9 @@ body {
 
 /* Novel Sidebar */
 .novel-sidebar {
-    width: 300px;
+    width: 20%; /* 导航栏占1/5宽度 */
+    min-width: 180px;
+    max-width: 250px;
     background-color: #5a3e2b;
     color: #fff;
     padding: 20px;
@@ -48,7 +50,7 @@ body {
 }
 
 .sidebar-header h2 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin: 0;
     color: #f8f4e9;
 }
@@ -57,7 +59,7 @@ body {
     background: none;
     border: none;
     color: #fff;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     cursor: pointer;
     display: none;
     transition: color 0.2s ease;
@@ -70,21 +72,24 @@ body {
 .novel-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
 }
 
 .novel-item {
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 8px;
+    padding: 12px 15px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    text-decoration: none;
+    color: inherit;
+    display: block;
 }
 
 .novel-item:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    transform: translateX(5px);
 }
 
 .novel-item.active {
@@ -93,24 +98,18 @@ body {
 }
 
 .novel-item h3 {
-    font-size: 1.2rem;
-    margin: 0 0 5px 0;
-    color: #f8f4e9;
-}
-
-.novel-item p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 0;
-    color: rgba(248, 244, 233, 0.8);
-    font-style: italic;
+    color: #f8f4e9;
 }
 
 /* Main Content */
 .main-content {
-    flex: 1;
-    margin-left: 300px;
-    padding: 20px;
+    width: 80%; /* 正文区域占4/5宽度 */
+    margin-left: 20%; /* 对应导航栏宽度 */
+    padding: 30px;
     transition: margin-left 0.3s ease;
+    min-height: 100vh;
 }
 
 .container.sidebar-collapsed .main-content {
