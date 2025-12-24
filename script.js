@@ -239,12 +239,18 @@ function loadNovel(novelId) {
     const novel = novels[novelId];
     if (!novel) return;
     
+    // Debug: Log novel content length
+    console.log(`Novel ${novelId} has ${novel.content.length} paragraphs`);
+    
     // Update current novel ID
     PAGINATION.currentNovelId = novelId;
     // Reset to first page
     PAGINATION.currentPage = 1;
-    // Calculate total pages
-    PAGINATION.totalPages = Math.ceil(novel.content.length / PAGINATION.paragraphsPerPage);
+    // Calculate total pages - ensure at least 1 page
+    PAGINATION.totalPages = Math.max(1, Math.ceil(novel.content.length / PAGINATION.paragraphsPerPage));
+    
+    // Debug: Log pagination info
+    console.log(`Pagination: ${PAGINATION.currentPage} / ${PAGINATION.totalPages}, ${PAGINATION.paragraphsPerPage} paragraphs per page`);
     
     // Update title and author
     novelTitle.textContent = novel.title;
@@ -262,12 +268,21 @@ function renderPage() {
     const novel = novels[PAGINATION.currentNovelId];
     if (!novel) return;
     
+    // Debug: Log current page info
+    console.log(`Rendering page ${PAGINATION.currentPage} for ${PAGINATION.currentNovelId}`);
+    
     // Calculate start and end indices
     const startIndex = (PAGINATION.currentPage - 1) * PAGINATION.paragraphsPerPage;
     const endIndex = startIndex + PAGINATION.paragraphsPerPage;
     
+    // Debug: Log indices
+    console.log(`Start: ${startIndex}, End: ${endIndex}, Total: ${novel.content.length}`);
+    
     // Get current page paragraphs
     const currentParagraphs = novel.content.slice(startIndex, endIndex);
+    
+    // Debug: Log current paragraphs count
+    console.log(`Current page has ${currentParagraphs.length} paragraphs`);
     
     // Generate content HTML
     let contentHtml = '';
@@ -286,6 +301,10 @@ function renderPage() {
     
     // Scroll to top of content
     novelContent.scrollTop = 0;
+    
+    // Update main content margin to account for top navigation
+    const mainContent = document.querySelector('.main-content');
+    mainContent.style.marginTop = '70px'; // Match top navigation height
 }
 
 // Create pagination controls

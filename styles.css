@@ -34,6 +34,46 @@ body {
     overflow-y: auto;
     transition: transform 0.3s ease;
     z-index: 100;
+    top: 70px; /* 添加顶部边距，与顶部导航栏对齐 */
+}
+
+/* Top Navigation */
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #5a3e2b;
+    padding: 15px 20px;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+}
+
+.top-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.top-nav a:hover {
+    color: #d4a76a;
+}
+
+.top-nav a.active {
+    color: #d4a76a;
+    border-bottom: 2px solid #d4a76a;
+    padding-bottom: 5px;
 }
 
 .novel-sidebar.collapsed {
