@@ -182,91 +182,141 @@ Cultural Impact Winners: narrative-driven puzzle game Chants of Sennaar; a helpf
     
     <script src="../script.js"></script>
     <script>
-        // Translate all paragraphs when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            const chineseTexts = document.querySelectorAll('.chinese-text, .article-title-chinese');
-            
-            chineseTexts.forEach((element, index) => {
-                const englishText = element.getAttribute('data-english');
-                translateParagraph(englishText, element, index);
-            });
-        });
-        
-        // Function to translate a paragraph
-        async function translateParagraph(text, element, index) {
-            try {
-                // Use MyMemory Translation API for free translation
-                const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|zh';
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data.responseStatus === 200) {
-                    let translation = data.responseData.translatedText;
-                    // Fallback if translation is empty
-                    if (!translation || translation.trim() === '') {
-                        if (element.classList.contains('article-title-chinese')) {
-                            translation = '文章标题翻译';
-                        } else {
-                            translation = '这是文章内容的中文翻译。';
+        // Translation cache management
+        const TRANSLATION_CACHE = {
+            get: (key) => {
+                try {
+                    const cacheItem = localStorage.getItem('translation_' + key);
+                    if (cacheItem) {
+                        const parsed = JSON.parse(cacheItem);
+                        // Check if cache is still valid (7 days)
+                        if (Date.now() - parsed.timestamp < 7 * 24 * 60 * 60 * 1000) {
+                            return parsed.translation;
                         }
                     }
-                    element.textContent = translation;
-                    element.classList.remove('loading-translation');
-                } else {
-                    // Try alternative translation API if first one fails
-                    tryAlternativeTranslation(text, element);
+                } catch (e) {
+                    console.error('Cache read error:', e);
                 }
-            } catch (error) {
-                console.error('Translation error:', error);
-                // Try alternative translation API if first one fails
-                tryAlternativeTranslation(text, element);
+                return null;
+            },
+            set: (key, translation) => {
+                try {
+                    localStorage.setItem('translation_' + key, JSON.stringify({
+                        translation,
+                        timestamp: Date.now()
+                    }));
+                } catch (e) {
+                    console.error('Cache write error:', e);
+                }
             }
-        }
+        };
         
-        // Alternative translation function using a different approach
-        function tryAlternativeTranslation(text, element) {
-            try {
-                // Use another free translation API as fallback
-                const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(text);
-                fetch(url)
-                    .then(response => response.json())
-                    .then(data => {
-                        let translation = '';
-                        if (data && data[0] && Array.isArray(data[0])) {
-                            translation = data[0].map(item => item[0]).join('');
+        // Function to translate a paragraph with caching
+        async function translateParagraph(text, element) {
+            // Generate cache key from text
+            const cacheKey = btoa(text.trim().toLowerCase());
+            
+            // Check if translation is in cache
+            const cachedTranslation = TRANSLATION_CACHE.get(cacheKey);
+            if (cachedTranslation) {
+                element.textContent = cachedTranslation;
+                element.classList.remove('loading-translation');
+                return;
+            }
+            
+            // Translation APIs configuration
+            const apis = [
+                {
+                    name: 'MyMemory',
+                    url: 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|zh'
+                },
+                {
+                    name: 'Google Translate',
+                    url: 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(text)
+                }
+            ];
+            
+            // Try APIs in order
+            for (const api of apis) {
+                try {
+                    const response = await fetch(api.url, {
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        // Add timeout for faster failure on slow connections
+                        signal: AbortSignal.timeout(5000)
+                    });
+                    
+                    if (api.name === 'MyMemory') {
+                        const data = await response.json();
+                        if (data.responseStatus === 200 && data.responseData.translatedText) {
+                            const translation = data.responseData.translatedText;
+                            TRANSLATION_CACHE.set(cacheKey, translation);
+                            element.textContent = translation;
+                            element.classList.remove('loading-translation');
+                            return;
                         }
-                        
-                        if (!translation || translation.trim() === '') {
-                            if (element.classList.contains('article-title-chinese')) {
-                                translation = '文章标题翻译';
-                            } else {
-                                translation = '这是文章内容的中文翻译。';
+                    } else if (api.name === 'Google Translate') {
+                        const data = await response.json();
+                        if (data && data[0] && Array.isArray(data[0])) {
+                            const translation = data[0].map(function(item) { return item[0]; }).join('');
+                            if (translation) {
+                                TRANSLATION_CACHE.set(cacheKey, translation);
+                                element.textContent = translation;
+                                element.classList.remove('loading-translation');
+                                return;
                             }
                         }
-                        element.textContent = translation;
-                        element.classList.remove('loading-translation');
-                    })
-                    .catch(error => {
-                        console.error('Alternative translation error:', error);
-                        // Final fallback if all APIs fail
-                        if (element.classList.contains('article-title-chinese')) {
-                            element.textContent = '文章标题翻译';
-                        } else {
-                            element.textContent = '这是文章内容的中文翻译。';
-                        }
-                        element.classList.remove('loading-translation');
-                    });
-            } catch (error) {
-                console.error('Alternative translation error:', error);
-                // Final fallback if all APIs fail
-                if (element.classList.contains('article-title-chinese')) {
-                    element.textContent = '文章标题翻译';
-                } else {
-                    element.textContent = '这是文章内容的中文翻译。';
+                    }
+                } catch (error) {
+                    console.error(api.name + ' translation error:', error);
+                    // Continue to next API if current one fails
+                    continue;
                 }
-                element.classList.remove('loading-translation');
             }
+            
+            // Fallback if all APIs fail
+            const fallbackTranslation = element.classList.contains('article-title-chinese') ? '文章标题翻译' : '这是文章内容的中文翻译。';
+            element.textContent = fallbackTranslation;
+            element.classList.remove('loading-translation');
         }
+        
+        // Translate all paragraphs when the page loads with optimized concurrency
+        document.addEventListener('DOMContentLoaded', function() {
+            const chineseTexts = document.querySelectorAll('.chinese-text, .article-title-chinese');
+            
+            // Limit concurrent translations to avoid overloading API
+            const CONCURRENCY_LIMIT = 3;
+            let activeTranslations = 0;
+            let index = 0;
+            
+            // Function to process next translation
+            const processNext = function() {
+                if (index >= chineseTexts.length) return;
+                
+                // Wait if we've reached concurrency limit
+                if (activeTranslations >= CONCURRENCY_LIMIT) {
+                    setTimeout(processNext, 100);
+                    return;
+                }
+                
+                const element = chineseTexts[index++];
+                const englishText = element.getAttribute('data-english');
+                
+                activeTranslations++;
+                translateParagraph(englishText, element)
+                    .finally(function() {
+                        activeTranslations--;
+                        processNext(); // Process next translation when current one finishes
+                    });
+            };
+            
+            // Start processing translations
+            for (let i = 0; i < CONCURRENCY_LIMIT; i++) {
+                processNext();
+            }
+        });
     </script>
 </body>
 </html>
