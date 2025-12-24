@@ -11,6 +11,19 @@ const originalText = document.getElementById('originalText');
 const translatedText = document.getElementById('translatedText');
 const container = document.querySelector('.container');
 
+// Pagination Elements (will be added to HTML)
+let prevPageBtn = null;
+let nextPageBtn = null;
+let pageInfo = null;
+
+// Pagination settings
+const PAGINATION = {
+    paragraphsPerPage: 10, // 每页显示10个段落
+    currentPage: 1,
+    totalPages: 1,
+    currentNovelId: 'jane_eyre'
+};
+
 // Translation API Configuration
 const API_CONFIG = {
     // Using a free translation API for demonstration
@@ -221,18 +234,44 @@ function addNovelSelectionListeners() {
     });
 }
 
-// Load novel content
+// Load novel content with pagination
 function loadNovel(novelId) {
     const novel = novels[novelId];
     if (!novel) return;
+    
+    // Update current novel ID
+    PAGINATION.currentNovelId = novelId;
+    // Reset to first page
+    PAGINATION.currentPage = 1;
+    // Calculate total pages
+    PAGINATION.totalPages = Math.ceil(novel.content.length / PAGINATION.paragraphsPerPage);
     
     // Update title and author
     novelTitle.textContent = novel.title;
     novelAuthor.textContent = `By ${novel.author}`;
     
+    // Render current page
+    renderPage();
+    
+    // Create or update pagination controls
+    createPaginationControls();
+}
+
+// Render current page content
+function renderPage() {
+    const novel = novels[PAGINATION.currentNovelId];
+    if (!novel) return;
+    
+    // Calculate start and end indices
+    const startIndex = (PAGINATION.currentPage - 1) * PAGINATION.paragraphsPerPage;
+    const endIndex = startIndex + PAGINATION.paragraphsPerPage;
+    
+    // Get current page paragraphs
+    const currentParagraphs = novel.content.slice(startIndex, endIndex);
+    
     // Generate content HTML
     let contentHtml = '';
-    novel.content.forEach(paragraph => {
+    currentParagraphs.forEach(paragraph => {
         contentHtml += `<p><span class="selectable">${paragraph}</span></p>`;
     });
     
@@ -241,6 +280,92 @@ function loadNovel(novelId) {
     
     // Add event listeners to new selectable elements
     addSelectableEventListeners();
+    
+    // Update pagination info
+    updatePaginationInfo();
+    
+    // Scroll to top of content
+    novelContent.scrollTop = 0;
+}
+
+// Create pagination controls
+function createPaginationControls() {
+    // Check if pagination controls already exist
+    let paginationContainer = document.getElementById('paginationControls');
+    
+    if (!paginationContainer) {
+        // Create pagination container
+        paginationContainer = document.createElement('div');
+        paginationContainer.id = 'paginationControls';
+        paginationContainer.className = 'pagination-controls';
+        
+        // Create previous page button
+        prevPageBtn = document.createElement('button');
+        prevPageBtn.id = 'prevPage';
+        prevPageBtn.className = 'pagination-btn';
+        prevPageBtn.textContent = '上一页';
+        prevPageBtn.addEventListener('click', goToPrevPage);
+        
+        // Create page info
+        pageInfo = document.createElement('span');
+        pageInfo.id = 'pageInfo';
+        pageInfo.className = 'pagination-info';
+        
+        // Create next page button
+        nextPageBtn = document.createElement('button');
+        nextPageBtn.id = 'nextPage';
+        nextPageBtn.className = 'pagination-btn';
+        nextPageBtn.textContent = '下一页';
+        nextPageBtn.addEventListener('click', goToNextPage);
+        
+        // Append elements to container
+        paginationContainer.appendChild(prevPageBtn);
+        paginationContainer.appendChild(pageInfo);
+        paginationContainer.appendChild(nextPageBtn);
+        
+        // Add pagination container to the DOM (after novel content)
+        const mainElement = novelContent.parentElement;
+        mainElement.appendChild(paginationContainer);
+    }
+    
+    // Update button states
+    updatePaginationButtons();
+}
+
+// Update pagination button states
+function updatePaginationButtons() {
+    // Update previous button state
+    if (prevPageBtn) {
+        prevPageBtn.disabled = PAGINATION.currentPage === 1;
+    }
+    
+    // Update next button state
+    if (nextPageBtn) {
+        nextPageBtn.disabled = PAGINATION.currentPage === PAGINATION.totalPages;
+    }
+}
+
+// Update pagination info
+function updatePaginationInfo() {
+    if (pageInfo) {
+        pageInfo.textContent = `${PAGINATION.currentPage} / ${PAGINATION.totalPages}`;
+    }
+}
+
+// Go to previous page
+function goToPrevPage() {
+    if (PAGINATION.currentPage > 1) {
+        PAGINATION.currentPage--;
+        renderPage();
+    }
+}
+
+// Go to next page
+function goToNextPage() {
+    if (PAGINATION.currentPage < PAGINATION.totalPages) {
+        PAGINATION.currentPage++;
+        renderPage();
+    }
 }
 
 // Add event listeners to selectable text elements
