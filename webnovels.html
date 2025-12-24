@@ -13,10 +13,57 @@
         
         .webnovel-content {
             background-color: #fff;
-            padding: 40px;
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             min-height: 600px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+        
+        /* Ensure all elements wrap correctly on mobile */
+        .webnovel-title-link {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            display: block;
+        }
+        
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Responsive adjustments for mobile */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 10px;
+            }
+            
+            .webnovel-content {
+                padding: 15px;
+            }
+            
+            .tags-sidebar {
+                gap: 6px;
+                padding: 10px 0;
+            }
+            
+            .tag-btn {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+            
+            .webnovel-title-link {
+                font-size: 1.1rem;
+            }
+            
+            .article-tag {
+                font-size: 0.75rem;
+                padding: 3px 10px;
+            }
         }
         
         /* Tags Styles */
@@ -84,6 +131,9 @@
             transition: color 0.3s ease;
             font-weight: bold;
             font-family: Georgia, serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
         }
         
         .webnovel-title-link:hover {
