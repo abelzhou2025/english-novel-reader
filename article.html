@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Reader - English Novel Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Article reader specific styles */
+        .article-content {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-title {
+            font-size: 1.8rem;
+            color: #5a3e2b;
+            margin-bottom: 20px;
+            font-family: Georgia, serif;
+        }
+        
+        .article-paragraph {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .english-text {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .chinese-text {
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            opacity: 0.7;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 3px solid #d4a76a;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loading {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #5a3e2b;
+            padding: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">小说</a></li>
+            <li><a href="webnovels.html">网文</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="article-content">
+                <a href="webnovels.html" class="back-btn">← 返回网文列表</a>
+                <h1 class="article-title" id="articleTitle">Loading...</h1>
+                <div class="loading" id="loading">正在加载文章内容...</div>
+                <div id="articleBody" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // Get article URL from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const articleUrl = urlParams.get('url');
+        const articleTitle = urlParams.get('title');
+        
+        // Set page title
+        if (articleTitle) {
+            document.getElementById('articleTitle').textContent = decodeURIComponent(articleTitle);
+        }
+        
+        // Fetch and display article content
+        async function fetchArticleContent(url) {
+            try {
+                // This is a placeholder - in a real implementation, you would use a server-side proxy
+                // to fetch the content due to CORS restrictions
+                
+                // For demonstration purposes, we'll simulate fetching content
+                simulateArticleFetch(url);
+            } catch (error) {
+                console.error('Error fetching article:', error);
+                document.getElementById('loading').textContent = '加载文章失败，请稍后重试。';
+            }
+        }
+        
+        // Simulate article fetching for demonstration
+        function simulateArticleFetch(url) {
+            // Simulate network delay
+            setTimeout(() => {
+                // Hide loading message
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('articleBody').style.display = 'block';
+                
+                // Sample article content for demonstration
+                const sampleContent = [
+                    "This is a sample article paragraph. It demonstrates how the article reader will display content.",
+                    "Each paragraph in English will be followed by its Chinese translation.",
+                    "The translation will be displayed in Microsoft YaHei font with 70% grayscale.",
+                    "This format makes it easy for readers to compare the original text with the translation.",
+                    "The article reader supports multiple paragraphs and will automatically format them.",
+                    "Readers can easily switch between articles using the navigation menu.",
+                    "The responsive design ensures a good reading experience on all devices.",
+                    "This is the last paragraph of the sample article."
+                ];
+                
+                // Display the article content with translations
+                const articleBody = document.getElementById('articleBody');
+                sampleContent.forEach((paragraph, index) => {
+                    // Create English paragraph
+                    const englishPara = document.createElement('div');
+                    englishPara.className = 'article-paragraph english-text';
+                    englishPara.textContent = paragraph;
+                    articleBody.appendChild(englishPara);
+                    
+                    // Create Chinese translation
+                    const chinesePara = document.createElement('div');
+                    chinesePara.className = 'article-paragraph chinese-text';
+                    chinesePara.textContent = `这是第 ${index + 1} 段的中文翻译示例，使用微软雅黑字体，灰度为70%。`;
+                    articleBody.appendChild(chinesePara);
+                });
+            }, 1500);
+        }
+        
+        // Fetch article content when page loads
+        if (articleUrl) {
+            fetchArticleContent(articleUrl);
+        } else {
+            document.getElementById('loading').textContent = '未找到文章URL，请返回重试。';
+        }
+    </script>
+</body>
+</html>

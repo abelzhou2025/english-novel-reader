@@ -57,8 +57,8 @@
         }
         
         .webnovel-article {
-            margin-bottom: 40px;
-            padding-bottom: 30px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #eee;
         }
         
@@ -69,15 +69,16 @@
         }
         
         .webnovel-title {
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         
         .webnovel-title-link {
             color: #5a3e2b;
             text-decoration: none;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             transition: color 0.3s ease;
             font-weight: bold;
+            font-family: Georgia, serif;
         }
         
         .webnovel-title-link:hover {
@@ -121,10 +122,17 @@
             <div class="tags-sidebar">
                 <button class="tag-btn active" data-tag="all">全部</button>
                 <button class="tag-btn" data-tag="latest">最新</button>
-                <button class="tag-btn" data-tag="ai">AI</button>
-                <button class="tag-btn" data-tag="meta">Meta</button>
-                <button class="tag-btn" data-tag="apple">Apple</button>
-                <button class="tag-btn" data-tag="deepmind">DeepMind</button>
+                <button class="tag-btn" data-tag="ai">ai</button>
+                <button class="tag-btn" data-tag="amazon">amazon</button>
+                <button class="tag-btn" data-tag="openai">openai</button>
+                <button class="tag-btn" data-tag="google">google</button>
+                <button class="tag-btn" data-tag="meta">meta</button>
+                <button class="tag-btn" data-tag="apple">apple</button>
+                <button class="tag-btn" data-tag="microsoft">microsoft</button>
+                <button class="tag-btn" data-tag="deepmind">deepmind</button>
+                <button class="tag-btn" data-tag="anthropic">anthropic</button>
+                <button class="tag-btn" data-tag="tesla">tesla</button>
+                <button class="tag-btn" data-tag="youtube">youtube</button>
             </div>
         </aside>
         
@@ -137,103 +145,114 @@
             
             <main>
                 <div class="webnovel-content" id="webnovelContent">
-                    
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft deepmind anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/10_ai_predictions_for_2026md.html" class="webnovel-title-link">
+                                10 AI Predictions For 2026
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google microsoft anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_coding_is_now_everywhere_but_not_evemd.html" class="webnovel-title-link">
+                                AI coding is now everywhere. But not everyone is convinced.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/actor_joseph_gordon-levitt_wonders_why_amd.html" class="webnovel-title-link">
+                                Actor Joseph Gordon-Levitt wonders why AI companies don't have to 'follow any laws'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/amazon_in_talks_to_invest_about_10_billmd.html" class="webnovel-title-link">
+                                Amazon in talks to invest about $10 billion in OpenAI, source says
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google apple microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/forget_chatbots_this_is_the_ai_technolomd.html" class="webnovel-title-link">
+                                Forget Chatbots. This Is the AI Technology to Watch in 2026
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google meta deepmind anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_researchers_figure_how_to_get_ai_md.html" class="webnovel-title-link">
+                                Struggling to get AI agents to work? This Google research could help | Fortune
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
                     <div class="webnovel-article" data-tags="ai">
                         <h2 class="webnovel-title">
-                            <a href="https://www.wired.com/story/in-a-first-ai-models-analyze-language-as-well-as-a-human-expert/" class="webnovel-title-link" target="_blank">
-                                AI Models Analyze Language as Well as a Human Expert
+                            <a href="articles/i_was_wrong_universities_dont_fear_aimd.html" class="webnovel-title-link">
+                                I was wrong. Universities don't fear AI. They fear self-reflection
                             </a>
                         </h2>
-                        <p>这是一篇关于AI语言模型的文章，探讨了AI模型如何像人类专家一样分析语言。</p>
                         <div class="article-tags">
-                            <span class="article-tag">AI</span>
+                            <span class="article-tag">ai</span>
                         </div>
                     </div>
-                    
-                    <div class="webnovel-article" data-tags="ai">
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta microsoft">
                         <h2 class="webnovel-title">
-                            <a href="https://www.theverge.com/column/843883/ai-image-generators-better-worse" class="webnovel-title-link" target="_blank">
-                                AI Image Generators: Better or Worse?
+                            <a href="articles/openai_data_center_plans_highlight_ai_inmd.html" class="webnovel-title-link">
+                                OpenAI Data Center Plans Highlight AI Investment Momentum
                             </a>
                         </h2>
-                        <p>这篇文章讨论了AI图像生成器的发展，分析了其优缺点和未来趋势。</p>
                         <div class="article-tags">
-                            <span class="article-tag">AI</span>
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">microsoft</span>
                         </div>
                     </div>
-                    
-                    <div class="webnovel-article" data-tags="meta ai">
+                    <div class="webnovel-article" data-tags="ai openai google anthropic">
                         <h2 class="webnovel-title">
-                            <a href="https://www.pymnts.com/cpi-posts/eu-probes-meta-over-potential-ai-restrictions-on-whatsapp/" class="webnovel-title-link" target="_blank">
-                                EU Probes Meta Over Potential AI Restrictions on WhatsApp
+                            <a href="articles/openai_says_ai_browsers_may_always_be_vumd.html" class="webnovel-title-link">
+                                OpenAI says AI browsers may always be vulnerable to prompt injection attacks
                             </a>
                         </h2>
-                        <p>欧盟正在调查Meta在WhatsApp上的潜在AI限制，这篇文章详细介绍了相关情况。</p>
                         <div class="article-tags">
-                            <span class="article-tag">AI</span>
-                            <span class="article-tag">Meta</span>
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">anthropic</span>
                         </div>
                     </div>
-                    
-                    <div class="webnovel-article" data-tags="ai">
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft anthropic tesla">
                         <h2 class="webnovel-title">
-                            <a href="https://www.forbes.com/sites/robtoews/2025/12/07/the-next-frontier-for-ai-is-the-human-brain/" class="webnovel-title-link" target="_blank">
-                                The Next Frontier for AI Is the Human Brain
+                            <a href="articles/the_ai_boom_is_heralding_a_new_gold_rushmd.html" class="webnovel-title-link">
+                                The AI boom is heralding a new gold rush in the American west
                             </a>
                         </h2>
-                        <p>这篇文章探讨了AI的下一个前沿领域——人类大脑，分析了脑机接口和神经AI的发展。</p>
                         <div class="article-tags">
-                            <span class="article-tag">AI</span>
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
                         </div>
                     </div>
-                    
-                    <div class="webnovel-article" data-tags="ai deepmind">
+                    <div class="webnovel-article" data-tags="ai openai google youtube">
                         <h2 class="webnovel-title">
-                            <a href="https://www.businessinsider.com/demis-hassabis-ai-scaling-pushed-to-maximum-data-2025-12" class="webnovel-title-link" target="_blank">
-                                Demis Hassabis: AI Scaling Pushed to Maximum Data
+                            <a href="articles/youtube_now_shutting_down_channels_postimd.html" class="webnovel-title-link">
+                                YouTube Now Shutting Down Channels Posting AI Slop
                             </a>
                         </h2>
-                        <p>DeepMind创始人Demis Hassabis讨论了AI扩展到最大数据的问题，分享了他对AI未来的看法。</p>
                         <div class="article-tags">
-                            <span class="article-tag">AI</span>
-                            <span class="article-tag">DeepMind</span>
-                        </div>
-                    </div>
-                    
-                    <div class="webnovel-article" data-tags="meta ai">
-                        <h2 class="webnovel-title">
-                            <a href="https://www.cnbc.com/2025/12/05/meta-limitless-ai-wearable.html" class="webnovel-title-link" target="_blank">
-                                Meta's Limitless AI Wearable
-                            </a>
-                        </h2>
-                        <p>Meta发布了名为Limitless的AI可穿戴设备，这篇文章介绍了其功能和潜在影响。</p>
-                        <div class="article-tags">
-                            <span class="article-tag">AI</span>
-                            <span class="article-tag">Meta</span>
-                        </div>
-                    </div>
-                    
-                    <div class="webnovel-article" data-tags="apple">
-                        <h2 class="webnovel-title">
-                            <a href="https://www.cnn.com/2025/12/06/tech/apple-tim-cook-leadership-changes" class="webnovel-title-link" target="_blank">
-                                Apple Tim Cook Leadership Changes
-                            </a>
-                        </h2>
-                        <p>苹果公司CEO Tim Cook宣布了领导层变动，这篇文章分析了这一变化的影响。</p>
-                        <div class="article-tags">
-                            <span class="article-tag">Apple</span>
-                        </div>
-                    </div>
-                    
-                    <div class="webnovel-article" data-tags="ai">
-                        <h2 class="webnovel-title">
-                            <a href="https://www.fastcompany.com/91450218/ai-data-center-boom-unexpected-winner" class="webnovel-title-link" target="_blank">
-                                AI Data Center Boom's Unexpected Winner
-                            </a>
-                        </h2>
-                        <p>AI数据中心的繁荣带来了意想不到的赢家，这篇文章揭示了其中的故事。</p>
-                        <div class="article-tags">
-                            <span class="article-tag">AI</span>
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">youtube</span>
                         </div>
                     </div>
                 </div>
@@ -245,19 +264,17 @@
         // DOM Elements
         const novelSidebar = document.getElementById('novelSidebar');
         const toggleSidebar = document.getElementById('toggleSidebar');
-        const novelList = document.getElementById('novelList');
         const container = document.querySelector('.container');
         const webnovelContent = document.getElementById('webnovelContent');
         const tagButtons = document.querySelectorAll('.tag-btn');
-        const articles = document.querySelectorAll('.webnovel-article');
+        
+        // Track selected tags for multi-select functionality
+        const selectedTags = new Set();
         
         // Initialize the application
         function init() {
             // Add sidebar toggle functionality
             addSidebarToggle();
-            
-            // Add novel selection event listeners
-            addNovelSelectionListeners();
             
             // Add tags filter functionality
             addTagsFilter();
@@ -271,54 +288,83 @@
             });
         }
         
-        // Add novel selection event listeners
-        function addNovelSelectionListeners() {
-            const novelItems = document.querySelectorAll('.novel-item');
-            
-            novelItems.forEach(item => {
-                item.addEventListener('click', () => {
-                    // Update active state
-                    novelItems.forEach(i => i.classList.remove('active'));
-                    item.classList.add('active');
-                });
-            });
-        }
-        
         // Add tags filter functionality
         function addTagsFilter() {
             tagButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const tag = button.dataset.tag;
                     
-                    // Update active state
-                    tagButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+                    // Handle "all" tag specially
+                    if (tag === 'all') {
+                        // Clear all selected tags and show all articles
+                        selectedTags.clear();
+                        tagButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                    } else if (tag === 'latest') {
+                        // Handle "latest" tag specially
+                        selectedTags.clear();
+                        tagButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                    } else {
+                        // Toggle the tag in selectedTags set
+                        if (selectedTags.has(tag)) {
+                            selectedTags.delete(tag);
+                            button.classList.remove('active');
+                        } else {
+                            selectedTags.add(tag);
+                            button.classList.add('active');
+                        }
+                        
+                        // Remove "all" and "latest" active state if any tags are selected
+                        tagButtons.forEach(btn => {
+                            if (btn.dataset.tag === 'all' || btn.dataset.tag === 'latest') {
+                                btn.classList.remove('active');
+                            }
+                        });
+                        
+                        // If no tags selected, activate "all"
+                        if (selectedTags.size === 0) {
+                            tagButtons.forEach(btn => {
+                                if (btn.dataset.tag === 'all') {
+                                    btn.classList.add('active');
+                                }
+                            });
+                        }
+                    }
                     
-                    // Filter articles
-                    filterArticles(tag);
+                    // Filter articles based on selected tags
+                    filterArticles();
                 });
             });
         }
         
-        // Filter articles by tag
-        function filterArticles(tag) {
+        // Filter articles by selected tags
+        function filterArticles() {
+            const articles = document.querySelectorAll('.webnovel-article');
+            
             articles.forEach(article => {
-                const articleTags = article.dataset.tags;
+                const articleTags = article.dataset.tags.split(' ');
+                let shouldShow = false;
                 
-                if (tag === 'all') {
-                    // Show all articles
-                    article.style.display = 'block';
-                } else if (tag === 'latest') {
-                    // Show all articles (latest functionality can be implemented with dates)
-                    article.style.display = 'block';
-                } else {
-                    // Show articles with the selected tag
-                    if (articleTags.includes(tag)) {
-                        article.style.display = 'block';
-                    } else {
-                        article.style.display = 'none';
-                    }
+                // Check if "all" is active
+                const allButton = document.querySelector('.tag-btn[data-tag="all"].active');
+                if (allButton) {
+                    shouldShow = true;
+                } 
+                // Check if "latest" is active (for now, show all articles)
+                else if (document.querySelector('.tag-btn[data-tag="latest"].active')) {
+                    shouldShow = true;
                 }
+                // Check if article has all selected tags
+                else if (selectedTags.size > 0) {
+                    // Article should have all selected tags
+                    shouldShow = [...selectedTags].every(tag => articleTags.includes(tag));
+                } else {
+                    // No tags selected, show all
+                    shouldShow = true;
+                }
+                
+                article.style.display = shouldShow ? 'block' : 'none';
             });
         }
         
