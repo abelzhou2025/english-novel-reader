@@ -19,26 +19,78 @@
             min-height: 600px;
         }
         
-        .webnovel-article {
+        /* Tags Filter */
+        .tags-filter {
+            display: flex;
+            gap: 10px;
             margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .tag-btn {
+            background-color: #e8f4f8;
+            color: #17a2b8;
+            border: 1px solid #17a2b8;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .tag-btn:hover {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        
+        .tag-btn.active {
+            background-color: #17a2b8;
+            color: #fff;
+        }
+        
+        .webnovel-article {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .webnovel-article:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
         
         .webnovel-title {
-            color: #5a3e2b;
-            font-size: 1.5rem;
             margin-bottom: 15px;
         }
         
-        .webnovel-link {
-            color: #17a2b8;
+        .webnovel-title-link {
+            color: #5a3e2b;
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             transition: color 0.3s ease;
+            font-weight: bold;
         }
         
-        .webnovel-link:hover {
-            color: #138496;
-            text-decoration: underline;
+        .webnovel-title-link:hover {
+            color: #17a2b8;
+        }
+        
+        /* Article Tags */
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .article-tag {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #dee2e6;
         }
     </style>
 </head>
@@ -96,52 +148,113 @@
             
             <main>
                 <div class="webnovel-content" id="webnovelContent">
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">AI Models Analyze Language as Well as a Human Expert</h2>
-                        <p><a href="https://www.wired.com/story/in-a-first-ai-models-analyze-language-as-well-as-a-human-expert/" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <!-- Tags Filter -->
+                    <div class="tags-filter">
+                        <button class="tag-btn active" data-tag="all">全部</button>
+                        <button class="tag-btn" data-tag="latest">最新</button>
+                        <button class="tag-btn" data-tag="ai">AI</button>
+                        <button class="tag-btn" data-tag="meta">Meta</button>
+                        <button class="tag-btn" data-tag="apple">Apple</button>
+                        <button class="tag-btn" data-tag="deepmind">DeepMind</button>
+                    </div>
+                    
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.wired.com/story/in-a-first-ai-models-analyze-language-as-well-as-a-human-expert/" class="webnovel-title-link" target="_blank">
+                                AI Models Analyze Language as Well as a Human Expert
+                            </a>
+                        </h2>
                         <p>这是一篇关于AI语言模型的文章，探讨了AI模型如何像人类专家一样分析语言。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">AI Image Generators: Better or Worse?</h2>
-                        <p><a href="https://www.theverge.com/column/843883/ai-image-generators-better-worse" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.theverge.com/column/843883/ai-image-generators-better-worse" class="webnovel-title-link" target="_blank">
+                                AI Image Generators: Better or Worse?
+                            </a>
+                        </h2>
                         <p>这篇文章讨论了AI图像生成器的发展，分析了其优缺点和未来趋势。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">EU Probes Meta Over Potential AI Restrictions on WhatsApp</h2>
-                        <p><a href="https://www.pymnts.com/cpi-posts/eu-probes-meta-over-potential-ai-restrictions-on-whatsapp/" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="meta ai">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.pymnts.com/cpi-posts/eu-probes-meta-over-potential-ai-restrictions-on-whatsapp/" class="webnovel-title-link" target="_blank">
+                                EU Probes Meta Over Potential AI Restrictions on WhatsApp
+                            </a>
+                        </h2>
                         <p>欧盟正在调查Meta在WhatsApp上的潜在AI限制，这篇文章详细介绍了相关情况。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                            <span class="article-tag">Meta</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">The Next Frontier for AI Is the Human Brain</h2>
-                        <p><a href="https://www.forbes.com/sites/robtoews/2025/12/07/the-next-frontier-for-ai-is-the-human-brain/" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.forbes.com/sites/robtoews/2025/12/07/the-next-frontier-for-ai-is-the-human-brain/" class="webnovel-title-link" target="_blank">
+                                The Next Frontier for AI Is the Human Brain
+                            </a>
+                        </h2>
                         <p>这篇文章探讨了AI的下一个前沿领域——人类大脑，分析了脑机接口和神经AI的发展。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">Demis Hassabis: AI Scaling Pushed to Maximum Data</h2>
-                        <p><a href="https://www.businessinsider.com/demis-hassabis-ai-scaling-pushed-to-maximum-data-2025-12" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="ai deepmind">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.businessinsider.com/demis-hassabis-ai-scaling-pushed-to-maximum-data-2025-12" class="webnovel-title-link" target="_blank">
+                                Demis Hassabis: AI Scaling Pushed to Maximum Data
+                            </a>
+                        </h2>
                         <p>DeepMind创始人Demis Hassabis讨论了AI扩展到最大数据的问题，分享了他对AI未来的看法。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                            <span class="article-tag">DeepMind</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">Meta's Limitless AI Wearable</h2>
-                        <p><a href="https://www.cnbc.com/2025/12/05/meta-limitless-ai-wearable.html" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="meta ai">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.cnbc.com/2025/12/05/meta-limitless-ai-wearable.html" class="webnovel-title-link" target="_blank">
+                                Meta's Limitless AI Wearable
+                            </a>
+                        </h2>
                         <p>Meta发布了名为Limitless的AI可穿戴设备，这篇文章介绍了其功能和潜在影响。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                            <span class="article-tag">Meta</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">Apple Tim Cook Leadership Changes</h2>
-                        <p><a href="https://www.cnn.com/2025/12/06/tech/apple-tim-cook-leadership-changes" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="apple">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.cnn.com/2025/12/06/tech/apple-tim-cook-leadership-changes" class="webnovel-title-link" target="_blank">
+                                Apple Tim Cook Leadership Changes
+                            </a>
+                        </h2>
                         <p>苹果公司CEO Tim Cook宣布了领导层变动，这篇文章分析了这一变化的影响。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">Apple</span>
+                        </div>
                     </div>
                     
-                    <div class="webnovel-article">
-                        <h2 class="webnovel-title">AI Data Center Boom's Unexpected Winner</h2>
-                        <p><a href="https://www.fastcompany.com/91450218/ai-data-center-boom-unexpected-winner" class="webnovel-link" target="_blank">阅读原文 →</a></p>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="https://www.fastcompany.com/91450218/ai-data-center-boom-unexpected-winner" class="webnovel-title-link" target="_blank">
+                                AI Data Center Boom's Unexpected Winner
+                            </a>
+                        </h2>
                         <p>AI数据中心的繁荣带来了意想不到的赢家，这篇文章揭示了其中的故事。</p>
+                        <div class="article-tags">
+                            <span class="article-tag">AI</span>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -155,6 +268,8 @@
         const novelList = document.getElementById('novelList');
         const container = document.querySelector('.container');
         const webnovelContent = document.getElementById('webnovelContent');
+        const tagButtons = document.querySelectorAll('.tag-btn');
+        const articles = document.querySelectorAll('.webnovel-article');
         
         // Initialize the application
         function init() {
@@ -163,6 +278,9 @@
             
             // Add novel selection event listeners
             addNovelSelectionListeners();
+            
+            // Add tags filter functionality
+            addTagsFilter();
         }
         
         // Add sidebar toggle functionality
@@ -183,6 +301,44 @@
                     novelItems.forEach(i => i.classList.remove('active'));
                     item.classList.add('active');
                 });
+            });
+        }
+        
+        // Add tags filter functionality
+        function addTagsFilter() {
+            tagButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tag = button.dataset.tag;
+                    
+                    // Update active state
+                    tagButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filter articles
+                    filterArticles(tag);
+                });
+            });
+        }
+        
+        // Filter articles by tag
+        function filterArticles(tag) {
+            articles.forEach(article => {
+                const articleTags = article.dataset.tags;
+                
+                if (tag === 'all') {
+                    // Show all articles
+                    article.style.display = 'block';
+                } else if (tag === 'latest') {
+                    // Show all articles (latest functionality can be implemented with dates)
+                    article.style.display = 'block';
+                } else {
+                    // Show articles with the selected tag
+                    if (articleTags.includes(tag)) {
+                        article.style.display = 'block';
+                    } else {
+                        article.style.display = 'none';
+                    }
+                }
             });
         }
         

@@ -213,15 +213,16 @@ body {
 .translation-popup {
     display: none;
     position: fixed;
-    top: auto;
-    bottom: 20px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translate(-50%, -50%);
     z-index: 1000;
-    animation: slideUp 0.3s ease;
-    width: 90%;
-    max-width: 800px;
+    animation: fadeIn 0.2s ease;
+    width: 80%;
+    max-width: 600px;
+    max-height: 60%;
     background-color: transparent;
+    pointer-events: none;
 }
 
 .translation-popup.show {
@@ -229,12 +230,14 @@ body {
 }
 
 .popup-content {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.98);
     border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    animation: slideUp 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    animation: fadeIn 0.2s ease;
     overflow: hidden;
     backdrop-filter: blur(5px);
+    pointer-events: auto;
+    border: 1px solid #e0e0e0;
 }
 
 .popup-header {
@@ -243,16 +246,18 @@ body {
 
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 5px;
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    color: #6c757d;
+    color: #999;
     transition: color 0.2s ease;
     z-index: 10;
     display: block;
+    padding: 5px;
+    line-height: 1;
 }
 
 .close-btn:hover {
@@ -260,7 +265,7 @@ body {
 }
 
 .popup-body {
-    padding: 15px 20px;
+    padding: 12px 15px;
 }
 
 .original-text {
@@ -268,18 +273,40 @@ body {
 }
 
 .translated-text {
-    padding: 15px;
+    padding: 12px;
     background-color: #e8f4f8;
-    border-left: 4px solid #17a2b8;
+    border-left: 3px solid #17a2b8;
     font-family: 'Microsoft YaHei', sans-serif;
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #333;
-    line-height: 1.6;
+    line-height: 1.5;
+    margin: 0;
+    max-height: 40vh;
+    overflow-y: auto;
 }
 
 .translated-text::before {
     content: "";
     display: none; /* Hide Translation label */
+}
+
+/* Hide scrollbar for translated text */
+.translated-text::-webkit-scrollbar {
+    width: 6px;
+}
+
+.translated-text::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.translated-text::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+}
+
+.translated-text::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 /* Mobile optimization */
