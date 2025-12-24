@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wreflection - English Novel Reader</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Article reader specific styles */
+        .article-content {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .article-title {
+            font-size: 1.8rem;
+            color: #5a3e2b;
+            margin-bottom: 10px;
+            font-family: Georgia, serif;
+        }
+        
+        .article-title-chinese {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            font-family: 'Microsoft YaHei', sans-serif;
+            opacity: 0.8;
+        }
+        
+        .article-paragraph {
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .english-text {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .chinese-text {
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            opacity: 0.7;
+            margin-bottom: 30px;
+            padding-left: 20px;
+            border-left: 3px solid #d4a76a;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .loading-translation {
+            font-style: italic;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="../index.html">小说</a></li>
+            <li><a href="../webnovels.html">网文</a></li>
+            <li><a href="../about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="article-content">
+                <a href="../webnovels.html" class="back-btn">← 返回网文列表</a>
+                <h1 class="article-title">Wreflection</h1>
+                <div class="article-title-chinese loading-translation" data-english="Wreflection">正在翻译标题...</div>
+                <div id="articleBody">
+                    <div class="article-paragraph">
+                        <div class="english-text">Your computer modem screeches as it tries to connect to something called the internet. Maybe it works. Maybe you try again.</div>
+                        <div class="chinese-text loading-translation" data-english="Your computer modem screeches as it tries to connect to something called the internet. Maybe it works. Maybe you try again.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">For the first time in history, you can exchange letters with someone across the world in seconds. Only 2000-something websites exist1, so you could theoretically visit them all over a weekend. Most websites are just text on gray backgrounds with the occasional pixelated image2. Loading times are brutal. A single image takes a minute, a 1-minute video could take hours. Most people do not trust putting their credit cards online. The advice everyone gives: don’t trust strangers on the internet.</div>
+                        <div class="chinese-text loading-translation" data-english="For the first time in history, you can exchange letters with someone across the world in seconds. Only 2000-something websites exist1, so you could theoretically visit them all over a weekend. Most websites are just text on gray backgrounds with the occasional pixelated image2. Loading times are brutal. A single image takes a minute, a 1-minute video could take hours. Most people do not trust putting their credit cards online. The advice everyone gives: don’t trust strangers on the internet.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Optimists predict grand transformations. Some believe digital commerce will overtake physical retail within years. Others insist we’ll wander around in virtual reality worlds.</div>
+                        <div class="chinese-text loading-translation" data-english="Optimists predict grand transformations. Some believe digital commerce will overtake physical retail within years. Others insist we’ll wander around in virtual reality worlds.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">> *“I expect that within the next five years more than one in ten people will wear head-mounted computer displays while traveling in buses, trains, and planes.”- Nicholas Negroponte, MIT Professor, 1993</div>
+                        <div class="chinese-text loading-translation" data-english="> *“I expect that within the next five years more than one in ten people will wear head-mounted computer displays while traveling in buses, trains, and planes.”- Nicholas Negroponte, MIT Professor, 1993">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![CDN media](https://substackcdn.com/image/fetch/%24s_%21Vm0E%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/922a9770-2c05-4708-a7b6-8c2bda31a3e0_992x571.jpeg)</div>
+                        <div class="chinese-text loading-translation" data-english="![CDN media](https://substackcdn.com/image/fetch/%24s_%21Vm0E%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/922a9770-2c05-4708-a7b6-8c2bda31a3e0_992x571.jpeg)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">If you told the average person in 1995 that within 25 years, we’d consume news from strangers on social media over newspapers, watch shows on-demand in place of cable TV, find romantic partners through apps more than through friends, and flip “don’t trust strangers on the internet” so completely that we’d let internet strangers pick us up in their personal vehicles and sleep in their spare bedrooms, most people would find that hard to believe.</div>
+                        <div class="chinese-text loading-translation" data-english="If you told the average person in 1995 that within 25 years, we’d consume news from strangers on social media over newspapers, watch shows on-demand in place of cable TV, find romantic partners through apps more than through friends, and flip “don’t trust strangers on the internet” so completely that we’d let internet strangers pick us up in their personal vehicles and sleep in their spare bedrooms, most people would find that hard to believe.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">One side warns that AI will eliminate entire professions and cause mass unemployment within a couple of years. The other claims that AI will create more jobs than it destroys. One camp dismisses AI as overhyped vaporware destined for a bubble burst, while the other predicts it will automate every knowledge task and reshape civilization within the decade.</div>
+                        <div class="chinese-text loading-translation" data-english="One side warns that AI will eliminate entire professions and cause mass unemployment within a couple of years. The other claims that AI will create more jobs than it destroys. One camp dismisses AI as overhyped vaporware destined for a bubble burst, while the other predicts it will automate every knowledge task and reshape civilization within the decade.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Geoffrey Hinton, who some call the Father of AI, warned in 2016 that AI would trigger mass unemployment. “People should stop training radiologists now,” he declared, certain that AI would replace them within years.</div>
+                        <div class="chinese-text loading-translation" data-english="Geoffrey Hinton, who some call the Father of AI, warned in 2016 that AI would trigger mass unemployment. “People should stop training radiologists now,” he declared, certain that AI would replace them within years.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![CDN media](https://substackcdn.com/image/fetch/%24s_%21HIr3%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/190c07b0-0f3a-41d2-ac1c-706c4ad66c1d_640x1195.png)</div>
+                        <div class="chinese-text loading-translation" data-english="![CDN media](https://substackcdn.com/image/fetch/%24s_%21HIr3%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/190c07b0-0f3a-41d2-ac1c-706c4ad66c1d_640x1195.png)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Yet as Deena Mousa, a researcher, shows in “The Algorithm Will See You Now,” AI hasn’t replaced radiologists, despite predictions. It is thriving.</div>
+                        <div class="chinese-text loading-translation" data-english="Yet as Deena Mousa, a researcher, shows in “The Algorithm Will See You Now,” AI hasn’t replaced radiologists, despite predictions. It is thriving.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">> In 2025, American diagnostic radiology residency programs offered a record 1,208 positions across all radiology specialties, a four percent increase from 2024, and the field’s vacancy rates are at all-time highs. In 2025, radiology was the second-highest-paid medical specialty in the country, with an average income of $520,000, over 48 percent higher than the average salary in 2015.</div>
+                        <div class="chinese-text loading-translation" data-english="> In 2025, American diagnostic radiology residency programs offered a record 1,208 positions across all radiology specialties, a four percent increase from 2024, and the field’s vacancy rates are at all-time highs. In 2025, radiology was the second-highest-paid medical specialty in the country, with an average income of $520,000, over 48 percent higher than the average salary in 2015.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![AI isn't replacing radiologists - by Deena Mousa](https://substackcdn.com/image/fetch/%24s_%21ZRYf%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/9c5c5c55-c95a-4edb-ac67-4925ad6f07c7_1240x1104.png)</div>
+                        <div class="chinese-text loading-translation" data-english="![AI isn't replacing radiologists - by Deena Mousa](https://substackcdn.com/image/fetch/%24s_%21ZRYf%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/9c5c5c55-c95a-4edb-ac67-4925ad6f07c7_1240x1104.png)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Mousa identifies a few factors for why the prediction failed - real-world complexity, the job involves more than image recognition, and regulatory/insurance hurdles. Most critical she points is Jevons Paradox, which is *the economic principle that a technological improvement in resource efficiency leads to an increase in the total consumption of that resource, rather than a decrease.Her argument is that as AI makes radiologists more productive, better diagnostics and faster turnaround at lower costs mean more people get scans. So employment doesn’t decrease. It increases.</div>
+                        <div class="chinese-text loading-translation" data-english="Mousa identifies a few factors for why the prediction failed - real-world complexity, the job involves more than image recognition, and regulatory/insurance hurdles. Most critical she points is Jevons Paradox, which is *the economic principle that a technological improvement in resource efficiency leads to an increase in the total consumption of that resource, rather than a decrease.Her argument is that as AI makes radiologists more productive, better diagnostics and faster turnaround at lower costs mean more people get scans. So employment doesn’t decrease. It increases.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">This is also the Tech world’s consensus. Microsoft CEO Satya Nadella agrees, as does Box CEO Aaron Levie, who suggests:</div>
+                        <div class="chinese-text loading-translation" data-english="This is also the Tech world’s consensus. Microsoft CEO Satya Nadella agrees, as does Box CEO Aaron Levie, who suggests:">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">> “The least understood yet most important concept in the world is Jevons Paradox. When we make a technology more efficient, demand goes well beyond the original level. AI is the perfect example of this—almost anything that AI is applied to will see more demand, not less.”</div>
+                        <div class="chinese-text loading-translation" data-english="> “The least understood yet most important concept in the world is Jevons Paradox. When we make a technology more efficient, demand goes well beyond the original level. AI is the perfect example of this—almost anything that AI is applied to will see more demand, not less.”">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">First, as Andrej Karpathy, the computer scientist who coined the term *vibe coding*, points out, radiology is not the right job to look for initial job displacements.</div>
+                        <div class="chinese-text loading-translation" data-english="First, as Andrej Karpathy, the computer scientist who coined the term *vibe coding*, points out, radiology is not the right job to look for initial job displacements.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">> “Radiology is too multi-faceted, too high risk, too regulated. When looking for jobs that will change a lot due to AI on shorter time scales, I’d look in other places - jobs that look like repetition of one rote task, each task being relatively independent, closed (not requiring too much context), short (in time), forgiving (the cost of mistake is low), and of course automatable giving current (and digital) capability. Even then, I’d expect to see AI adopted as a tool at first, where jobs change and refactor (e.g. more monitoring or supervising than manual doing, etc).”</div>
+                        <div class="chinese-text loading-translation" data-english="> “Radiology is too multi-faceted, too high risk, too regulated. When looking for jobs that will change a lot due to AI on shorter time scales, I’d look in other places - jobs that look like repetition of one rote task, each task being relatively independent, closed (not requiring too much context), short (in time), forgiving (the cost of mistake is low), and of course automatable giving current (and digital) capability. Even then, I’d expect to see AI adopted as a tool at first, where jobs change and refactor (e.g. more monitoring or supervising than manual doing, etc).”">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Second, the tech consensus that we will see increased employment actually depends on the industry. Specifically, *how much unfulfilled demandcan be unlocked in that industry, and whether this unfulfilled demand growth outpaces *continued automation and productivity improvement*.</div>
+                        <div class="chinese-text loading-translation" data-english="Second, the tech consensus that we will see increased employment actually depends on the industry. Specifically, *how much unfulfilled demandcan be unlocked in that industry, and whether this unfulfilled demand growth outpaces *continued automation and productivity improvement*.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">To understand this better, look at what actually happened in three industries over a 200-year period from 1800 to 2000. In the paper *Automation and jobs: when technology boosts employment*, James Bessen, an economist, shows the employment, productivity, and demand data for textile, iron & steel, and motor vehicle industries.</div>
+                        <div class="chinese-text loading-translation" data-english="To understand this better, look at what actually happened in three industries over a 200-year period from 1800 to 2000. In the paper *Automation and jobs: when technology boosts employment*, James Bessen, an economist, shows the employment, productivity, and demand data for textile, iron & steel, and motor vehicle industries.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![](https://substackcdn.com/image/fetch/%24s_%21C5Fb%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/894c6897-6232-4a70-aafa-8860f695e2d1_1088x1412.webp)</div>
+                        <div class="chinese-text loading-translation" data-english="![](https://substackcdn.com/image/fetch/%24s_%21C5Fb%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/894c6897-6232-4a70-aafa-8860f695e2d1_1088x1412.webp)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">After automation, both textile and iron/steel workers saw employment increase for nearly a century before experiencing a steep decline. Vehicle manufacturing, by contrast, holds steady and hasn’t seen the same steep decline yet.</div>
+                        <div class="chinese-text loading-translation" data-english="After automation, both textile and iron/steel workers saw employment increase for nearly a century before experiencing a steep decline. Vehicle manufacturing, by contrast, holds steady and hasn’t seen the same steep decline yet.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">To answer why those two industries saw sharp declines but motor vehicle manufacturing did not, first look at the productivity of workers in all three industries:</div>
+                        <div class="chinese-text loading-translation" data-english="To answer why those two industries saw sharp declines but motor vehicle manufacturing did not, first look at the productivity of workers in all three industries:">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![](https://substackcdn.com/image/fetch/%24s_%21TiZG%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/4566cd7d-954f-4581-9de0-6abf3435f218_1108x1418.webp)</div>
+                        <div class="chinese-text loading-translation" data-english="![](https://substackcdn.com/image/fetch/%24s_%21TiZG%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/4566cd7d-954f-4581-9de0-6abf3435f218_1108x1418.webp)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![](https://substackcdn.com/image/fetch/%24s_%21UkXq%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/f7872dc2-a7d3-46fa-b09e-afc84ba31497_778x1600.webp)</div>
+                        <div class="chinese-text loading-translation" data-english="![](https://substackcdn.com/image/fetch/%24s_%21UkXq%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/f7872dc2-a7d3-46fa-b09e-afc84ba31497_778x1600.webp)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">What the graphs show is a consistent pattern (*note: the productivity and demand graphs are logarithmic, meaning productivity and demand grew exponentially*). Early on, a service or product is expensive because many workers are needed to produce it. Most people can’t afford it or use them sparingly. For example, in the early 1800s, most people could only afford a pair of pants or shirt. Then automation makes workers dramatically more productive. A textile worker in 1900 could produce fifty times more than one in 1800. This productivity explosion crashes prices, which creates massive new demand. Suddenly everyone can afford multiple outfits instead of just one or two. Employment and productivity both surge (*note:*employment growth masks internal segment displacement and wage changes. See footnote*3)</div>
+                        <div class="chinese-text loading-translation" data-english="What the graphs show is a consistent pattern (*note: the productivity and demand graphs are logarithmic, meaning productivity and demand grew exponentially*). Early on, a service or product is expensive because many workers are needed to produce it. Most people can’t afford it or use them sparingly. For example, in the early 1800s, most people could only afford a pair of pants or shirt. Then automation makes workers dramatically more productive. A textile worker in 1900 could produce fifty times more than one in 1800. This productivity explosion crashes prices, which creates massive new demand. Suddenly everyone can afford multiple outfits instead of just one or two. Employment and productivity both surge (*note:*employment growth masks internal segment displacement and wage changes. See footnote*3)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Once demand saturates, employment doesn’t further increase but holds steady at peak demand. But as automation continues and workers keep getting more productive, employment starts to decline. In textiles, mechanization enabled massive output growth but ultimately displaced workers once consumption plateaued while automation and productivity continued climbing. We probably don’t need infinite clothing. Similarly, patients will likely never need a million radiology reports, no matter how cheap they become and so radiologists will eventually hit a ceiling. We don’t need infinite food, clothing, tax returns, and so on.</div>
+                        <div class="chinese-text loading-translation" data-english="Once demand saturates, employment doesn’t further increase but holds steady at peak demand. But as automation continues and workers keep getting more productive, employment starts to decline. In textiles, mechanization enabled massive output growth but ultimately displaced workers once consumption plateaued while automation and productivity continued climbing. We probably don’t need infinite clothing. Similarly, patients will likely never need a million radiology reports, no matter how cheap they become and so radiologists will eventually hit a ceiling. We don’t need infinite food, clothing, tax returns, and so on.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Motor vehicles, in Bessen’s graphs, tell a different story because demand remains far from saturated. Most people globally still don’t own cars. Automation hasn’t completely conquered manufacturing either (Tesla’s retreat from full manufacturing automation proves the current technical limits). When both demand and automation potential remain high, employment can sustain or even grow despite productivity gains.</div>
+                        <div class="chinese-text loading-translation" data-english="Motor vehicles, in Bessen’s graphs, tell a different story because demand remains far from saturated. Most people globally still don’t own cars. Automation hasn’t completely conquered manufacturing either (Tesla’s retreat from full manufacturing automation proves the current technical limits). When both demand and automation potential remain high, employment can sustain or even grow despite productivity gains.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Software presents an even more interesting question. How many apps do you need? What about software that generates applications on demand, that creates entire software ecosystems autonomously? Until now, *handcrafted softwarewas the constraint. Expensive software engineers and ~~their~~ our labor costs limited what companies could afford to build. Automation changes this equation by making those engineers far more productive. Both consumer and enterprise software markets suggest significant unmet demand because businesses have consistently left projects unbuilt4. They couldn’t justify the development costs or had to allocate limited resources to their top priority projects. I saw this firsthand at Amazon. Thousands of ideas went unfunded not because they lacked business value, but because of the lack of engineering resources to build them. If AI can produce software at a fraction of the cost, that unleashes enormous latent demand. The key question then is if and when that demand will saturate.</div>
+                        <div class="chinese-text loading-translation" data-english="Software presents an even more interesting question. How many apps do you need? What about software that generates applications on demand, that creates entire software ecosystems autonomously? Until now, *handcrafted softwarewas the constraint. Expensive software engineers and ~~their~~ our labor costs limited what companies could afford to build. Automation changes this equation by making those engineers far more productive. Both consumer and enterprise software markets suggest significant unmet demand because businesses have consistently left projects unbuilt4. They couldn’t justify the development costs or had to allocate limited resources to their top priority projects. I saw this firsthand at Amazon. Thousands of ideas went unfunded not because they lacked business value, but because of the lack of engineering resources to build them. If AI can produce software at a fraction of the cost, that unleashes enormous latent demand. The key question then is if and when that demand will saturate.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">1. *The magnitude and growth of unmet market demand,and
+2. *Whether that demand growth outpaces productivity improvements from automation.*</div>
+                        <div class="chinese-text loading-translation" data-english="1. *The magnitude and growth of unmet market demand,and
+2. *Whether that demand growth outpaces productivity improvements from automation.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![](https://substackcdn.com/image/fetch/%24s_%21jwgp%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/a3f6ad3d-a52e-464b-b6a7-00c2bdb1dddc_1600x1600.png)</div>
+                        <div class="chinese-text loading-translation" data-english="![](https://substackcdn.com/image/fetch/%24s_%21jwgp%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/a3f6ad3d-a52e-464b-b6a7-00c2bdb1dddc_1600x1600.png)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Different industries will experience different outcomes depending on who’s winning that demand and productivity race.</div>
+                        <div class="chinese-text loading-translation" data-english="Different industries will experience different outcomes depending on who’s winning that demand and productivity race.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">The dotcom boom of the 1990s saw a wave of companies adding “.com” to their name to ride the mania and watch their valuations soar. Companies poured billions into fiber optics and undersea cables - expensive projects only possible because people believed the hype5. All of this eventually burst in spectacular fashion in the dotcom crash in 2000-2001. Infrastructure companies like Cisco briefly became the most valuable in the world only to come tumbling down6. Pets.com served as the poster child of this exuberance raising $82.5 million in its IPO, spending millions on a Super Bowl ad only to collapse nine months later7.</div>
+                        <div class="chinese-text loading-translation" data-english="The dotcom boom of the 1990s saw a wave of companies adding “.com” to their name to ride the mania and watch their valuations soar. Companies poured billions into fiber optics and undersea cables - expensive projects only possible because people believed the hype5. All of this eventually burst in spectacular fashion in the dotcom crash in 2000-2001. Infrastructure companies like Cisco briefly became the most valuable in the world only to come tumbling down6. Pets.com served as the poster child of this exuberance raising $82.5 million in its IPO, spending millions on a Super Bowl ad only to collapse nine months later7.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">But the dotcom bubble also got several things right. More importantly, it eventually bought us the physical infrastructure that made YouTube, Netflix, and Facebook possible. Sure, companies like Worldcom, NorthPoint, and Global Crossing making these investments went bankrupt, but they also laid the foundation for the future. Although the crash proved the skeptics right in the short term, it proved the optimists were directionally correct in the long term.</div>
+                        <div class="chinese-text loading-translation" data-english="But the dotcom bubble also got several things right. More importantly, it eventually bought us the physical infrastructure that made YouTube, Netflix, and Facebook possible. Sure, companies like Worldcom, NorthPoint, and Global Crossing making these investments went bankrupt, but they also laid the foundation for the future. Although the crash proved the skeptics right in the short term, it proved the optimists were directionally correct in the long term.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Today’s AI boom shows similar exuberance. Consider the AI startup founded by former OpenAI executive Mira Murati, which raised $2 billion at a $10 billion valuation, the largest seed round in history8. This despite having no product and declining to reveal what it’s building or how it will generate returns. Several AI wrappers have raised millions in seed funding with little to no moat.</div>
+                        <div class="chinese-text loading-translation" data-english="Today’s AI boom shows similar exuberance. Consider the AI startup founded by former OpenAI executive Mira Murati, which raised $2 billion at a $10 billion valuation, the largest seed round in history8. This despite having no product and declining to reveal what it’s building or how it will generate returns. Several AI wrappers have raised millions in seed funding with little to no moat.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Yet some investments will outlast the hype and will likely help future AI companies even if this is a bubble. For example, the annual capital expenditures of Hyperscalers9 that have more than doubled since ChatGPT’s release - Microsoft, Google, Meta, and Amazon are collectively spending almost half a trillion dollars on data centers, chips, and compute infrastructure. Regardless of which specific companies survive, this infrastructure being built now will create the foundation for our AI future - from inference capacity to the power generation needed to support it.</div>
+                        <div class="chinese-text loading-translation" data-english="Yet some investments will outlast the hype and will likely help future AI companies even if this is a bubble. For example, the annual capital expenditures of Hyperscalers9 that have more than doubled since ChatGPT’s release - Microsoft, Google, Meta, and Amazon are collectively spending almost half a trillion dollars on data centers, chips, and compute infrastructure. Regardless of which specific companies survive, this infrastructure being built now will create the foundation for our AI future - from inference capacity to the power generation needed to support it.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![](https://substackcdn.com/image/fetch/%24s_%21e1Qf%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/b8060772-c6a4-42b6-9581-1a38dd5b8b9a_1600x879.png)</div>
+                        <div class="chinese-text loading-translation" data-english="![](https://substackcdn.com/image/fetch/%24s_%21e1Qf%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/b8060772-c6a4-42b6-9581-1a38dd5b8b9a_1600x879.png)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">The infrastructure investments may have long-term value, but are we already in bubble territory? Azeem Azhar, a tech analyst and investor, provides an excellent practical framework to answer the AI bubble question. He benchmarks today’s AI boom using five gauges: economic strain (investment as a share of GDP), industry strain (capex to revenue ratios), revenue growth trajectories (doubling time), valuation heat (price-to-earnings multiples), and funding quality (the resilience of capital sources). His analysis shows that AI remains in a demand-led boom rather than a bubble, but if two of the five gauges head into red, we will be in bubble territory.</div>
+                        <div class="chinese-text loading-translation" data-english="The infrastructure investments may have long-term value, but are we already in bubble territory? Azeem Azhar, a tech analyst and investor, provides an excellent practical framework to answer the AI bubble question. He benchmarks today’s AI boom using five gauges: economic strain (investment as a share of GDP), industry strain (capex to revenue ratios), revenue growth trajectories (doubling time), valuation heat (price-to-earnings multiples), and funding quality (the resilience of capital sources). His analysis shows that AI remains in a demand-led boom rather than a bubble, but if two of the five gauges head into red, we will be in bubble territory.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">The demand is real. After all OpenAI is one of the fastest-growing companies in history10. But that alone doesn’t prevent bubbles. OpenAI will likely be fine given its product-market fit, but many other AI companies face the same unit economics questions that plagued dotcom companies in the 1990s. Pets.com had millions of users too (a then large portion of internet users), but as the tech axiom goes, you can acquire infinite customers and generate infinite revenue if you sell dollars for 85 cents11. So despite the demand, the pattern may be similar to the 1990s. Expect overbuilding. Expect some spectacular failures. But also expect the infrastructure to outlast the hype cycle and enable things we can’t yet imagine.</div>
+                        <div class="chinese-text loading-translation" data-english="The demand is real. After all OpenAI is one of the fastest-growing companies in history10. But that alone doesn’t prevent bubbles. OpenAI will likely be fine given its product-market fit, but many other AI companies face the same unit economics questions that plagued dotcom companies in the 1990s. Pets.com had millions of users too (a then large portion of internet users), but as the tech axiom goes, you can acquire infinite customers and generate infinite revenue if you sell dollars for 85 cents11. So despite the demand, the pattern may be similar to the 1990s. Expect overbuilding. Expect some spectacular failures. But also expect the infrastructure to outlast the hype cycle and enable things we can’t yet imagine.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">We’re early in the AI revolution. We’re at that metaphorical screeching modem phase of the internet era. Just as infrastructure companies poured billions into fiber optics, hyperscalers now pour billions into data centers. Startups add “.ai” to their names like companies once added “.com” as they seek higher valuations. The hype will cycle through both euphoria and despair. Some predictions will look laughably wrong. Some that seem crazy will prove conservative.</div>
+                        <div class="chinese-text loading-translation" data-english="We’re early in the AI revolution. We’re at that metaphorical screeching modem phase of the internet era. Just as infrastructure companies poured billions into fiber optics, hyperscalers now pour billions into data centers. Startups add “.ai” to their names like companies once added “.com” as they seek higher valuations. The hype will cycle through both euphoria and despair. Some predictions will look laughably wrong. Some that seem crazy will prove conservative.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Different industries will experience different outcomes. Unlike what the Jevons optimists suggest, demand for many things plateaus once human needs are met. Employment outcomes in any industry depend on the magnitude and growth of unmet market demand and whether that demand growth outpaces productivity improvements from automation.</div>
+                        <div class="chinese-text loading-translation" data-english="Different industries will experience different outcomes. Unlike what the Jevons optimists suggest, demand for many things plateaus once human needs are met. Employment outcomes in any industry depend on the magnitude and growth of unmet market demand and whether that demand growth outpaces productivity improvements from automation.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Cost reduction will unlock market segments. Aswath Damodaran, a finance professor, (in)famously undervalued Uber assuming it would only capture a portion of the existing taxi market12. He missed that making rides dramatically cheaper would expand the market itself as people took Ubers to destinations they’d never have paid taxi prices to reach. AI will similarly enable products and services currently too expensive to build with human intelligence. A restaurant owner might use AI to create custom supply chain software that with human developers, say at $100,000, would never have been built. A non-profit might deploy AI to contest a legal battle that was previously unaffordable.</div>
+                        <div class="chinese-text loading-translation" data-english="Cost reduction will unlock market segments. Aswath Damodaran, a finance professor, (in)famously undervalued Uber assuming it would only capture a portion of the existing taxi market12. He missed that making rides dramatically cheaper would expand the market itself as people took Ubers to destinations they’d never have paid taxi prices to reach. AI will similarly enable products and services currently too expensive to build with human intelligence. A restaurant owner might use AI to create custom supply chain software that with human developers, say at $100,000, would never have been built. A non-profit might deploy AI to contest a legal battle that was previously unaffordable.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">We can predict change, but we can’t predict the details. No one in 1995 predicted we’d date strangers from the internet, ride in their *ubers*, or sleep in their *airbnbs*. Or that a job called *influencerswould become the most sought-after career among young people. Human creativity generates outcomes we can’t forecast with our current mental models. Expect new domains and industries to emerge. AI has already helped us decode more animal communication in the last five years than in the last fifty. Can we predict what jobs a technology that allows us to have full-blown conversations with them will unlock? A job that doesn’t exist today will likely be the most sought-after job in 2050. We can’t name it because it hasn’t been invented yet.</div>
+                        <div class="chinese-text loading-translation" data-english="We can predict change, but we can’t predict the details. No one in 1995 predicted we’d date strangers from the internet, ride in their *ubers*, or sleep in their *airbnbs*. Or that a job called *influencerswould become the most sought-after career among young people. Human creativity generates outcomes we can’t forecast with our current mental models. Expect new domains and industries to emerge. AI has already helped us decode more animal communication in the last five years than in the last fifty. Can we predict what jobs a technology that allows us to have full-blown conversations with them will unlock? A job that doesn’t exist today will likely be the most sought-after job in 2050. We can’t name it because it hasn’t been invented yet.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">Job categories will transform. Even as the internet made some jobs obsolete, it also transformed others and created new categories. Expect the same with AI. Karpathy ends with a question:</div>
+                        <div class="chinese-text loading-translation" data-english="Job categories will transform. Even as the internet made some jobs obsolete, it also transformed others and created new categories. Expect the same with AI. Karpathy ends with a question:">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">> About 6 months ago, I was also asked to vote if we will have less or more software engineers in 5 years. Exercise left for the reader.</div>
+                        <div class="chinese-text loading-translation" data-english="> About 6 months ago, I was also asked to vote if we will have less or more software engineers in 5 years. Exercise left for the reader.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">To answer this question, go back to 1995 and ask the same question but with journalists. You might have predicted more journalists because the internet would create more demand by enabling you to reach the whole world. You’d be right for 10 or so years as employment in journalism grew until the early 2000s. But 30 years later, the number of newspapers and the number of journalists both have declined, even though more “journalism” happens than ever. Just not by people we call journalists. Bloggers, influencers, YouTubers, and newsletter writers do the work that traditional journalists used to do13.</div>
+                        <div class="chinese-text loading-translation" data-english="To answer this question, go back to 1995 and ask the same question but with journalists. You might have predicted more journalists because the internet would create more demand by enabling you to reach the whole world. You’d be right for 10 or so years as employment in journalism grew until the early 2000s. But 30 years later, the number of newspapers and the number of journalists both have declined, even though more “journalism” happens than ever. Just not by people we call journalists. Bloggers, influencers, YouTubers, and newsletter writers do the work that traditional journalists used to do13.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">The same pattern will play out with software engineers. We’ll see more people doing software engineering work and in a decade or so, what “software engineer” means will have transformed. Consider the restaurant owner from earlier who uses AI to create custom inventory software that is useful only for them. They won’t call themselves a software engineer.</div>
+                        <div class="chinese-text loading-translation" data-english="The same pattern will play out with software engineers. We’ll see more people doing software engineering work and in a decade or so, what “software engineer” means will have transformed. Consider the restaurant owner from earlier who uses AI to create custom inventory software that is useful only for them. They won’t call themselves a software engineer.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">So just like in 1995, if the AI optimists today say that within 25 years, we’d prefer news from AI over social media influencers, watch AI-generated characters in place of human actors, find romantic partners through AI matchmakers more than through dating apps (or perhaps use AI romantic partners itself), and flip “don’t trust AI” so completely that we’d rely on AI for life-or-death decisions and trust it to raise our children, most people would find that hard to believe. Even with all the intelligence, both natural and artificial, no one can predict with certainty what our AI future will look like. Not the tech CEOs, not the AI researchers, and certainly not some random guy pontificating on the internet. But whether we get the details right or not, our AI future is loading.</div>
+                        <div class="chinese-text loading-translation" data-english="So just like in 1995, if the AI optimists today say that within 25 years, we’d prefer news from AI over social media influencers, watch AI-generated characters in place of human actors, find romantic partners through AI matchmakers more than through dating apps (or perhaps use AI romantic partners itself), and flip “don’t trust AI” so completely that we’d rely on AI for life-or-death decisions and trust it to raise our children, most people would find that hard to believe. Even with all the intelligence, both natural and artificial, no one can predict with certainty what our AI future will look like. Not the tech CEOs, not the AI researchers, and certainly not some random guy pontificating on the internet. But whether we get the details right or not, our AI future is loading.">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*If you enjoyed this post, please consider sharing it on your socials or with someone who might also find it interesting. To get future posts delivered to your inbox, please subscribe using the button below. Please follow*me on X.com to discuss tech and business trends as they happen.*</div>
+                        <div class="chinese-text loading-translation" data-english="*If you enjoyed this post, please consider sharing it on your socials or with someone who might also find it interesting. To get future posts delivered to your inbox, please subscribe using the button below. Please follow*me on X.com to discuss tech and business trends as they happen.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*Approximately 2,879 websites were established before 1995, expanding to 23,500 by June 1995. See <https://en.wikipedia.org/wiki/List_of_websites_founded_before_1995>*</div>
+                        <div class="chinese-text loading-translation" data-english="*Approximately 2,879 websites were established before 1995, expanding to 23,500 by June 1995. See <https://en.wikipedia.org/wiki/List_of_websites_founded_before_1995>*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*Historical data from the Industrial Revolution shows that even as aggregate textile employment grew, workers shifted between job types within the industry as some roles became redundant. And correspondingly, some jobs saw wages collapse while others saw increases. For example, domestic hand-loom weavers were displaced by power looms and saw their wages collapse, while self-acting mule spinners (a newly created role) and factory workers saw stable employment and steady compensation growth. Additionally, Britain’s deflationary period (1815-1850) saw food prices fall by half, meaning real purchasing power often rose even when nominal wages declined. Despite all this, the psychological reality was harsh. Even with falling prices, watching your paycheck shrink while neighbors lost jobs and debts grew harder to pay (lower wages but fixed obligations) created real instability regardless of aggregate statistics improvements. Also see Acemoglu & Johnson, 2024.*</div>
+                        <div class="chinese-text loading-translation" data-english="*Historical data from the Industrial Revolution shows that even as aggregate textile employment grew, workers shifted between job types within the industry as some roles became redundant. And correspondingly, some jobs saw wages collapse while others saw increases. For example, domestic hand-loom weavers were displaced by power looms and saw their wages collapse, while self-acting mule spinners (a newly created role) and factory workers saw stable employment and steady compensation growth. Additionally, Britain’s deflationary period (1815-1850) saw food prices fall by half, meaning real purchasing power often rose even when nominal wages declined. Despite all this, the psychological reality was harsh. Even with falling prices, watching your paycheck shrink while neighbors lost jobs and debts grew harder to pay (lower wages but fixed obligations) created real instability regardless of aggregate statistics improvements. Also see Acemoglu & Johnson, 2024.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![](https://substackcdn.com/image/fetch/%24s_%21QCBc%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/defa2f56-7973-4028-92ea-d67372056d8e_1450x1000.png)</div>
+                        <div class="chinese-text loading-translation" data-english="![](https://substackcdn.com/image/fetch/%24s_%21QCBc%21%2Cf_auto%2Cq_auto%3Agood%2Cfl_progressive%3Asteep/https%3A//substack-post-media.s3.amazonaws.com/public/images/defa2f56-7973-4028-92ea-d67372056d8e_1450x1000.png)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*Ask any tech product leader about their roadmap planning, and they’ll all universally report far more worthwhile projects than resources to build them, forcing ruthless prioritization to decide what gets built.*</div>
+                        <div class="chinese-text loading-translation" data-english="*Ask any tech product leader about their roadmap planning, and they’ll all universally report far more worthwhile projects than resources to build them, forcing ruthless prioritization to decide what gets built.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*Hyperscalers are large cloud computing companies like Microsoft, Google, Meta, and Amazon that operate massive data centers and provide the computing infrastructure necessary to train and run AI models at scale.*</div>
+                        <div class="chinese-text loading-translation" data-english="*Hyperscalers are large cloud computing companies like Microsoft, Google, Meta, and Amazon that operate massive data centers and provide the computing infrastructure necessary to train and run AI models at scale.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*Damodaran valued Uber at $6B, assuming a 10% market share of the then $100B taxi market. Uber’s market cap as of October 2025 is $190B.*</div>
+                        <div class="chinese-text loading-translation" data-english="*Damodaran valued Uber at $6B, assuming a 10% market share of the then $100B taxi market. Uber’s market cap as of October 2025 is $190B.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">*Job transformation doesn’t guarantee comparable compensation. Much of this new “journalism” or content creation happens for free or at rates far below what traditional news organizations paid, separating the work from stable employment.*</div>
+                        <div class="chinese-text loading-translation" data-english="*Job transformation doesn’t guarantee comparable compensation. Much of this new “journalism” or content creation happens for free or at rates far below what traditional news organizations paid, separating the work from stable employment.*">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">![Abhi Chakravarty's avatar](https://substack.com/profile/6572877-abhi-chakravarty?utm_source=comment)</div>
+                        <div class="chinese-text loading-translation" data-english="![Abhi Chakravarty's avatar](https://substack.com/profile/6572877-abhi-chakravarty?utm_source=comment)">正在翻译...</div>
+                    </div>
+                    <div class="article-paragraph">
+                        <div class="english-text">This was a really interesting read! I noticed that your article focused primarily on ANI (Artificial Narrow Intelligence). I was wondering if you have any thoughts on AGI (Artificial General Intelligence) or ASI (Artificial Superintelligence), and how they might compare or relate to the topics you discussed.</div>
+                        <div class="chinese-text loading-translation" data-english="This was a really interesting read! I noticed that your article focused primarily on ANI (Artificial Narrow Intelligence). I was wondering if you have any thoughts on AGI (Artificial General Intelligence) or ASI (Artificial Superintelligence), and how they might compare or relate to the topics you discussed.">正在翻译...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="../script.js"></script>
+    <script>
+        // Translate all paragraphs when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            const chineseTexts = document.querySelectorAll('.chinese-text, .article-title-chinese');
+            
+            chineseTexts.forEach((element, index) => {
+                const englishText = element.getAttribute('data-english');
+                translateParagraph(englishText, element, index);
+            });
+        });
+        
+        // Function to translate a paragraph
+        async function translateParagraph(text, element, index) {
+            try {
+                // Use MyMemory Translation API for free translation
+                const url = 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|zh';
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.responseStatus === 200) {
+                    let translation = data.responseData.translatedText;
+                    // Fallback if translation is empty
+                    if (!translation || translation.trim() === '') {
+                        if (element.classList.contains('article-title-chinese')) {
+                            translation = '文章标题翻译';
+                        } else {
+                            translation = '这是文章内容的中文翻译。';
+                        }
+                    }
+                    element.textContent = translation;
+                    element.classList.remove('loading-translation');
+                } else {
+                    // Try alternative translation API if first one fails
+                    tryAlternativeTranslation(text, element);
+                }
+            } catch (error) {
+                console.error('Translation error:', error);
+                // Try alternative translation API if first one fails
+                tryAlternativeTranslation(text, element);
+            }
+        }
+        
+        // Alternative translation function using a different approach
+        function tryAlternativeTranslation(text, element) {
+            try {
+                // Use another free translation API as fallback
+                const url = 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(text);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        let translation = '';
+                        if (data && data[0] && Array.isArray(data[0])) {
+                            translation = data[0].map(item => item[0]).join('');
+                        }
+                        
+                        if (!translation || translation.trim() === '') {
+                            if (element.classList.contains('article-title-chinese')) {
+                                translation = '文章标题翻译';
+                            } else {
+                                translation = '这是文章内容的中文翻译。';
+                            }
+                        }
+                        element.textContent = translation;
+                        element.classList.remove('loading-translation');
+                    })
+                    .catch(error => {
+                        console.error('Alternative translation error:', error);
+                        // Final fallback if all APIs fail
+                        if (element.classList.contains('article-title-chinese')) {
+                            element.textContent = '文章标题翻译';
+                        } else {
+                            element.textContent = '这是文章内容的中文翻译。';
+                        }
+                        element.classList.remove('loading-translation');
+                    });
+            } catch (error) {
+                console.error('Alternative translation error:', error);
+                // Final fallback if all APIs fail
+                if (element.classList.contains('article-title-chinese')) {
+                    element.textContent = '文章标题翻译';
+                } else {
+                    element.textContent = '这是文章内容的中文翻译。';
+                }
+                element.classList.remove('loading-translation');
+            }
+        }
+    </script>
+</body>
+</html>

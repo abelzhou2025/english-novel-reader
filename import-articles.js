@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Define the path to the articles folder
-const articlesFolder = path.join(process.env.HOME, 'Desktop', 'articles');
+const articlesFolder = path.join(process.env.HOME, 'Desktop', 'articles2');
 const outputFolder = path.join(__dirname, 'articles');
 
 // Create output folder if it doesn't exist
@@ -335,12 +335,19 @@ function updateWebnovelsHTML(articles) {
 ${sidebarTagsHTML}
                 </div>`);
     
-    // Update the article list
-    const updatedArticleList = `<div class="webnovel-content" id="webnovelContent">
-${newArticlesHTML}
+    // Extract existing articles
+        const existingArticlesHTML = articleListMatch[1].trim();
+        
+        // Combine existing and new articles
+        const combinedArticlesHTML = `${existingArticlesHTML}
+${newArticlesHTML}`;
+        
+        // Update the article list
+        const updatedArticleList = `<div class="webnovel-content" id="webnovelContent">
+${combinedArticlesHTML}
                     </div>`;
     
-    webnovelsContent = webnovelsContent.replace(articleListRegex, updatedArticleList);
+        webnovelsContent = webnovelsContent.replace(articleListRegex, updatedArticleList);
     
     // Write back to file
     fs.writeFileSync(webnovelsPath, webnovelsContent, 'utf8');
