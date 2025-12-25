@@ -10,6 +10,85 @@ body {
     color: #333;
     line-height: 1.6;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark Theme Support */
+body.dark-theme {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-theme .top-nav {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .top-nav a.active {
+    color: #d4a76a;
+    border-bottom-color: #d4a76a;
+}
+
+body.dark-theme .novel-content {
+    background-color: #1e1e1e;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+}
+
+body.dark-theme .novel-content p {
+    color: #e0e0e0;
+}
+
+body.dark-theme .novel-content .selectable {
+    color: #e0e0e0;
+}
+
+body.dark-theme .novel-content .selectable:hover {
+    background-color: #2d2d2d;
+}
+
+body.dark-theme .novel-content .selectable.selected {
+    background-color: #1b3a2d;
+    color: #d4edda;
+}
+
+body.dark-theme .translation-popup .popup-content {
+    background-color: rgba(30, 30, 30, 0.98);
+    border-color: #444;
+}
+
+body.dark-theme .translation-popup .translated-text {
+    background-color: #2d2d2d;
+    border-left-color: #d4a76a;
+    color: #e0e0e0;
+}
+
+body.dark-theme .pagination-btn {
+    background-color: #333;
+    color: #e0e0e0;
+    border: 1px solid #555;
+}
+
+body.dark-theme .pagination-btn:hover:not(:disabled) {
+    background-color: #444;
+    color: #fff;
+}
+
+body.dark-theme .pagination-btn.active {
+    background-color: #d4a76a;
+    color: #121212;
+    border-color: #d4a76a;
+}
+
+body.dark-theme .article-tag {
+    background-color: #2d2d2d;
+    color: #d4a76a;
+    border-color: #5a3e2b;
+}
+
+body.dark-theme .reading-controls {
+    background-color: #2d2d2d;
+    border-color: #444;
 }
 
 .container {

@@ -7,6 +7,54 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Article reader specific styles */
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Dark Theme */
+        body.dark-theme {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .article-content {
+            background-color: #1e1e1e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        body.dark-theme .article-title {
+            color: #d4a76a;
+        }
+        
+        body.dark-theme .english-text {
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .chinese-text {
+            color: #b0b0b0;
+            border-left-color: #5a3e2b;
+        }
+        
+        body.dark-theme .back-btn {
+            background-color: #d4a76a;
+            color: #121212;
+        }
+        
+        body.dark-theme .back-btn:hover {
+            background-color: #e5c17a;
+        }
+        
+        body.dark-theme .control-group label {
+            color: #e0e0e0;
+        }
+        
+        body.dark-theme .control-select,
+        body.dark-theme .control-range {
+            background-color: #333;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        
         .article-content {
             max-width: 800px;
             margin: 100px auto;
@@ -18,6 +66,7 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .article-title {
@@ -28,6 +77,63 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
+            transition: color 0.3s ease;
+        }
+        
+        /* Reading Controls */
+        .reading-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        body.dark-theme .reading-controls {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+        
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .control-group label {
+            font-weight: 500;
+            color: #5a3e2b;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+        
+        .control-select {
+            padding: 6px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            background-color: #fff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .control-select:hover {
+            border-color: #d4a76a;
+        }
+        
+        .control-range {
+            width: 120px;
+            cursor: pointer;
+        }
+        
+        #font-size-value {
+            font-weight: 500;
+            min-width: 50px;
         }
         
         .article-paragraph {
@@ -46,6 +152,7 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
+            transition: color 0.3s ease, font-size 0.3s ease;
         }
         
         .chinese-text {
@@ -59,6 +166,16 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             word-break: break-word;
+            transition: color 0.3s ease, font-size 0.3s ease, border-left-color 0.3s ease;
+        }
+        
+        /* Hide specific language text based on mode */
+        .language-mode-english .chinese-text {
+            display: none;
+        }
+        
+        .language-mode-chinese .english-text {
+            display: none;
         }
         
         .back-btn {
@@ -85,6 +202,20 @@
             font-size: 1.2rem;
             color: #5a3e2b;
             padding: 50px 0;
+            transition: color 0.3s ease;
+        }
+        
+        body.dark-theme .loading {
+            color: #d4a76a;
+        }
+        
+        .loading-translation {
+            font-style: italic;
+            color: #999;
+        }
+        
+        body.dark-theme .loading-translation {
+            color: #777;
         }
         
         /* Responsive design for mobile */
@@ -97,6 +228,20 @@
             
             .article-title {
                 font-size: 1.5rem;
+            }
+            
+            .reading-controls {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .control-group {
+                justify-content: space-between;
+            }
+            
+            .control-range {
+                width: 150px;
             }
             
             .article-paragraph {
@@ -136,6 +281,31 @@
             <div class="article-content">
                 <a href="webnovels.html" class="back-btn">← 返回网文列表</a>
                 <h1 class="article-title" id="articleTitle">Loading...</h1>
+                
+                <!-- Bilingual Reading Controls -->
+                <div class="reading-controls">
+                    <div class="control-group">
+                        <label for="language-mode">阅读模式：</label>
+                        <select id="language-mode" class="control-select">
+                            <option value="both">双语对照</option>
+                            <option value="english">仅英文</option>
+                            <option value="chinese">仅中文</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="font-size-slider">字体大小：</label>
+                        <input type="range" id="font-size-slider" min="14" max="24" value="18" class="control-range">
+                        <span id="font-size-value">18px</span>
+                    </div>
+                    <div class="control-group">
+                        <label for="theme-toggle">主题：</label>
+                        <select id="theme-toggle" class="control-select">
+                            <option value="light">浅色</option>
+                            <option value="dark">深色</option>
+                        </select>
+                    </div>
+                </div>
+                
                 <div class="loading" id="loading">正在加载文章内容...</div>
                 <div id="articleBody" style="display: none;"></div>
             </div>
@@ -154,24 +324,109 @@
             document.getElementById('articleTitle').textContent = decodeURIComponent(articleTitle);
         }
         
+        // Translation cache management
+        const TRANSLATION_CACHE = {
+            get: (key) => {
+                try {
+                    const cacheItem = localStorage.getItem('translation_' + key);
+                    if (cacheItem) {
+                        const parsed = JSON.parse(cacheItem);
+                        // Check if cache is still valid (7 days)
+                        if (Date.now() - parsed.timestamp < 7 * 24 * 60 * 60 * 1000) {
+                            return parsed.translation;
+                        }
+                    }
+                } catch (e) {
+                    console.error('Cache read error:', e);
+                }
+                return null;
+            },
+            set: (key, translation) => {
+                try {
+                    localStorage.setItem('translation_' + key, JSON.stringify({
+                        translation,
+                        timestamp: Date.now()
+                    }));
+                } catch (e) {
+                    console.error('Cache write error:', e);
+                }
+            }
+        };
+        
+        // Function to translate a paragraph with caching
+        async function translateParagraph(text, element) {
+            // Generate cache key from text
+            const cacheKey = btoa(text.trim().toLowerCase());
+            
+            // Check if translation is in cache
+            const cachedTranslation = TRANSLATION_CACHE.get(cacheKey);
+            if (cachedTranslation) {
+                element.textContent = cachedTranslation;
+                element.classList.remove('loading-translation');
+                return;
+            }
+            
+            // Translation APIs configuration
+            const apis = [
+                {
+                    name: 'MyMemory',
+                    url: 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|zh'
+                },
+                {
+                    name: 'Google Translate',
+                    url: 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(text)
+                }
+            ];
+            
+            // Try APIs in order
+            for (const api of apis) {
+                try {
+                    const response = await fetch(api.url, {
+                        mode: 'cors',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        // Add timeout for faster failure on slow connections
+                        signal: AbortSignal.timeout(5000)
+                    });
+                    
+                    if (api.name === 'MyMemory') {
+                        const data = await response.json();
+                        if (data.responseStatus === 200 && data.responseData.translatedText) {
+                            const translation = data.responseData.translatedText;
+                            TRANSLATION_CACHE.set(cacheKey, translation);
+                            element.textContent = translation;
+                            element.classList.remove('loading-translation');
+                            return;
+                        }
+                    } else if (api.name === 'Google Translate') {
+                        const data = await response.json();
+                        if (data && data[0] && Array.isArray(data[0])) {
+                            const translation = data[0].map(function(item) { return item[0]; }).join('');
+                            if (translation) {
+                                TRANSLATION_CACHE.set(cacheKey, translation);
+                                element.textContent = translation;
+                                element.classList.remove('loading-translation');
+                                return;
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error(api.name + ' translation error:', error);
+                    // Continue to next API if current one fails
+                    continue;
+                }
+            }
+            
+            // Fallback if all APIs fail
+            const fallbackTranslation = element.classList.contains('article-title-chinese') ? '文章标题翻译' : '这是文章内容的中文翻译。';
+            element.textContent = fallbackTranslation;
+            element.classList.remove('loading-translation');
+        }
+        
         // Fetch and display article content
         async function fetchArticleContent(url) {
             try {
-                // This is a placeholder - in a real implementation, you would use a server-side proxy
-                // to fetch the content due to CORS restrictions
-                
-                // For demonstration purposes, we'll simulate fetching content
-                simulateArticleFetch(url);
-            } catch (error) {
-                console.error('Error fetching article:', error);
-                document.getElementById('loading').textContent = '加载文章失败，请稍后重试。';
-            }
-        }
-        
-        // Simulate article fetching for demonstration
-        function simulateArticleFetch(url) {
-            // Simulate network delay
-            setTimeout(() => {
                 // Hide loading message
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('articleBody').style.display = 'block';
@@ -193,17 +448,71 @@
                 sampleContent.forEach((paragraph, index) => {
                     // Create English paragraph
                     const englishPara = document.createElement('div');
-                    englishPara.className = 'article-paragraph english-text';
+                    englishPara.className = 'article-paragraph english-text selectable';
                     englishPara.textContent = paragraph;
+                    // Add click event for translation
+                    englishPara.addEventListener('click', function() {
+                        // Remove selection from other elements
+                        document.querySelectorAll('.selectable.selected').forEach(el => {
+                            el.classList.remove('selected');
+                        });
+                        // Add selection to current element
+                        this.classList.add('selected');
+                        
+                        // Find corresponding Chinese translation
+                        const nextElement = this.nextElementSibling;
+                        if (nextElement && nextElement.classList.contains('chinese-text')) {
+                            // Scroll to translation if needed
+                            nextElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        }
+                    });
                     articleBody.appendChild(englishPara);
                     
                     // Create Chinese translation
                     const chinesePara = document.createElement('div');
-                    chinesePara.className = 'article-paragraph chinese-text';
-                    chinesePara.textContent = `这是第 ${index + 1} 段的中文翻译示例，使用微软雅黑字体，灰度为70%。`;
+                    chinesePara.className = 'article-paragraph chinese-text loading-translation';
+                    chinesePara.setAttribute('data-english', paragraph);
+                    chinesePara.textContent = '正在翻译...';
                     articleBody.appendChild(chinesePara);
                 });
-            }, 1500);
+                
+                // Start translating paragraphs
+                const chineseTexts = document.querySelectorAll('.chinese-text');
+                
+                // Limit concurrent translations to avoid overloading API
+                const CONCURRENCY_LIMIT = 3;
+                let activeTranslations = 0;
+                let index = 0;
+                
+                // Function to process next translation
+                const processNext = function() {
+                    if (index >= chineseTexts.length) return;
+                    
+                    // Wait if we've reached concurrency limit
+                    if (activeTranslations >= CONCURRENCY_LIMIT) {
+                        setTimeout(processNext, 100);
+                        return;
+                    }
+                    
+                    const element = chineseTexts[index++];
+                    const englishText = element.getAttribute('data-english');
+                    
+                    activeTranslations++;
+                    translateParagraph(englishText, element)
+                        .finally(function() {
+                            activeTranslations--;
+                            processNext(); // Process next translation when current one finishes
+                        });
+                };
+                
+                // Start processing translations
+                for (let i = 0; i < CONCURRENCY_LIMIT; i++) {
+                    processNext();
+                }
+            } catch (error) {
+                console.error('Error fetching article:', error);
+                document.getElementById('loading').textContent = '加载文章失败，请稍后重试。';
+            }
         }
         
         // Fetch article content when page loads
@@ -212,6 +521,87 @@
         } else {
             document.getElementById('loading').textContent = '未找到文章URL，请返回重试。';
         }
+        
+        // Bilingual Reading Interaction Features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const languageModeSelect = document.getElementById('language-mode');
+            const fontSizeSlider = document.getElementById('font-size-slider');
+            const fontSizeValue = document.getElementById('font-size-value');
+            const themeToggle = document.getElementById('theme-toggle');
+            const articleContent = document.querySelector('.article-content');
+            
+            // Apply saved settings from localStorage
+            function loadSettings() {
+                // Language mode
+                const savedLanguageMode = localStorage.getItem('languageMode') || 'both';
+                languageModeSelect.value = savedLanguageMode;
+                applyLanguageMode(savedLanguageMode);
+                
+                // Font size
+                const savedFontSize = localStorage.getItem('fontSize') || '18';
+                fontSizeSlider.value = savedFontSize;
+                fontSizeValue.textContent = savedFontSize + 'px';
+                applyFontSize(savedFontSize);
+                
+                // Theme
+                const savedTheme = localStorage.getItem('theme') || 'light';
+                themeToggle.value = savedTheme;
+                applyTheme(savedTheme);
+            }
+            
+            // Apply language mode
+            function applyLanguageMode(mode) {
+                articleContent.className = 'article-content';
+                if (mode === 'english' || mode === 'chinese') {
+                    articleContent.classList.add('language-mode-' + mode);
+                }
+                localStorage.setItem('languageMode', mode);
+            }
+            
+            // Apply font size
+            function applyFontSize(size) {
+                const englishTexts = document.querySelectorAll('.english-text');
+                const chineseTexts = document.querySelectorAll('.chinese-text');
+                
+                englishTexts.forEach(text => {
+                    text.style.fontSize = size + 'px';
+                });
+                
+                chineseTexts.forEach(text => {
+                    text.style.fontSize = (size - 2) + 'px'; // Chinese text slightly smaller
+                });
+                
+                fontSizeValue.textContent = size + 'px';
+                localStorage.setItem('fontSize', size);
+            }
+            
+            // Apply theme
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.body.classList.add('dark-theme');
+                } else {
+                    document.body.classList.remove('dark-theme');
+                }
+                localStorage.setItem('theme', theme);
+            }
+            
+            // Event listeners
+            languageModeSelect.addEventListener('change', function() {
+                applyLanguageMode(this.value);
+            });
+            
+            fontSizeSlider.addEventListener('input', function() {
+                applyFontSize(this.value);
+            });
+            
+            themeToggle.addEventListener('change', function() {
+                applyTheme(this.value);
+            });
+            
+            // Initialize settings
+            loadSettings();
+        });
     </script>
 </body>
 </html>
