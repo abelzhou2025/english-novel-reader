@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Effective harnesses for long-running agents - English Novel Reader</title>
+<link href="../styles.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f9f7f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+        }
+        
+        .article-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        .article-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-heading {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            color: #3a3a3a;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .section-subheading {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .paragraph-block {
+            margin-bottom: 25px;
+        }
+        
+        .english-text {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #2c2c2c;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .chinese-text {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            padding-left: 20px;
+            border-left: 3px solid #d4a76a;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                margin: 80px 15px 30px;
+                padding: 25px;
+            }
+            
+            .article-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-heading {
+                font-size: 1.3rem;
+            }
+            
+            .english-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Top Navigation -->
+<nav class="top-nav">
+<ul>
+<li><a href="../index.html">首页</a></li>
+<li><a href="../novels.html">小说</a></li>
+<li><a class="active" href="../webnovels.html">网文</a></li>
+    <li><a href="../news.html">新闻</a></li>
+    <li><a href="../about.html">关于我</a></li>
+</ul>
+</nav>
+<div class="article-content">
+<a class="back-btn" href="../webnovels.html">← 返回网文列表</a>
+<h1 class="article-title">Effective harnesses for long-running agents</h1>
+<div class="paragraph-block">
+<p class="english-text">As AI agents become more capable, developers are increasingly asking them to take on complex tasks requiring work that spans hours, or even days. However, getting agents to make consistent progress across multiple context windows remains an open problem.</p>
+<p class="chinese-text">随着人工智能代理的能力越来越强，开发人员越来越多地要求它们承担需要花费数小时甚至数天时间的复杂任务。然而，让代理在多个上下文窗口中取得一致的进展仍然是一个悬而未决的问题。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">The core challenge of long-running agents is that they must work in discrete sessions, and each new session begins with no memory of what came before. Imagine a software project staffed by engineers working in shifts, where each new engineer arrives with no memory of what happened on the previous shift. Because context windows are limited, and because most complex projects cannot be completed within a single window, agents need a way to bridge the gap between coding sessions.</p>
+<p class="chinese-text">长时间运行的代理的核心挑战是它们必须在离散的会话中工作，并且每个新会话开始时都不记得之前发生了什么。想象一下一个软件项目，工程师轮班工作，每个新工程师到达时都不记得上一个班次发生了什么。由于上下文窗口是有限的，并且大多数复杂的项目无法在单个窗口内完成，因此代理需要一种方法来弥合编码会话之间的差距。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">We developed a two-fold solution to enable the Claude Agent SDK to work effectively across many context windows: an initializer agent that sets up the environment on the first run, and a coding agent that is tasked with making incremental progress in every session, while leaving clear artifacts for the next session. You can find code examples in the accompanying quickstart.</p>
+<p class="chinese-text">我们开发了一个两重解决方案，使 Claude Agent SDK 能够在多个上下文窗口中有效工作：一个初始化程序代理，用于在第一次运行时设置环境，以及一个编码代理，其任务是在每个会话中取得增量进展，同时为下一个会话留下清晰的工件。您可以在随附的快速入门中找到代码示例。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h2 class="section-heading">The long-running agent problem</h2>
+<div class="paragraph-block">
+<p class="english-text">The Claude Agent SDK is a powerful, general-purpose agent harness adept at coding, as well as other tasks that require the model to use tools to gather context, plan, and execute. It has context management capabilities such as compaction, which enables an agent to work on a task without exhausting the context window. Theoretically, given this setup, it should be possible for an agent to continue to do useful work for an arbitrarily long time.</p>
+<p class="chinese-text">Claude Agent SDK 是一个功能强大的通用代理工具，擅长编码以及需要模型使用工具收集上下文、计划和执行的其他任务。它具有上下文管理功能，例如压缩，使代理能够在不耗尽上下文窗口的情况下处理任务。理论上，在这种设置下，代理应该可以在任意长时间内继续做有用的工作。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">However, compaction isn't sufficient. Out of the box, even a frontier coding model like Opus 4.5 running on the Claude Agent SDK in a loop across multiple context windows will fall short of building a production-quality web app if it's only given a high-level prompt, such as "build a clone of claude.ai."</p>
+<p class="chinese-text">然而，压缩还不够。即使像 Opus 4.5 这样开箱即用的前沿编码模型在 Claude Agent SDK 上跨多个上下文窗口循环运行，如果仅给出高级提示（例如“构建 claude.ai 的克隆”），也无法构建生产质量的 Web 应用程序。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Claude's failures manifested in two patterns. First, the agent tended to try to do too much at once---essentially to attempt to one-shot the app. Often, this led to the model running out of context in the middle of its implementation, leaving the next session to start with a feature half-implemented and undocumented. The agent would then have to guess at what had happened, and spend substantial time trying to get the basic app working again. This happens even with compaction, which doesn't always pass perfectly clear instructions to the next agent.</p>
+<p class="chinese-text">克劳德的失败表现为两种模式。首先，代理倾向于尝试一次做太多事情——本质上是试图一次性完成应用程序。通常，这会导致模型在实现过程中脱离上下文，从而使下一个会话以半实现且未记录的功能开始。然后，代理必须猜测发生了什么，并花费大量时间尝试让基本应用程序再次运行。即使使用压缩也会发生这种情况，压缩并不总是能将完全清晰的指令传递给下一个代理。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">A second failure mode would often occur later in a project. After some features had already been built, a later agent instance would look around, see that progress had been made, and declare the job done.</p>
+<p class="chinese-text">第二种故障模式通常会在项目后期发生。在构建了一些功能之后，稍后的代理实例将环顾四周，查看是否已取得进展，并声明工作已完成。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">This decomposes the problem into two parts. First, we need to set up an initial environment that lays the foundation for all the features that a given prompt requires, which sets up the agent to work step-by-step and feature-by-feature. Second, we should prompt each agent to make incremental progress towards its goal while also leaving the environment in a clean state at the end of a session. By "clean state" we mean the kind of code that would be appropriate for merging to a main branch: there are no major bugs, the code is orderly and well-documented, and in general, a developer could easily begin work on a new feature without first having to clean up an unrelated mess.</p>
+<p class="chinese-text">这将问题分解为两部分。首先，我们需要建立一个初始环境，为给定提示所需的所有功能奠定基础，从而设置代理逐步、逐个功能地工作。其次，我们应该促使每个智能体朝着其目标逐步取得进展，同时在会话结束时使环境处于清洁状态。我们所说的“干净状态”是指适合合并到主分支的代码类型：没有重大错误，代码有序且文档齐全，一般来说，开发人员可以轻松地开始开发新功能，而无需首先清理不相关的混乱。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">When experimenting internally, we addressed these problems using a two-part solution:</p>
+<p class="chinese-text">在内部实验时，我们使用两部分解决方案解决了这些问题：</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">The key insight here was finding a way for agents to quickly understand the state of work when starting with a fresh context window, which is accomplished with the claude-progress.txt file alongside the git history. Inspiration for these practices came from knowing what effective software engineers do every day.</p>
+<p class="chinese-text">这里的关键见解是找到一种方法，让代理在从新的上下文窗口开始时快速了解工作状态，这是通过 claude-progress.txt 文件和 git 历史记录来完成的。这些实践的灵感来自于了解有效的软件工程师每天所做的事情。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h2 class="section-heading">Environment management</h2>
+<div class="paragraph-block">
+<p class="english-text">In the updated Claude 4 prompting guide, we shared some best practices for multi-context window workflows, including a harness structure that uses "a different prompt for the very first context window." This "different prompt" requests that the initializer agent set up the environment with all the necessary context that future coding agents will need to work effectively. Here, we provide a deeper dive on some of the key components of such an environment.</p>
+<p class="chinese-text">在更新的 Claude 4 提示指南中，我们分享了一些多上下文窗口工作流程的最佳实践，包括使用“针对第一个上下文窗口的不同提示”的线束结构。这种“不同的提示”要求初始化程序代理设置具有未来编码代理有效工作所需的所有必要上下文的环境。在这里，我们对此类环境的一些关键组件进行了更深入的探讨。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h3 class="section-subheading">Feature list</h3>
+<div class="paragraph-block">
+<p class="english-text">To address the problem of the agent one-shotting an app or prematurely considering the project complete, we prompted the initializer agent to write a comprehensive file of feature requirements expanding on the user's initial prompt. In the claude.ai clone example, this meant over 200 features, such as "a user can open a new chat, type in a query, press enter, and see an AI response." These features were all initially marked as "failing" so that later coding agents would have a clear outline of what full functionality looked like.</p>
+<p class="chinese-text">为了解决代理一次性完成应用程序或过早地认为项目已完成的问题，我们提示初始化程序代理编写一份全面的功能需求文件，以扩展用户的初始提示。在 claude.ai 克隆示例中，这意味着超过 200 个功能，例如“用户可以打开新聊天，输入查询，按 Enter 键，然后查看 AI 响应”。这些功能最初都被标记为“失败”，以便后来的编码代理能够清楚地了解完整功能的外观。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">We prompt coding agents to edit this file only by changing the status of a passes field, and we use strongly-worded instructions like "It is unacceptable to remove or edit tests because this could lead to missing or buggy functionality." After some experimentation, we landed on using JSON for this, as the model is less likely to inappropriately change or overwrite JSON files compared to Markdown files.</p>
+<p class="chinese-text">我们提示编码代理仅通过更改通过字段的状态来编辑此文件，并且我们使用措辞强硬的指令，例如“删除或编辑测试是不可接受的，因为这可能会导致功能缺失或有缺陷。”经过一些实验后，我们最终决定使用 JSON 来实现此目的，因为与 Markdown 文件相比，该模型不太可能不当更改或覆盖 JSON 文件。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h3 class="section-subheading">Incremental progress</h3>
+<div class="paragraph-block">
+<p class="english-text">Given this initial environment scaffolding, the next iteration of the coding agent was then asked to work on only one feature at a time. This incremental approach turned out to be critical to addressing the agent's tendency to do too much at once.</p>
+<p class="chinese-text">考虑到这个初始环境脚手架，编码代理的下一次迭代被要求一次仅处理一个功能。事实证明，这种增量方法对于解决代理一次性做太多事情的倾向至关重要。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Once working incrementally, it's still essential that the model leaves the environment in a clean state after making a code change. In our experiments, we found that the best way to elicit this behavior was to ask the model to commit its progress to git with descriptive commit messages and to write summaries of its progress in a progress file. This allowed the model to use git to revert bad code changes and recover working states of the code base.</p>
+<p class="chinese-text">一旦增量工作，模型在进行代码更改后使环境保持干净状态仍然很重要。在我们的实验中，我们发现引发此行为的最佳方法是要求模型使用描述性提交消息将其进度提交到 git，并将其进度摘要写入进度文件。这允许模型使用 git 来恢复错误的代码更改并恢复代码库的工作状态。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">These approaches also increased efficiency, as they eliminated the need for an agent to have to guess at what had happened and spend its time trying to get the basic app working again.</p>
+<p class="chinese-text">这些方法还提高了效率，因为它们消除了代理必须猜测发生了什么并花时间尝试让基本应用程序再次运行的需要。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h3 class="section-subheading">Testing</h3>
+<div class="paragraph-block">
+<p class="english-text">One final major failure mode that we observed was Claude's tendency to mark a feature as complete without proper testing. Absent explicit prompting, Claude tended to make code changes, and even do testing with unit tests or curl commands against a development server, but would fail recognize that the feature didn't work end-to-end.</p>
+<p class="chinese-text">我们观察到的最后一个主要故障模式是克劳德倾向于在没有适当测试的情况下将功能标记为完整。如果没有明确的提示，Claude 倾向于更改代码，甚至使用单元测试或针对开发服务器的curl 命令进行测试，但无法认识到该功能无法端到端运行。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">In the case of building a web app, Claude mostly did well at verifying features end-to-end once explicitly prompted to use browser automation tools and do all testing as a human user would.</p>
+<p class="chinese-text">在构建 Web 应用程序的情况下，一旦明确提示使用浏览器自动化工具并像人类用户一样进行所有测试，Claude 在端到端验证功能方面表现出色。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Screenshots taken by Claude through the Puppeteer MCP server as it tested the claude.ai clone.</p>
+<p class="chinese-text">Claude 在测试 claude.ai 克隆时通过 Puppeteer MCP 服务器拍摄的屏幕截图。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Providing Claude with these kinds of testing tools dramatically improved performance, as the agent was able to identify and fix bugs that weren't obvious from the code alone.</p>
+<p class="chinese-text">为 Claude 提供此类测试工具极大地提高了性能，因为代理能够识别并修复仅从代码中并不明显的错误。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Some issues remain, like limitations to Claude's vision and to browser automation tools making it difficult to identify every kind of bug. For example, Claude can't see browser-native alert modals through the Puppeteer MCP, and features relying on these modals tended to be buggier as a result.</p>
+<p class="chinese-text">一些问题仍然存在，例如克劳德的愿景和浏览器自动化工具的限制，使得识别每种错误变得困难。例如，Claude 无法通过 Puppeteer MCP 查看浏览器本机警报模式，因此依赖这些模式的功能往往会出现更多错误。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h2 class="section-heading">Getting up to speed</h2>
+<div class="paragraph-block">
+<p class="english-text">With all of the above in place, every coding agent is prompted to run through a series of steps to get its bearings, some quite basic but still helpful:</p>
+<p class="chinese-text">完成上述所有操作后，每个编码代理都会被提示执行一系列步骤来了解其方向，其中一些非常基本但仍然有用：</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">This approach saves Claude some tokens in every session since it doesn't have to figure out how to test the code. It also helps to ask the initializer agent to write an init.sh script that can run the development server, and then run through a basic end-to-end test before implementing a new feature.</p>
+<p class="chinese-text">这种方法可以在每次会话中为 Claude 节省一些令牌，因为它不必弄清楚如何测试代码。它还有助于要求初始化程序代理编写一个可以运行开发服务器的 init.sh 脚本，然后在实现新功能之前运行基本的端到端测试。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">In the case of the claude.ai clone, this meant that the agent always started the local development server and used the Puppeteer MCP to start a new chat, send a message, and receive a response. This ensured that Claude could quickly identify if the app had been left in a broken state, and immediately fix any existing bugs. If the agent had instead started implementing a new feature, it would likely make the problem worse.</p>
+<p class="chinese-text">就 claude.ai 克隆而言，这意味着代理始终启动本地开发服务器并使用 Puppeteer MCP 启动新聊天、发送消息并接收响应。这确保了克劳德能够快速识别应用程序是否处于损坏状态，并立即修复任何现有的错误。如果代理开始实施新功能，则可能会使问题变得更糟。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Given all this, a typical session starts off with the following assistant messages:</p>
+<p class="chinese-text">鉴于所有这些，典型的会话以以下辅助消息开始：</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Agent failure modes and solutions</p>
+<p class="chinese-text">Agent故障模式及解决方案</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Summarizing four common failure modes and solutions in long-running AI agents.</p>
+<p class="chinese-text">总结了长时间运行的人工智能代理的四种常见故障模式和解决方案。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h2 class="section-heading">Future work</h2>
+<div class="paragraph-block">
+<p class="english-text">This research demonstrates one possible set of solutions in a long-running agent harness to enable the model to make incremental progress across many context windows. However, there remain open questions.</p>
+<p class="chinese-text">这项研究展示了长期运行的代理工具中的一组可能的解决方案，使模型能够在许多上下文窗口中取得增量进展。然而，仍有一些悬而未决的问题。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Most notably, it's still unclear whether a single, general-purpose coding agent performs best across contexts, or if better performance can be achieved through a multi-agent architecture. It seems reasonable that specialized agents like a testing agent, a quality assurance agent, or a code cleanup agent, could do an even better job at sub-tasks across the software development lifecycle.</p>
+<p class="chinese-text">最值得注意的是，目前尚不清楚单个通用编码代理是否在跨上下文中表现最佳，或者是否可以通过多代理架构实现更好的性能。测试代理、质量保证代理或代码清理代理等专门代理可以在整个软件开发生命周期的子任务上做得更好，这似乎是合理的。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Additionally, this demo is optimized for full-stack web app development. A future direction is to generalize these findings to other fields. It's likely that some or all of these lessons can be applied to the types of long-running agentic tasks required in, for example, scientific research or financial modeling.</p>
+<p class="chinese-text">此外，该演示还针对全栈 Web 应用程序开发进行了优化。未来的方向是将这些发现推广到其他领域。这些经验教训中的部分或全部很可能可以应用于科学研究或金融建模等所需的长期运行的代理任务类型。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h3 class="section-subheading">Acknowledgements</h3>
+<div class="paragraph-block">
+<p class="english-text">Written by Justin Young. Special thanks to David Hershey, Prithvi Rajasakeran, Jeremy Hadfield, Naia Bouscal, Michael Tingley, Jesse Mu, Jake Eaton, Marius Buleandara, Maggie Vo, Pedram Navid, Nadine Yasser, and Alex Notov for their contributions.</p>
+<p class="chinese-text">由贾斯汀·杨撰写。特别感谢 David Hershey、Prithvi Rajasakeran、Jeremy Hadfield、Naia Bouscal、Michael Tingley、Jesse Mu、Jake Eaton、Marius Buleandara、Maggie Vo、Pedram Navid、Nadine Yasser 和 Alex Notov 的贡献。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">This work reflects the collective efforts of several teams across Anthropic who made it possible for Claude to safely do long-horizon autonomous software engineering, especially the code RL \&amp; Claude Code teams. Interested candidates who would like to contribute are welcome to apply at anthropic.com/careers.</p>
+<p class="chinese-text">这项工作反映了 Anthropic 多个团队的集体努力，使 Claude 能够安全地进行长期自主软件工程，特别是代码 RL \&amp; Claude Code 团队。欢迎有兴趣做出贡献的候选人在 anthropic.com/careers 上申请。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h3 class="section-subheading">Footnotes</h3>
+<div class="paragraph-block">
+<p class="english-text">Read in Cubox</p>
+<p class="chinese-text">在 Cubox 中阅读</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+</div>
+
+    <!-- Translation Tooltip HTML -->
+    <div class="translation-tooltip" id="translationTooltip" style="display: none; position: fixed; max-width: 400px; background-color: rgba(255, 255, 255, 0.98); border: 2px solid #5a3e2b; border-radius: 8px; padding: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 1000; font-family: 'Microsoft YaHei', sans-serif;">
+        <div class="tooltip-translation" style="color: #5a3e2b; font-size: 1rem; font-weight: 500; line-height: 1.6;">翻译中...</div>
+    </div>
+    <!-- Translation Script -->
+    <script>
+        // Article Translation Features
+        // Features: Click-to-translate near cursor
+        
+        // Global variables
+        let selectedParagraph = null;
+        
+        // Translation API (using free MyMemory API)
+        const TRANSLATION_API = 'https://api.mymemory.translated.net/get';
+        
+        // DOM elements
+        let translationTooltip;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            translationTooltip = document.getElementById('translationTooltip');
+            
+            // Add click listener to close tooltip when clicking outside
+            document.addEventListener('click', function(e) {
+                // Check if click is outside tooltip and not on a selectable paragraph
+                if (translationTooltip && 
+                    !translationTooltip.contains(e.target) && 
+                    !e.target.classList.contains('selectable')) {
+                    hideTranslation();
+                }
+            });
+            
+            // Add selectable class to all English text paragraphs in articles
+            const englishParagraphs = document.querySelectorAll('.english-text');
+            englishParagraphs.forEach(paragraph => {
+                // Only make English text selectable
+                if (paragraph.textContent.trim()) {
+                    paragraph.classList.add('selectable');
+                    
+                    // Add click listener for translation
+                    paragraph.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Prevent document click from firing
+                        handleParagraphClick(this, e);
+                    });
+                }
+            });
+        });
+        
+        // Handle paragraph click for translation
+        function handleParagraphClick(element, event) {
+            // Remove previous selection
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+            }
+            
+            // Mark as selected
+            element.classList.add('selected');
+            selectedParagraph = element;
+            
+            // Get the text to translate
+            const textToTranslate = element.textContent;
+            
+            // Position tooltip near the click
+            positionTooltip(event);
+            
+            // Show tooltip with loading state
+            showTranslation(textToTranslate);
+            
+            // Fetch translation
+            translateText(textToTranslate);
+        }
+        
+        // Position tooltip near cursor but ensure it stays on screen
+        function positionTooltip(event) {
+            const tooltip = translationTooltip;
+            const offset = 15; // Offset from cursor
+            
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Initial position near cursor
+            let left = event.pageX + offset;
+            let top = event.pageY + offset;
+            
+            // Show tooltip temporarily to get its dimensions
+            tooltip.style.display = 'block';
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+            
+            // Get tooltip dimensions
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const tooltipWidth = tooltipRect.width;
+            const tooltipHeight = tooltipRect.height;
+            
+            // Adjust if tooltip goes off right edge
+            if (event.clientX + tooltipWidth + offset > viewportWidth) {
+                left = event.pageX - tooltipWidth - offset;
+            }
+            
+            // Adjust if tooltip goes off bottom edge
+            if (event.clientY + tooltipHeight + offset > viewportHeight) {
+                top = event.pageY - tooltipHeight - offset;
+            }
+            
+            // Ensure tooltip doesn't go off left or top edges
+            if (left < 10) left = 10;
+            if (top < 80) top = 80; // Account for top nav
+            
+            // Set final position
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+        
+        // Show translation tooltip
+        function showTranslation(originalText) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Show loading state
+            translationDiv.textContent = '翻译中...';
+            translationDiv.style.color = '#999';
+            
+            // Show tooltip
+            translationTooltip.style.display = 'block';
+        }
+        
+        // Hide translation tooltip
+        function hideTranslation() {
+            translationTooltip.style.display = 'none';
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+                selectedParagraph = null;
+            }
+        }
+        
+        // Translate text using free API
+        async function translateText(text) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Limit text length for API (MyMemory has a 500 character limit)
+            const textToTranslate = text.length > 500 ? text.substring(0, 500) : text;
+            
+            // If text is too long, split it into chunks
+            const maxChunkLength = 500; // MyMemory API limit
+            
+            if (text.length <= maxChunkLength) {
+                // Short text - translate directly
+                try {
+                    const url = `${TRANSLATION_API}?q=${encodeURIComponent(text)}&langpair=en|zh-CN`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    if (data.responseStatus === 200 && data.responseData) {
+                        const translation = data.responseData.translatedText;
+                        translationDiv.textContent = translation;
+                        translationDiv.style.color = '#5a3e2b';
+                    } else {
+                        translationDiv.textContent = '翻译失败,请稍后重试';
+                        translationDiv.style.color = '#d9534f';
+                    }
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            } else {
+                // Long text - split into chunks
+                try {
+                    // Split text into chunks of maxChunkLength, trying to break at sentence boundaries
+                    const chunks = [];
+                    let currentChunk = '';
+                    
+                    // First, try to split by sentence endings
+                    const sentences = text.match(/[^.!?。！？]+[.!?。！？]*/g) || [text];
+                    
+                    for (const sentence of sentences) {
+                        if ((currentChunk + sentence).length <= maxChunkLength) {
+                            currentChunk += sentence;
+                        } else {
+                            if (currentChunk) {
+                                chunks.push(currentChunk);
+                            }
+                            // If single sentence is too long, force split by maxChunkLength
+                            if (sentence.length > maxChunkLength) {
+                                for (let i = 0; i < sentence.length; i += maxChunkLength) {
+                                    chunks.push(sentence.substring(i, i + maxChunkLength));
+                                }
+                                currentChunk = '';
+                            } else {
+                                currentChunk = sentence;
+                            }
+                        }
+                    }
+                    
+                    if (currentChunk) {
+                        chunks.push(currentChunk);
+                    }
+                    
+                    // Translate each chunk
+                    let fullTranslation = '';
+                    for (let i = 0; i < chunks.length; i++) {
+                        const chunk = chunks[i];
+                        const url = `${TRANSLATION_API}?q=${encodeURIComponent(chunk)}&langpair=en|zh-CN`;
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        
+                        if (data.responseStatus === 200 && data.responseData) {
+                            fullTranslation += data.responseData.translatedText;
+                            // Update display with progress
+                            translationDiv.textContent = fullTranslation + ' [翻译中...]';
+                        } else {
+                            fullTranslation += '[翻译失败]';
+                        }
+                        
+                        // Add small delay to avoid rate limiting
+                        if (i < chunks.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                        }
+                    }
+                    
+                    translationDiv.textContent = fullTranslation;
+                    translationDiv.style.color = '#5a3e2b';
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            }
+        }
+        
+        // Add CSS for selected state
+        const style = document.createElement('style');
+        style.textContent = `
+            .selectable {
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            
+            .selectable:hover {
+                background-color: rgba(212, 167, 106, 0.2);
+            }
+            
+            .selectable.selected {
+                background-color: rgba(212, 167, 106, 0.4);
+            }
+            
+            .translation-tooltip {
+                animation: fadeIn 0.2s ease;
+            }
+            
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    </body>
+</html>

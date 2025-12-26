@@ -3,16 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>English Novel Reader with Translation</title>
-    <!-- Redirect to webnovels.html -->
-    <meta http-equiv="refresh" content="0;url=webnovels.html">
+    <title>AI洞察库 - 双语阅读网站</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .hero-section {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 60px 30px;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            color: #5a3e2b;
+            margin-bottom: 20px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #7a5c42;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px 60px;
+        }
+        
+        .feature-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            color: #5a3e2b;
+            margin-bottom: 15px;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 15px 40px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-family: 'Microsoft YaHei', sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .cta-button:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .feature-cards {
+                grid-template-columns: 1fr;
+                padding: 0 20px 40px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center;">
-        <div>
-            <h1>正在跳转到网文页面...</h1>
-            <p><a href="webnovels.html">如果没有自动跳转，请点击这里</a></p>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html" class="active">首页</a></li>
+            <li><a href="novels.html">小说</a></li>
+            <li><a href="webnovels.html">网文</a></li>
+            <li><a href="news.html">新闻</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="hero-section">
+        <h1 class="hero-title">AI洞察库</h1>
+        <p class="hero-subtitle">
+            探索人工智能的前沿世界，通过双语阅读提升英语能力<br>
+            精选AI相关英文文章，助您了解最新科技动态
+        </p>
+        <a href="webnovels.html" class="cta-button">开始阅读</a>
+    </div>
+    
+    <div class="feature-cards">
+        <a href="webnovels.html" class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h2 class="feature-title">AI文章库</h2>
+            <p class="feature-description">
+                超过380篇精选AI相关英文文章，涵盖OpenAI、Google、Microsoft等顶尖科技公司的最新动态
+            </p>
+        </a>
+        
+        <a href="novels.html" class="feature-card">
+            <div class="feature-icon">📖</div>
+            <h2 class="feature-title">经典小说</h2>
+            <p class="feature-description">
+                收录多部经典英文小说，包括《简爱》《傲慢与偏见》等，享受纯粹的文学阅读体验
+            </p>
+        </a>
+        
+        <div class="feature-card" style="cursor: default;">
+            <div class="feature-icon">🌐</div>
+            <h2 class="feature-title">双语对照</h2>
+            <p class="feature-description">
+                支持英中双语对照阅读模式，可自由切换仅英文、仅中文或双语显示，满足不同学习需求
+            </p>
+        </div>
+        
+        <div class="feature-card" style="cursor: default;">
+            <div class="feature-icon">🎨</div>
+            <h2 class="feature-title">个性化设置</h2>
+            <p class="feature-description">
+                支持字体大小调节、深色主题切换，打造最适合您的阅读环境
+            </p>
+        </div>
+        
+        <div class="feature-card" style="cursor: default;">
+            <div class="feature-icon">📱</div>
+            <h2 class="feature-title">响应式设计</h2>
+            <p class="feature-description">
+                完美适配手机、平板和电脑，随时随地享受流畅的阅读体验
+            </p>
+        </div>
+        
+        <div class="feature-card" style="cursor: default;">
+            <div class="feature-icon">🏷️</div>
+            <h2 class="feature-title">智能分类</h2>
+            <p class="feature-description">
+                按标签筛选文章，快速找到您感兴趣的AI、科技、公司相关内容
+            </p>
         </div>
     </div>
 </body>

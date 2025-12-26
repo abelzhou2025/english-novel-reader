@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Test</title>
+</head>
+<body>
+    <h1>Translation API Test</h1>
+    <div id="test-result"></div>
+    <div class="chinese-text loading-translation" data-english="Hello, world!">正在翻译...</div>
+    
+    <script>
+        // Test translation API
+        async function testTranslation() {
+            const resultDiv = document.getElementById('test-result');
+            const testElement = document.querySelector('.chinese-text');
+            const englishText = testElement.getAttribute('data-english');
+            
+            try {
+                const url = new URL('https://api.mymemory.translated.net/get');
+                url.searchParams.append('q', englishText);
+                url.searchParams.append('langpair', 'en|zh');
+                url.searchParams.append('de', 'example@example.com');
+                
+                const response = await fetch(url, {
+                    method: 'GET',
+                    timeout: 5000
+                });
+                
+                resultDiv.innerHTML += `<p>Response status: ${response.status}</p>`;
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.innerHTML += `<p>Response data: ${JSON.stringify(data)}</p>`;
+                    
+                    if (data.responseData && data.responseData.translatedText) {
+                        testElement.textContent = data.responseData.translatedText;
+                        testElement.classList.remove('loading-translation');
+                        resultDiv.innerHTML += `<p>Translation successful: ${data.responseData.translatedText}</p>`;
+                    } else {
+                        resultDiv.innerHTML += `<p>Translation failed: Invalid response data</p>`;
+                    }
+                } else {
+                    resultDiv.innerHTML += `<p>Translation failed: HTTP error ${response.status}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML += `<p>Translation failed: ${error.message}</p>`;
+            }
+        }
+        
+        // Run test when page loads
+        document.addEventListener('DOMContentLoaded', testTranslation);
+    </script>
+</body>
+</html>

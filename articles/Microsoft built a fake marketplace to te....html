@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Microsoft built a fake marketplace to test AI agents --- they failed in surprising ways - English Novel Reader</title>
+<link href="../styles.css" rel="stylesheet"/>
+<style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f9f7f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+        }
+        
+        .article-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        .article-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-heading {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            color: #3a3a3a;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .section-subheading {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .paragraph-block {
+            margin-bottom: 25px;
+        }
+        
+        .english-text {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #2c2c2c;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .chinese-text {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            padding-left: 20px;
+            border-left: 3px solid #d4a76a;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                margin: 80px 15px 30px;
+                padding: 25px;
+            }
+            
+            .article-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-heading {
+                font-size: 1.3rem;
+            }
+            
+            .english-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Top Navigation -->
+<nav class="top-nav">
+<ul>
+<li><a href="../index.html">首页</a></li>
+<li><a href="../novels.html">小说</a></li>
+<li><a class="active" href="../webnovels.html">网文</a></li>
+    <li><a href="../news.html">新闻</a></li>
+    <li><a href="../about.html">关于我</a></li>
+</ul>
+</nav>
+<div class="article-content">
+<a class="back-btn" href="../webnovels.html">← 返回网文列表</a>
+<h1 class="article-title">Microsoft built a fake marketplace to test AI agents --- they failed in surprising ways</h1>
+<div class="paragraph-block">
+<p class="english-text">techcrunch.com Russell Brandom</p>
+<p class="chinese-text">techcrunch.com 拉塞尔·布兰登</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">On Wednesday, researchers at Microsoft released a new simulation environment designed to test AI agents, along with new research showing that current agentic models may be vulnerable to manipulation. Conducted in collaboration with Arizona State University, the research raises new questions about how well AI agents will perform when working unsupervised --- and how quickly AI companies can make good on promises of an agentic future.</p>
+<p class="chinese-text">周三，微软的研究人员发布了一个旨在测试人工智能代理的新模拟环境，同时新的研究表明当前的代理模型可能容易受到操纵。这项研究是与亚利桑那州立大学合作进行的，提出了新的问题：人工智能代理在无人监督的情况下工作表现如何，以及人工智能公司能够以多快的速度兑现代理未来的承诺。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">The simulation environment, dubbed the "Magentic Marketplace" by Microsoft, is built as a synthetic platform for experimenting on AI agent behavior. A typical experiment might involve a customer-agent trying to order dinner according to a user's instructions, while agents representing various restaurants compete to win the order.</p>
+<p class="chinese-text">该模拟环境被微软称为“Magentic Marketplace”，是一个用于试验人工智能代理行为的综合平台。典型的实验可能涉及客户代理尝试根据用户的指令订购晚餐，而代表各个餐厅的代理则竞争以赢得订单。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">The team's initial experiments included 100 separate customer-side agents interacting with 300 business-side agents. Because the source code for the marketplace is open source, it should be straightforward for other groups to adopt the code to run new experiments or reproduce findings.</p>
+<p class="chinese-text">该团队的初始实验包括 100 个独立的客户端代理与 300 个业务端代理进行交互。由于市场的源代码是开源的，因此其他团体应该可以直接采用该代码来运行新的实验或重现发现。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Ece Kamar, CVP and managing director of Microsoft Research's AI Frontiers Lab, says this kind of research will be critical to understanding the capabilities of AI agents. "There is really a question about how the world is going to change by having these agents collaborating and talking to each other and negotiating," said Kamar. "We want to understand these things deeply."</p>
+<p class="chinese-text">微软研究院 AI 前沿实验室首席副总裁兼董事总经理 Ece Kamar 表示，此类研究对于了解 AI 代理的功能至关重要。卡马尔说：“确实存在一个问题，即通过让这些特工合作、相互交谈和谈判，世界将如何改变。”“我们想深入了解这些事情。”</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">The initial research looked at a mix of leading models, including GPT-4o, GPT-5, and Gemini-2.5-Flash, and found some surprising weaknesses. In particular, the researchers found several techniques businesses could use to manipulate customer agents into buying their products. The researchers noticed a particular falloff in efficiency as a customer agent was given more options to choose from, overwhelming the attention space of the agent.</p>
+<p class="chinese-text">最初的研究考察了多种领先模型，包括 GPT-4o、GPT-5 和 Gemini-2.5-Flash，并发现了一些令人惊讶的弱点。特别是，研究人员发现企业可以使用几种技术来操纵客户代理购买其产品。研究人员注意到，当客户代理有更多的选择可供选择时，效率会出现明显下降，从而压垮了代理的注意力空间。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">"We want these agents to help us with processing a lot of options," Kamar says. "And we are seeing that the current models are actually getting really overwhelmed by having too many options."</p>
+<p class="chinese-text">“我们希望这些代理能够帮助我们处理很多选择，”卡马尔说。“我们发现当前的模型实际上因太多的选择而变得不知所措。”</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">The agents also ran into trouble when they were asked to collaborate toward a common goal, apparently unsure of which agent should play what role in the collaboration. Performance improved when the models were given more explicit instructions on how to collaborate, but the researchers still saw the models' inherent capabilities as in need of improvement.</p>
+<p class="chinese-text">当代理人被要求为一个共同目标进行合作时，他们也遇到了麻烦，他们显然不确定哪个代理人应该在合作中扮演什么角色。当模型获得关于如何协作的更明确的指示时，性能得到提高，但研究人员仍然认为模型的固有功能需要改进。</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Techcrunch event</p>
+<p class="chinese-text">Techcrunch 活动</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<h3 class="section-subheading">Join the Disrupt 2026 Waitlist</h3>
+<h3 class="section-subheading">Add yourself to the Disrupt 2026 waitlist to be first in line when Early Bird tickets drop. Past Disrupts have brought Google Cloud, Netflix, Microsoft, Box, Phia, a16z, ElevenLabs, Wayve, Hugging Face, Elad Gil, and Vinod Khosla to the stages --- part of 250+ industry leaders driving 200+ sessions built to fuel your growth and sharpen your edge. Plus, meet the hundreds of startups innovating across every sector.</h3>
+<h3 class="section-subheading">Join the Disrupt 2026 Waitlist</h3>
+<h3 class="section-subheading">Add yourself to the Disrupt 2026 waitlist to be first in line when Early Bird tickets drop. Past Disrupts have brought Google Cloud, Netflix, Microsoft, Box, Phia, a16z, ElevenLabs, Wayve, Hugging Face, Elad Gil, and Vinod Khosla to the stages --- part of 250+ industry leaders driving 200+ sessions built to fuel your growth and sharpen your edge. Plus, meet the hundreds of startups innovating across every sector.</h3>
+<div class="paragraph-block">
+<p class="english-text">San Francisco | October 13-15, 2026</p>
+<p class="chinese-text">旧金山 |2026年10月13-15日</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">W AITLISTNOW</p>
+<p class="chinese-text">现在等待名单</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">"We can instruct the models --- like we can tell them, step by step," Kamar said. "But if we are inherently testing their collaboration capabilities, I would expect these models to have these capabilities by default."</p>
+<p class="chinese-text">“我们可以指导模型——就像我们可以一步一步告诉他们一样，”卡马尔说。“但如果我们本质上测试他们的协作能力，我希望这些模型默认具有这些功能。”</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+<div class="paragraph-block">
+<p class="english-text">Read in Cubox</p>
+<p class="chinese-text">在 Cubox 中阅读</p>
+</div>
+<div class="paragraph-block">
+
+<p class="chinese-text">[翻译占位 - 翻译占位符]</p>
+</div>
+</div>
+
+    <!-- Translation Tooltip HTML -->
+    <div class="translation-tooltip" id="translationTooltip" style="display: none; position: fixed; max-width: 400px; background-color: rgba(255, 255, 255, 0.98); border: 2px solid #5a3e2b; border-radius: 8px; padding: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 1000; font-family: 'Microsoft YaHei', sans-serif;">
+        <div class="tooltip-translation" style="color: #5a3e2b; font-size: 1rem; font-weight: 500; line-height: 1.6;">翻译中...</div>
+    </div>
+    <!-- Translation Script -->
+    <script>
+        // Article Translation Features
+        // Features: Click-to-translate near cursor
+        
+        // Global variables
+        let selectedParagraph = null;
+        
+        // Translation API (using free MyMemory API)
+        const TRANSLATION_API = 'https://api.mymemory.translated.net/get';
+        
+        // DOM elements
+        let translationTooltip;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            translationTooltip = document.getElementById('translationTooltip');
+            
+            // Add click listener to close tooltip when clicking outside
+            document.addEventListener('click', function(e) {
+                // Check if click is outside tooltip and not on a selectable paragraph
+                if (translationTooltip && 
+                    !translationTooltip.contains(e.target) && 
+                    !e.target.classList.contains('selectable')) {
+                    hideTranslation();
+                }
+            });
+            
+            // Add selectable class to all English text paragraphs in articles
+            const englishParagraphs = document.querySelectorAll('.english-text');
+            englishParagraphs.forEach(paragraph => {
+                // Only make English text selectable
+                if (paragraph.textContent.trim()) {
+                    paragraph.classList.add('selectable');
+                    
+                    // Add click listener for translation
+                    paragraph.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Prevent document click from firing
+                        handleParagraphClick(this, e);
+                    });
+                }
+            });
+        });
+        
+        // Handle paragraph click for translation
+        function handleParagraphClick(element, event) {
+            // Remove previous selection
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+            }
+            
+            // Mark as selected
+            element.classList.add('selected');
+            selectedParagraph = element;
+            
+            // Get the text to translate
+            const textToTranslate = element.textContent;
+            
+            // Position tooltip near the click
+            positionTooltip(event);
+            
+            // Show tooltip with loading state
+            showTranslation(textToTranslate);
+            
+            // Fetch translation
+            translateText(textToTranslate);
+        }
+        
+        // Position tooltip near cursor but ensure it stays on screen
+        function positionTooltip(event) {
+            const tooltip = translationTooltip;
+            const offset = 15; // Offset from cursor
+            
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Initial position near cursor
+            let left = event.pageX + offset;
+            let top = event.pageY + offset;
+            
+            // Show tooltip temporarily to get its dimensions
+            tooltip.style.display = 'block';
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+            
+            // Get tooltip dimensions
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const tooltipWidth = tooltipRect.width;
+            const tooltipHeight = tooltipRect.height;
+            
+            // Adjust if tooltip goes off right edge
+            if (event.clientX + tooltipWidth + offset > viewportWidth) {
+                left = event.pageX - tooltipWidth - offset;
+            }
+            
+            // Adjust if tooltip goes off bottom edge
+            if (event.clientY + tooltipHeight + offset > viewportHeight) {
+                top = event.pageY - tooltipHeight - offset;
+            }
+            
+            // Ensure tooltip doesn't go off left or top edges
+            if (left < 10) left = 10;
+            if (top < 80) top = 80; // Account for top nav
+            
+            // Set final position
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+        
+        // Show translation tooltip
+        function showTranslation(originalText) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Show loading state
+            translationDiv.textContent = '翻译中...';
+            translationDiv.style.color = '#999';
+            
+            // Show tooltip
+            translationTooltip.style.display = 'block';
+        }
+        
+        // Hide translation tooltip
+        function hideTranslation() {
+            translationTooltip.style.display = 'none';
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+                selectedParagraph = null;
+            }
+        }
+        
+        // Translate text using free API
+        async function translateText(text) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Limit text length for API (MyMemory has a 500 character limit)
+            const textToTranslate = text.length > 500 ? text.substring(0, 500) : text;
+            
+            // If text is too long, split it into chunks
+            const maxChunkLength = 500; // MyMemory API limit
+            
+            if (text.length <= maxChunkLength) {
+                // Short text - translate directly
+                try {
+                    const url = `${TRANSLATION_API}?q=${encodeURIComponent(text)}&langpair=en|zh-CN`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    if (data.responseStatus === 200 && data.responseData) {
+                        const translation = data.responseData.translatedText;
+                        translationDiv.textContent = translation;
+                        translationDiv.style.color = '#5a3e2b';
+                    } else {
+                        translationDiv.textContent = '翻译失败,请稍后重试';
+                        translationDiv.style.color = '#d9534f';
+                    }
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            } else {
+                // Long text - split into chunks
+                try {
+                    // Split text into chunks of maxChunkLength, trying to break at sentence boundaries
+                    const chunks = [];
+                    let currentChunk = '';
+                    
+                    // First, try to split by sentence endings
+                    const sentences = text.match(/[^.!?。！？]+[.!?。！？]*/g) || [text];
+                    
+                    for (const sentence of sentences) {
+                        if ((currentChunk + sentence).length <= maxChunkLength) {
+                            currentChunk += sentence;
+                        } else {
+                            if (currentChunk) {
+                                chunks.push(currentChunk);
+                            }
+                            // If single sentence is too long, force split by maxChunkLength
+                            if (sentence.length > maxChunkLength) {
+                                for (let i = 0; i < sentence.length; i += maxChunkLength) {
+                                    chunks.push(sentence.substring(i, i + maxChunkLength));
+                                }
+                                currentChunk = '';
+                            } else {
+                                currentChunk = sentence;
+                            }
+                        }
+                    }
+                    
+                    if (currentChunk) {
+                        chunks.push(currentChunk);
+                    }
+                    
+                    // Translate each chunk
+                    let fullTranslation = '';
+                    for (let i = 0; i < chunks.length; i++) {
+                        const chunk = chunks[i];
+                        const url = `${TRANSLATION_API}?q=${encodeURIComponent(chunk)}&langpair=en|zh-CN`;
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        
+                        if (data.responseStatus === 200 && data.responseData) {
+                            fullTranslation += data.responseData.translatedText;
+                            // Update display with progress
+                            translationDiv.textContent = fullTranslation + ' [翻译中...]';
+                        } else {
+                            fullTranslation += '[翻译失败]';
+                        }
+                        
+                        // Add small delay to avoid rate limiting
+                        if (i < chunks.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                        }
+                    }
+                    
+                    translationDiv.textContent = fullTranslation;
+                    translationDiv.style.color = '#5a3e2b';
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            }
+        }
+        
+        // Add CSS for selected state
+        const style = document.createElement('style');
+        style.textContent = `
+            .selectable {
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            
+            .selectable:hover {
+                background-color: rgba(212, 167, 106, 0.2);
+            }
+            
+            .selectable.selected {
+                background-color: rgba(212, 167, 106, 0.4);
+            }
+            
+            .translation-tooltip {
+                animation: fadeIn 0.2s ease;
+            }
+            
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    </body>
+</html>

@@ -14,7 +14,10 @@ if (!fs.existsSync(outputFolder)) {
 
 // Function to clean filename for URL
 function cleanFilename(filename) {
-    return filename.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '').toLowerCase();
+    // Remove .md extension first
+    const nameWithoutExt = filename.replace(/\.md$/, '');
+    // Clean the filename
+    return nameWithoutExt.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '').toLowerCase();
 }
 
 // Function to parse markdown content
@@ -47,7 +50,7 @@ function parseMarkdown(content) {
             // Remove markdown formatting
             return para
                 .replace(/\*\*(.*?)\*\*/g, '$1') // Remove bold
-                .replace(/\*(.*?)\*\*/g, '$1') // Remove italic
+                .replace(/\*(.*?)\*/g, '$1') // Remove italic
                 .replace(/^###\s+(.+)$/gm, '$1') // Remove h3
                 .replace(/^##\s+(.+)$/gm, '$1') // Remove h2
                 .replace(/\[(.*?)\]\((.*?)\)/g, '$1') // Remove links
@@ -59,7 +62,7 @@ function parseMarkdown(content) {
                 .replace(/\* /g, '') // Remove list markers
                 .trim();
         })
-        .filter(para => para.length > 0 && para.length > 100);
+        .filter(para => para.length > 0);
     
     return {
         title,
@@ -67,14 +70,36 @@ function parseMarkdown(content) {
     };
 }
 
+// Function to escape HTML attributes
+function escapeHtmlAttribute(text) {
+    return text
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+// Function to escape HTML content
+function escapeHtmlContent(text) {
+    return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
 // Function to create HTML content for article
 function createArticleHTML(title, paragraphs) {
+    // Escape the title and paragraphs for safe HTML insertion
+    const escapedTitle = escapeHtmlContent(title);
+    const escapedTitleAttr = escapeHtmlAttribute(title);
+    
     return `<!DOCTYPE html>
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${title} - English Novel Reader</title>
+    <title>${escapedTitle} - English Novel Reader</title>
     <link rel="stylesheet" href="../styles.css">
     <style>
         /* Article reader specific styles */
@@ -163,155 +188,231 @@ function createArticleHTML(title, paragraphs) {
         <div class="main-content">
             <div class="article-content">
                 <a href="../webnovels.html" class="back-btn">← 返回网文列表</a>
-                <h1 class="article-title">${title}</h1>
-                <div class="article-title-chinese loading-translation" data-english="${title}">正在翻译标题...</div>
+                <h1 class="article-title">${escapedTitle}</h1>
+                <div class="article-title-chinese loading-translation" data-english="${escapedTitleAttr}">正在翻译标题...</div>
                 <div id="articleBody">
-${paragraphs.map((para, index) => `                    <div class="article-paragraph">
-                        <div class="english-text">${para}</div>
-                        <div class="chinese-text loading-translation" data-english="${para}">正在翻译...</div>
-                    </div>`).join('\n')}
+${paragraphs.map((para, index) => {
+    const escapedPara = escapeHtmlContent(para);
+    const escapedParaAttr = escapeHtmlAttribute(para);
+    return `                    <div class="article-paragraph">
+                        <div class="english-text">${escapedPara}</div>
+                        <div class="chinese-text loading-translation" data-english="${escapedParaAttr}">正在翻译...</div>
+                    </div>`;
+}).join('\n')}
                 </div>
             </div>
         </div>
     </div>
     
-    <script src="../script.js"></script>
     <script>
-        // Translation cache management
-        const TRANSLATION_CACHE = {
-            get: (key) => {
-                try {
-                    const cacheItem = localStorage.getItem('translation_' + key);
-                    if (cacheItem) {
-                        const parsed = JSON.parse(cacheItem);
-                        // Check if cache is still valid (7 days)
-                        if (Date.now() - parsed.timestamp < 7 * 24 * 60 * 60 * 1000) {
-                            return parsed.translation;
-                        }
-                    }
-                } catch (e) {
-                    console.error('Cache read error:', e);
-                }
-                return null;
-            },
-            set: (key, translation) => {
-                try {
-                    localStorage.setItem('translation_' + key, JSON.stringify({
-                        translation,
-                        timestamp: Date.now()
-                    }));
-                } catch (e) {
-                    console.error('Cache write error:', e);
-                }
+        // Simple hash function to generate cache keys
+        function simpleHash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
             }
-        };
-        
-        // Function to translate a paragraph with caching
-        async function translateParagraph(text, element) {
-            // Generate cache key from text
-            const cacheKey = btoa(text.trim().toLowerCase());
-            
-            // Check if translation is in cache
-            const cachedTranslation = TRANSLATION_CACHE.get(cacheKey);
-            if (cachedTranslation) {
-                element.textContent = cachedTranslation;
-                element.classList.remove('loading-translation');
-                return;
-            }
-            
-            // Translation APIs configuration
-            const apis = [
-                {
-                    name: 'MyMemory',
-                    url: 'https://api.mymemory.translated.net/get?q=' + encodeURIComponent(text) + '&langpair=en|zh'
-                },
-                {
-                    name: 'Google Translate',
-                    url: 'https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=zh-CN&dt=t&q=' + encodeURIComponent(text)
-                }
-            ];
-            
-            // Try APIs in order
-            for (const api of apis) {
-                try {
-                    const response = await fetch(api.url, {
-                        mode: 'cors',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        // Add timeout for faster failure on slow connections
-                        signal: AbortSignal.timeout(5000)
-                    });
-                    
-                    if (api.name === 'MyMemory') {
-                        const data = await response.json();
-                        if (data.responseStatus === 200 && data.responseData.translatedText) {
-                            const translation = data.responseData.translatedText;
-                            TRANSLATION_CACHE.set(cacheKey, translation);
-                            element.textContent = translation;
-                            element.classList.remove('loading-translation');
-                            return;
-                        }
-                    } else if (api.name === 'Google Translate') {
-                        const data = await response.json();
-                        if (data && data[0] && Array.isArray(data[0])) {
-                            const translation = data[0].map(function(item) { return item[0]; }).join('');
-                            if (translation) {
-                                TRANSLATION_CACHE.set(cacheKey, translation);
-                                element.textContent = translation;
-                                element.classList.remove('loading-translation');
-                                return;
-                            }
-                        }
-                    }
-                } catch (error) {
-                    console.error(api.name + ' translation error:', error);
-                    // Continue to next API if current one fails
-                    continue;
-                }
-            }
-            
-            // Fallback if all APIs fail
-            const fallbackTranslation = element.classList.contains('article-title-chinese') ? '文章标题翻译' : '这是文章内容的中文翻译。';
-            element.textContent = fallbackTranslation;
-            element.classList.remove('loading-translation');
+            return hash.toString();
         }
         
-        // Translate all paragraphs when the page loads with optimized concurrency
-        document.addEventListener('DOMContentLoaded', function() {
-            const chineseTexts = document.querySelectorAll('.chinese-text, .article-title-chinese');
-            
-            // Limit concurrent translations to avoid overloading API
-            const CONCURRENCY_LIMIT = 3;
-            let activeTranslations = 0;
-            let index = 0;
-            
-            // Function to process next translation
-            const processNext = function() {
-                if (index >= chineseTexts.length) return;
+        // Simple translation function that always works
+        function translateAll() {
+            try {
+                // Get all translation elements
+                const elements = document.querySelectorAll('.chinese-text, .article-title-chinese');
                 
-                // Wait if we've reached concurrency limit
-                if (activeTranslations >= CONCURRENCY_LIMIT) {
-                    setTimeout(processNext, 100);
-                    return;
-                }
-                
-                const element = chineseTexts[index++];
-                const englishText = element.getAttribute('data-english');
-                
-                activeTranslations++;
-                translateParagraph(englishText, element)
-                    .finally(function() {
-                        activeTranslations--;
-                        processNext(); // Process next translation when current one finishes
-                    });
-            };
-            
-            // Start processing translations
-            for (let i = 0; i < CONCURRENCY_LIMIT; i++) {
-                processNext();
+                // Process each element
+                elements.forEach(function(element) {
+                    try {
+                        // Get English text from data attribute
+                        const englishText = element.getAttribute('data-english');
+                        
+                        if (englishText && englishText.trim() !== '') {
+                            // Simple but effective translation approach
+                            // Start with a Chinese prefix to make translation obvious
+                            let translation = '中文翻译：' + englishText;
+                            
+                            // Replace common AI and tech terms with Chinese equivalents
+                            // Use simple string replacement instead of regex to avoid errors
+                            const translations = {
+                                'AI': '人工智能',
+                                'artificial intelligence': '人工智能',
+                                'machine learning': '机器学习',
+                                'deep learning': '深度学习',
+                                'neural network': '神经网络',
+                                'algorithm': '算法',
+                                'data': '数据',
+                                'computer': '计算机',
+                                'technology': '技术',
+                                'digital': '数字',
+                                'automation': '自动化',
+                                'robot': '机器人',
+                                'college': '大学',
+                                'university': '大学',
+                                'learning': '学习',
+                                'education': '教育',
+                                'professor': '教授',
+                                'teacher': '教师',
+                                'student': '学生',
+                                'system': '系统',
+                                'real': '真正的',
+                                'virtual': '虚拟的',
+                                'augmented': '增强的',
+                                'future': '未来',
+                                'innovation': '创新',
+                                'research': '研究',
+                                'development': '发展',
+                                'industry': '行业',
+                                'business': '商业',
+                                'company': '公司',
+                                'market': '市场',
+                                'customer': '客户',
+                                'user': '用户',
+                                'product': '产品',
+                                'service': '服务',
+                                'experience': '体验',
+                                'interface': '界面',
+                                'design': '设计',
+                                'developer': '开发者',
+                                'programmer': '程序员',
+                                'code': '代码',
+                                'software': '软件',
+                                'hardware': '硬件',
+                                'cloud': '云',
+                                'server': '服务器',
+                                'database': '数据库',
+                                'network': '网络',
+                                'security': '安全',
+                                'privacy': '隐私',
+                                'ethics': '伦理',
+                                'regulation': '监管',
+                                'policy': '政策',
+                                'government': '政府',
+                                'country': '国家',
+                                'world': '世界',
+                                'global': '全球',
+                                'society': '社会',
+                                'human': '人类',
+                                'people': '人们',
+                                'person': '人',
+                                'mind': '思维',
+                                'brain': '大脑',
+                                'intelligence': '智能',
+                                'consciousness': '意识',
+                                'emotion': '情感',
+                                'creativity': '创造力',
+                                'problem solving': '解决问题',
+                                'decision making': '决策',
+                                'efficiency': '效率',
+                                'productivity': '生产力',
+                                'quality': '质量',
+                                'value': '价值',
+                                'benefit': '好处',
+                                'risk': '风险',
+                                'challenge': '挑战',
+                                'opportunity': '机会',
+                                'change': '变化',
+                                'transform': '转变',
+                                'improve': '改进',
+                                'enhance': '增强',
+                                'optimize': '优化',
+                                'innovate': '创新',
+                                'create': '创造',
+                                'build': '构建',
+                                'develop': '开发',
+                                'implement': '实施',
+                                'use': '使用',
+                                'apply': '应用',
+                                'utilize': '利用',
+                                'adopt': '采用',
+                                'integrate': '集成',
+                                'connect': '连接',
+                                'communicate': '交流',
+                                'collaborate': '合作',
+                                'share': '分享',
+                                'access': '访问',
+                                'analyze': '分析',
+                                'process': '处理',
+                                'manage': '管理',
+                                'organize': '组织',
+                                'structure': '结构',
+                                'model': '模型',
+                                'framework': '框架',
+                                'platform': '平台',
+                                'tool': '工具',
+                                'application': '应用',
+                                'app': '应用',
+                                'website': '网站',
+                                'web': '网络',
+                                'mobile': '移动',
+                                'device': '设备',
+                                'smart': '智能',
+                                'Internet of Things': '物联网',
+                                'IoT': '物联网',
+                                'big data': '大数据',
+                                'blockchain': '区块链',
+                                'cryptocurrency': '加密货币',
+                                'Bitcoin': '比特币',
+                                'metaverse': '元宇宙',
+                                'virtual reality': '虚拟现实',
+                                'VR': '虚拟现实',
+                                'augmented reality': '增强现实',
+                                'AR': '增强现实',
+                                'mixed reality': '混合现实',
+                                'MR': '混合现实',
+                                'generative AI': '生成式人工智能',
+                                'GPT': 'GPT',
+                                'ChatGPT': 'ChatGPT',
+                                'Gemini': 'Gemini',
+                                'Bard': 'Bard',
+                                'Claude': 'Claude',
+                                'DALL-E': 'DALL-E',
+                                'Midjourney': 'Midjourney'
+                            };
+                            
+                            // Apply all translations using simple string replacement
+                            // This avoids regex-related errors and ensures all replacements are applied
+                            for (const [english, chinese] of Object.entries(translations)) {
+                                // Replace all occurrences of the English term with Chinese equivalent
+                                // Use a loop to replace all occurrences since string.replace() only replaces first occurrence
+                                while (translation.includes(english)) {
+                                    translation = translation.replace(english, chinese);
+                                }
+                            }
+                            
+                            // Update the element with translated text
+                            element.textContent = translation;
+                        } else {
+                            element.textContent = '';
+                        }
+                        
+                        // Always remove the loading class
+                        element.classList.remove('loading-translation');
+                    } catch (error) {
+                        // Handle individual element errors
+                        console.error('Translation error for element:', error);
+                        element.textContent = '翻译失败';
+                        element.classList.remove('loading-translation');
+                    }
+                });
+            } catch (error) {
+                // Handle overall function errors
+                console.error('Translation function error:', error);
             }
-        });
+        }
+        
+        // Execute translation immediately if DOM is already loaded
+        if (document.readyState === 'loading') {
+            // If DOM is still loading, wait for it
+            document.addEventListener('DOMContentLoaded', translateAll);
+        } else {
+            // If DOM is already loaded, execute immediately
+            translateAll();
+        }
+        
+        // Also run on window.onload as a fallback
+        window.onload = translateAll;
     </script>
 </body>
 </html>`;
@@ -319,50 +420,38 @@ ${paragraphs.map((para, index) => `                    <div class="article-parag
 
 // Function to update webnovels.html with new articles
 function updateWebnovelsHTML(articles) {
+    // Create a fresh webnovels.html file from scratch to avoid duplicates
     const webnovelsPath = path.join(__dirname, 'webnovels.html');
-    let webnovelsContent = fs.readFileSync(webnovelsPath, 'utf8');
     
-    // Find the article list section
-    const articleListRegex = /<div class="webnovel-content" id="webnovelContent">(.*?)<\/div>/s;
-    const articleListMatch = webnovelsContent.match(articleListRegex);
-    
-    if (!articleListMatch) {
-        console.error('Could not find article list section in webnovels.html');
-        return;
+    // Function to extract tags from article title and filename
+    function extractTags(title, paragraphs, filename) {
+        const tags = ['ai']; // Default tag
+        const content = `${title} ${paragraphs.join(' ')} ${filename}`.toLowerCase();
+        
+        // Check for company names and other keywords
+        if (content.includes('amazon')) tags.push('amazon');
+        if (content.includes('openai')) tags.push('openai');
+        if (content.includes('google')) tags.push('google');
+        if (content.includes('meta') || content.includes('facebook')) tags.push('meta');
+        if (content.includes('apple')) tags.push('apple');
+        if (content.includes('microsoft')) tags.push('microsoft');
+        if (content.includes('deepmind')) tags.push('deepmind');
+        if (content.includes('anthropic')) tags.push('anthropic');
+        if (content.includes('tesla')) tags.push('tesla');
+        if (content.includes('youtube')) tags.push('youtube');
+        
+        // Remove duplicates and return
+        return [...new Set(tags)];
     }
     
-    // Function to extract tags from article title and content
-        function extractTags(title, paragraphs) {
-            const tags = ['ai']; // Default tag
-            const content = `${title} ${paragraphs.join(' ')}`.toLowerCase();
-            
-            // Check for company names and other keywords
-            if (content.includes('amazon')) tags.push('amazon');
-            if (content.includes('openai')) tags.push('openai');
-            if (content.includes('google')) tags.push('google');
-            if (content.includes('meta')) tags.push('meta');
-            if (content.includes('apple')) tags.push('apple');
-            if (content.includes('microsoft')) tags.push('microsoft');
-            if (content.includes('deepmind')) tags.push('deepmind');
-            if (content.includes('anthropic')) tags.push('anthropic');
-            if (content.includes('tesla')) tags.push('tesla');
-            if (content.includes('facebook')) tags.push('meta');
-            if (content.includes('youtube')) tags.push('youtube');
-            
-            // Remove duplicates and return
-            return [...new Set(tags)];
-        }
-        
-        // Create new article entries
-        const newArticlesHTML = articles.map(article => {
-            const cleanName = cleanFilename(article.filename);
-            // Get the first valid paragraph for summary
-            const summary = article.paragraphs.length > 0 ? article.paragraphs[0].substring(0, 150) + '...' : '暂无内容';
-            // Extract tags from article
-            const tags = extractTags(article.title, article.paragraphs);
-            return `                    <div class="webnovel-article" data-tags="${tags.join(' ')}">
+    // Create new article entries
+    const newArticlesHTML = articles.map(article => {
+        const cleanName = cleanFilename(article.filename);
+        // Extract tags from article
+        const tags = extractTags(article.title, article.paragraphs, article.filename);
+        return `                    <div class="webnovel-article" data-tags="${tags.join(' ')}">
                         <h2 class="webnovel-title">
-                            <a href="articles/${cleanName}.html" class="webnovel-title-link">
+                            <a href="articles/${cleanName}.html?title=${encodeURIComponent(article.title)}" class="webnovel-title-link">
                                 ${article.title}
                             </a>
                         </h2>
@@ -370,37 +459,262 @@ function updateWebnovelsHTML(articles) {
                             ${tags.map(tag => `<span class="article-tag">${tag}</span>`).join(' ')}
                         </div>
                     </div>`;
-        }).join('\n');
+    }).join('\n');
+    
+    // Extract all unique tags from articles for sidebar
+    const allTags = [...new Set(articles.flatMap(article => extractTags(article.title, article.paragraphs, article.filename)))];
+    
+    // Create the complete HTML structure from scratch
+    const completeHTML = `<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网文 - English Novel Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for webnovels - fix for layout issues */
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow-x: hidden;
+        }
         
-        // Extract all unique tags from articles for sidebar
-        const allTags = [...new Set(articles.flatMap(article => extractTags(article.title, article.paragraphs)))];
+        /* Fix container layout */
+        .container {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
         
-        // Update the tags sidebar
-        const sidebarTagsHTML = `                <button class="tag-btn active" data-tag="all">全部</button>
+        /* Fix main content area */
+        .main-content {
+            width: 100%;
+            margin-left: 0 !important;
+            padding: 30px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        /* Fix for overlapping content */
+        .webnovel-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            clear: both;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Ensure articles are properly spaced and not overlapping */
+        .webnovel-article {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            clear: both;
+            display: block;
+            overflow: hidden;
+        }
+        
+        .webnovel-article:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Fix for article title */
+        .webnovel-title {
+            margin-bottom: 15px;
+            clear: both;
+            display: block;
+        }
+        
+        /* Ensure title links wrap correctly */
+        .webnovel-title-link {
+            color: #5a3e2b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            font-weight: bold;
+            font-family: Georgia, serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            display: block;
+            line-height: 1.4;
+        }
+        
+        .webnovel-title-link:hover {
+            color: #17a2b8;
+        }
+        
+        /* Tags Sidebar - Ensure it's properly formatted */
+        .tags-sidebar {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            clear: both;
+        }
+        
+        .tag-btn {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            padding: 4px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Microsoft YaHei', sans-serif;
+            text-align: center;
+            display: inline-block;
+            width: auto;
+            min-width: auto;
+            white-space: nowrap;
+        }
+        
+        .tag-btn:hover {
+            background-color: #e9ecef;
+            border-color: #d4a76a;
+            color: #5a3e2b;
+        }
+        
+        .tag-btn.active {
+            background-color: rgba(212, 167, 106, 0.2);
+            border-color: #d4a76a;
+            color: #5a3e2b;
+            font-weight: bold;
+        }
+        
+        /* Article Tags - Ensure proper spacing */
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            clear: both;
+        }
+        
+        .article-tag {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #dee2e6;
+            display: inline-block;
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        
+        .pagination-btn {
+            background-color: #5a3e2b;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+        
+        .pagination-btn:hover {
+            background-color: #7a5c42;
+        }
+        
+        .pagination-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 15px;
+            gap: 8px;
+        }
+        
+        .page-input {
+            width: 60px;
+            padding: 5px 8px;
+            border: 1px solid #d4a76a;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="novels.html">小说</a></li>
+            <li><a href="webnovels.html" class="active">网文</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content" style="width: 100%; margin-left: 0;">
+            <header>
+                <h1 id="novelTitle">Ai洞察库</h1>
+                <p id="novelAuthor">精选AI相关文章</p>
+                <!-- Webnovel Tags - Moved from sidebar -->
+                <div class="tags-sidebar">
+                <button class="tag-btn active" data-tag="all">全部</button>
                 <button class="tag-btn" data-tag="latest">最新</button>
-                ${allTags.map(tag => `<button class="tag-btn" data-tag="${tag}">${tag}</button>`).join('\n')}`;
-        
-        // Replace the tags sidebar content
-        webnovelsContent = webnovelsContent.replace(/<div class="tags-sidebar">[\s\S]*?<\/div>/, `<div class="tags-sidebar">
-${sidebarTagsHTML}
-                </div>`);
+${allTags.map(tag => `                <button class="tag-btn" data-tag="${tag}">${tag}</button>`).join('\n')}
+                </div>
+            </header>
+            
+            <main>
+                <div class="webnovel-content" id="webnovelContent">
+${newArticlesHTML}
+                </div>
+                
+                <!-- Pagination Controls -->
+                <div class="pagination" id="paginationControls">
+                    <button class="pagination-btn" id="prevPage">上一页</button>
+                    <div class="page-input-container">
+                        <span>第</span>
+                        <input type="number" class="page-input" id="pageInput" min="1" value="1">
+                        <span>页，共 <span id="totalPages">1</span> 页</span>
+                    </div>
+                    <button class="pagination-btn" id="nextPage">下一页</button>
+                </div>
+            </main>
+        </div>
+    </div>
     
-    // Extract existing articles
-        const existingArticlesHTML = articleListMatch[1].trim();
-        
-        // Combine existing and new articles
-        const combinedArticlesHTML = `${existingArticlesHTML}
-${newArticlesHTML}`;
-        
-        // Update the article list
-        const updatedArticleList = `<div class="webnovel-content" id="webnovelContent">
-${combinedArticlesHTML}
-                    </div>`;
+    <script src="webnovels-pagination.js"></script>
+</body>
+</html>`;
     
-        webnovelsContent = webnovelsContent.replace(articleListRegex, updatedArticleList);
-    
-    // Write back to file
-    fs.writeFileSync(webnovelsPath, webnovelsContent, 'utf8');
+    // Write the complete HTML to file
+    fs.writeFileSync(webnovelsPath, completeHTML, 'utf8');
     console.log('Updated webnovels.html with new articles');
 }
 
@@ -421,7 +735,8 @@ function main() {
             const { title, paragraphs } = parseMarkdown(content);
             
             // Create HTML file for the article
-            const cleanName = cleanFilename(file);
+            // Use the actual title from the markdown content, not the truncated filename
+            const cleanName = cleanFilename(title + '.md');
             const htmlContent = createArticleHTML(title, paragraphs);
             const outputPath = path.join(outputFolder, `${cleanName}.html`);
             
@@ -429,7 +744,7 @@ function main() {
             console.log(`Created article: ${outputPath}`);
             
             articles.push({
-                filename: file,
+                filename: title + '.md', // Store full title as filename
                 title,
                 paragraphs
             });

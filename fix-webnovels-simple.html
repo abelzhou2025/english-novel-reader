@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网文 - English Novel Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for webnovels */
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .webnovel-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+        }
+        
+        /* Ensure all elements wrap correctly on mobile */
+        .webnovel-title-link {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            display: block;
+        }
+        
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Responsive adjustments for mobile */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 10px;
+            }
+            
+            .webnovel-content {
+                padding: 15px;
+            }
+            
+            .tags-sidebar {
+                gap: 6px;
+                padding: 10px 0;
+            }
+            
+            .tag-btn {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+            
+            .webnovel-title-link {
+                font-size: 1.1rem;
+            }
+            
+            .article-tag {
+                font-size: 0.75rem;
+                padding: 3px 10px;
+            }
+        }
+        
+        /* Tags Styles */
+        .tags-sidebar {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .tag-btn {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            padding: 4px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Microsoft YaHei', sans-serif;
+            text-align: center;
+            display: inline-block;
+            width: auto;
+            min-width: auto;
+            white-space: nowrap;
+        }
+        
+        .tag-btn:hover {
+            background-color: #e9ecef;
+            border-color: #d4a76a;
+            color: #5a3e2b;
+        }
+        
+        .tag-btn.active {
+            background-color: rgba(212, 167, 106, 0.2);
+            border-color: #d4a76a;
+            color: #5a3e2b;
+            font-weight: bold;
+        }
+        
+        .webnovel-article {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .webnovel-article:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .webnovel-title {
+            margin-bottom: 10px;
+        }
+        
+        .webnovel-title-link {
+            color: #5a3e2b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            font-weight: bold;
+            font-family: Georgia, serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
+        
+        .webnovel-title-link:hover {
+            color: #17a2b8;
+        }
+        
+        /* Article Tags */
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .article-tag {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #dee2e6;
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        
+        .pagination-btn {
+            background-color: #5a3e2b;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+        
+        .pagination-btn:hover {
+            background-color: #7a5c42;
+        }
+        
+        .pagination-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-input-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 15px;
+        }
+        
+        .page-input {
+            width: 60px;
+            padding: 5px 8px;
+            border: 1px solid #d4a76a;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="novels.html">小说</a></li>
+            <li><a href="webnovels.html" class="active">网文</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content" style="width: 100%; margin-left: 0;">
+            <header>
+                <h1 id="novelTitle">Ai洞察库</h1>
+                <p id="novelAuthor">精选AI相关文章</p>
+                <!-- Webnovel Tags - Moved from sidebar -->
+                <div class="tags-sidebar">
+                    <button class="tag-btn active" data-tag="all">全部</button>
+                    <button class="tag-btn" data-tag="latest">最新</button>
+                    <button class="tag-btn" data-tag="ai">ai</button>
+                    <button class="tag-btn" data-tag="amazon">amazon</button>
+                    <button class="tag-btn" data-tag="openai">openai</button>
+                    <button class="tag-btn" data-tag="google">google</button>
+                    <button class="tag-btn" data-tag="meta">meta</button>
+                    <button class="tag-btn" data-tag="apple">apple</button>
+                    <button class="tag-btn" data-tag="microsoft">microsoft</button>
+                    <button class="tag-btn" data-tag="deepmind">deepmind</button>
+                    <button class="tag-btn" data-tag="anthropic">anthropic</button>
+                    <button class="tag-btn" data-tag="tesla">tesla</button>
+                    <button class="tag-btn" data-tag="youtube">youtube</button>
+                </div>
+            </header>
+            
+            <main>
+                <div class="webnovel-content" id="webnovelContent">
+                    <!-- Articles will be inserted here by JavaScript -->
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const webnovelContent = document.getElementById("webnovelContent");
+        const tagButtons = document.querySelectorAll(".tag-btn");
+        
+        // Pagination settings
+        const articlesPerPage = 20;
+        let currentPage = 1;
+        let filteredArticles = [];
+        const selectedTags = new Set();
+        
+        // Article data - will be generated from articles directory
+        const articles = [
+            // Articles will be added here by the script
+        ];
+        
+        // Initialize the application when DOM is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add tags filter functionality
+            addTagsFilter();
+            // Load articles from the articles directory
+            loadArticles();
+        });
+        
+        // Add tags filter functionality
+        function addTagsFilter() {
+            tagButtons.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    const tag = button.dataset.tag;
+                    
+                    // Handle "all" tag specially
+                    if (tag === "all") {
+                        // Clear all selected tags and show all articles
+                        selectedTags.clear();
+                        tagButtons.forEach(function(btn) { btn.classList.remove("active"); });
+                        button.classList.add("active");
+                    } else if (tag === "latest") {
+                        // Handle "latest" tag specially
+                        selectedTags.clear();
+                        tagButtons.forEach(function(btn) { btn.classList.remove("active"); });
+                        button.classList.add("active");
+                    } else {
+                        // Toggle the tag in selectedTags set
+                        if (selectedTags.has(tag)) {
+                            selectedTags.delete(tag);
+                            button.classList.remove("active");
+                        } else {
+                            selectedTags.add(tag);
+                            button.classList.add("active");
+                        }
+                        
+                        // Remove "all" and "latest" active state if any tags are selected
+                        tagButtons.forEach(function(btn) {
+                            if (btn.dataset.tag === "all" || btn.dataset.tag === "latest") {
+                                btn.classList.remove("active");
+                            }
+                        });
+                        
+                        // If no tags selected, activate "all"
+                        if (selectedTags.size === 0) {
+                            tagButtons.forEach(function(btn) {
+                                if (btn.dataset.tag === "all") {
+                                    btn.classList.add("active");
+                                }
+                            });
+                        }
+                    }
+                    
+                    // Reset to first page when filters change
+                    currentPage = 1;
+                    // Filter articles based on selected tags
+                    filterArticles();
+                });
+            });
+        }
+        
+        // Load articles from the articles directory
+        function loadArticles() {
+            // This function would normally fetch articles from a server or JSON file
+            // For now, we'll generate articles from the file list
+            const articleFiles = [
+                "articles/10_ai_predictions_for_2026md.html",
+                "articles/48_hours_without_ai_-_the_new_york_timmd.html",
+                "articles/5_reasons_why_expert_agents_are_better_tmd.html",
+                "articles/_new_ai_enables_people_without_cad_tramd.html",
+                "articles/actor_joseph_gordon-levitt_wonders_why_amd.html",
+                "articles/after_eliminating_25_of_its_staff_the_md.html",
+                "articles/ai_act___shaping_europes_digital_futuremd.html",
+                "articles/ai_code_you_can_trust_-_fast_companymd.html",
+                "articles/ai_coding_is_now_everywhere_but_not_evemd.html",
+                "articles/ai_could_already_replace_nearly_12_of_jmd.html",
+                "articles/ai_could_increase_divide_between_rich_anmd.html",
+                "articles/ai_data_center_boom_mints_billionaires_amd.html",
+                "articles/ai_data_centers_are_hiking_electricity_cmd.html",
+                "articles/ai_data_centres_could_have_a_carbon_footmd.html",
+                "articles/ai_didnt_break_college__it_exposed_a_bmd.html",
+                "articles/ai_finds_its_way_into_apples_top_apps_omd.html",
+                "articles/ai_hasnt_cratered_jobs_new_yale_study_md.html",
+                "articles/ai_helps_drive_record_118_billion_in_bmd.html",
+                "articles/ai_is_a_tool_not_a_soul_-_wsjmd.html",
+                "articles/ai_is_beating_doctors_at_empathy__becaumd.html",
+                "articles/ai_is_destroying_the_university_and_learmd.html",
+                "articles/ai_is_making_its_way_into_religion___themd.html",
+                "articles/ai_is_screening_for_tb_is_it_doing_a_gomd.html",
+                "articles/ai_isnt_replacing_jobs_ai_spending_is_md.html",
+                "articles/ai_math_genius_delivers_100_accurate_remd.html",
+                "articles/ai_pioneer_fei-fei_li_ushers_in_the_nextmd.html",
+                "articles/ais_dial-up_eramd.html",
+                "articles/ais_future_runs_on_water_-_fast_companymd.html",
+                "articles/amazon_in_talks_to_invest_about_10_billmd.html",
+                "articles/amazon_releases_ai_agents_it_says_can_womd.html",
+                "articles/amazon_sues_perplexity_over_covert_ai_agmd.html",
+                "articles/amd_ceo_lisa_su_says_concerns_about_an_amd.html",
+                "articles/an_ai-generated_song_topped_billboards_md.html",
+                "articles/apple_artificial_intelligence_head_to_lemd.html",
+                "articles/are_ai_chatbots_changing_how_we_shop____md.html",
+                "articles/are_you_listening_to_bots__survey_shows_md.html",
+                "articles/as_ai_wipes_jobs_google_ceo_sundar_pichmd.html",
+                "articles/behind_googles_55bn_funding_in_germanmd.html",
+                "articles/bezos_62b_ai_venture_quietly_acquiresmd.html",
+                "articles/big_techs_spend_little_earn_lots_formd.html",
+                "articles/can_ai_reduce_the_prison_population____cmd.html",
+                "articles/can_artificial_intelligence_really_help_md.html",
+                "articles/can_schools_survive_in_the_age_of_ai_md.html",
+                "articles/ceos_are_making_the_business_case_for_aimd.html",
+                "articles/chatgpt_and_openai_still_have_a_winning_md.html",
+                "articles/chatgpt_wants_to_join_your_group_chats_-md.html",
+                "articles/cloudflare_has_blocked_416_billion_ai_bomd.html",
+                "articles/coca-colas_ai_holiday_ads_spark_viewer_md.html",
+                "articles/colleges_are_using_ai_tools_to_analyze_amd.html",
+                "articles/data_centers_in_space_-_why_data_processmd.html",
+                "articles/effective_harnesses_for_long-running_agemd.html",
+                "articles/elon_musk_lists_his_three_most_importantmd.html",
+                "articles/elon_musk_says_ai_research_into_ancient_md.html",
+                "articles/elon_musk_says_that_in_10_to_20_years_wmd.html",
+                "articles/elon_musks_ai_chatbot_grok_ranks_him_asmd.html",
+                "articles/exclusive___inside_microsofts_new_ai_smd.html",
+                "articles/explore_new_ways_to_plan_and_book_travelmd.html",
+                "articles/fda_offers_staff_agentic_ai_to_supportmd.html",
+                "articles/fei-fei_li_debuts_world-generating_ai_momd.html",
+                "articles/fei-fei_li_the_godmother_of_ai_got_hmd.html",
+                "articles/fei-fei_li_wins_queen_elizabeth_prize_fomd.html",
+                "articles/forget_chatbots_this_is_the_ai_technolomd.html",
+                "articles/fort_smith_mercy_among_first_to_use_ambimd.html",
+                "articles/from_more_meat_to_less_waste__how_food_cmd.html",
+                "articles/from_words_to_worlds__spatial_intelligenmd.html",
+                "articles/gemini_3_just_scored_100_on_a_critical_md.html",
+                "articles/geoffrey_hinton_doesnt_think_ceos_have_md.html",
+                "articles/godfather_of_ai_says_google_is_beginnmd.html",
+                "articles/google_ai_and_learning_forum__ben_gomes_md.html",
+                "articles/google_and_apple_redefine_ai_trust_as_prmd.html",
+                "articles/google_augments_ai_shopping_with_conversmd.html",
+                "articles/google_discover_is_testing_ai-generated_md.html",
+                "articles/google_is_launching_gemini_3_its_most_md.html",
+                "articles/google_maps_gets_smarter_with_gemini_ai_md.html",
+                "articles/google_maps_releases_new_ai_tools_that_lmd.html",
+                "articles/google_researchers_figure_how_to_get_ai_md.html",
+                "articles/google_says_gemini_3_flash_ai_is_as_fastmd.html",
+                "articles/google_says_it_isnt_using_your_gmail_tomd.html",
+                "articles/google_tells_employees_it_must_double_camd.html",
+                "articles/google_tests_direct_link_to_ai_mode_frommd.html",
+                "articles/google_tests_merging_ai_overviews_with_amd.html",
+                "articles/googles_ai_overviews_are_killing_searchmd.html",
+                "articles/googles_sundar_pichai_says_ai_could_do_md.html",
+                "articles/how_ai_can_make_travel_easier_cheaper_md.html",
+                "articles/how_ai_can_monitor_your_movements_to_impmd.html",
+                "articles/how_ai_could_reboot_science_and_revive_lmd.html",
+                "articles/how_ai_is_changing_career_and_technical_md.html",
+                "articles/how_ai_is_rewriting_the_healthcare_playbmd.html",
+                "articles/how_ai_is_transforming_skin_cancer_diagnmd.html",
+                "articles/how_ai_is_transforming_work_at_anthropicmd.html",
+                "articles/how_ai_may_impact_specialty_margins_and_md.html",
+                "articles/how_amazon_is_making_it_easier_to_shop_bmd.html",
+                "articles/how_ford_is_embracing_ai_to_drive_innovamd.html",
+                "articles/how_google_and_vitality_are_partnering_fmd.html",
+                "articles/how_openai_led_google_to_rethink_its_ai_md.html",
+                "articles/how_reliable_is_ai_information____msutomd.html",
+                "articles/how_sovereign_ai_is_reshaping_global_innmd.html",
+                "articles/how_this_21-year-old_student_used_ai_to_md.html",
+                "articles/how_to_get_out_of_ai_pilot_purgatory_-_fmd.html",
+                "articles/how_to_stop_ai_from_eating_the_open_intemd.html",
+                "articles/how_universities_are_building_human-centmd.html",
+                "articles/human-ai_teaming_in_healthcare__1__1___md.html",
+                "articles/i_completed_a_coursera_ai_certificationmd.html",
+                "articles/i_was_wrong_universities_dont_fear_aimd.html",
+                "articles/inside_cursor_-_colossusmd.html",
+                "articles/inside_three_longterm_relationships_withmd.html",
+                "articles/insurances_new_operating_system_for_202md.html",
+                "articles/interview__freepik_boss_tells_us_the_limmd.html",
+                "articles/introducing_naturelm-audio__an_audio-lanmd.html",
+                "articles/is_physical_world_ai_the_future_of_autonmd.html",
+                "articles/jeff_bezos_is_reportedly_becoming_a_ceo_md.html",
+                "articles/justice_in_the_age_of_algorithms__guardrmd.html",
+                "articles/lisa_su_thinks_ai_is_the_right_gamblemd.html",
+                "articles/microsoft_built_a_fake_marketplace_to_temd.html",
+                "articles/microsoft_excel_powers_an_ai-resistant_md.html",
+                "articles/mit_researchers_speak_objects_into_exismd.html",
+                "articles/more_people_are_using_ai_chatbots_but_fmd.html",
+                "articles/new_research_shows_how_ai_could_transformd.html",
+                "articles/news_summaries_from_ai_chatbots_have_majmd.html",
+                "articles/openai_continues_to_push_for_government_md.html",
+                "articles/openai_data_center_plans_highlight_ai_inmd.html",
+                "articles/openai_declares_code_red_as_google_catmd.html",
+                "articles/openai_google_microsoft__why_are_ai_gimd.html",
+                "articles/openai_says_ai_browsers_may_always_be_vumd.html",
+                "articles/opinion___ai_is_a_bubble_maybe_thatsmd.html",
+                "articles/opinion___how_ai_can_use_your_personalmd.html",
+                "articles/opinion___how_to_prepare_your_kids_for_tmd.html",
+                "articles/opinion___how_to_use_ai_to_talk_to_whamd.html",
+                "articles/opinion___youre_a_computer_science_majomd.html",
+                "articles/podcast___lowes_ai_reset__the_infrastrumd.html",
+                "articles/reaping_the_benefits_of_ai_without_the_bmd.html",
+                "articles/reddit_co-founder_alexis_ohanian_says_aimd.html",
+                "articles/researchers_call_for_more_conversation-rmd.html",
+                "articles/simulars_ai_agent_wants_to_run_your_macmd.html",
+                "articles/stanford_founders_yc-backed_startup_autmd.html",
+                "articles/state_of_agentic_ai_founders_editionmd.html",
+                "articles/study_highlights_ai_limits_in_heart_caremd.html",
+                "articles/texas_schools_are_using_ai_to_screen_libmd.html",
+                "articles/the_ai_boom_has_found_another_gear_whmd.html",
+                "articles/the_ai_boom_is_heralding_a_new_gold_rushmd.html",
+                "articles/the_ai_doctor_will_see_you_now_-_fast_comd.html",
+                "articles/the_commoditization_of__ai-first__marketmd.html",
+                "articles/the_global_race_for_the_ai_app_layer_is_md.html",
+                "articles/the_google_antitrust_ruling_shows_how_aimd.html",
+                "articles/the_secret_to_avoiding_ai_slop__let_womd.html",
+                "articles/tiktok_will_let_you_choose_how_much_ai-gmd.html",
+                "articles/to_ai_or_not_to_ai__do_college_students_md.html",
+                "articles/trains_cancelled_over_fake_bridge_collapmd.html",
+                "articles/using_ai_to_scan_the_earth_-_spacenewsmd.html",
+                "articles/walmart_ai_strategy__us905b_bet_on_agenmd.html",
+                "articles/want_to_know_why_your_ai_agent_failed__tmd.html",
+                "articles/what_could_possibly_go_wrong_if_an_entermd.html",
+                "articles/what_the_ceo_of_the_worlds_largest_datamd.html",
+                "articles/when_ai_agents_can_serve_people_and_busimd.html",
+                "articles/when_ai_hype_meets_ai_reality__a_reckonimd.html",
+                "articles/white_collar_vs_blue_collar__two_sistermd.html",
+                "articles/who_pays_when_ai_is_wrong__-_the_new_ymd.html",
+                "articles/why_ai_cannot_create_new_scientific_knowmd.html",
+                "articles/why_ai_is_now_hrs_business___wiredmd.html",
+                "articles/why_are_we_talking_about_superintelligenmd.html",
+                "articles/why_data_centers_are_important_for_ai___md.html",
+                "articles/why_does_ai_keep_making_things_up_that_amd.html",
+                "articles/why_does_ai_write_like__that__-_the_nmd.html",
+                "articles/why_employees_dont_trust_your_ai_stratemd.html",
+                "articles/why_every_leader_should_ask_whats_the_cmd.html",
+                "articles/why_is_ai_making_computers_and_games_conmd.html",
+                "articles/why_the_next_ai_revolution_will_happen_omd.html",
+                "articles/why_wikipedia_is_losing_traffic_to_ai_ovmd.html",
+                "articles/yelps_ai_can_now_scan_restaurant_menus_md.html",
+                "articles/you_can_now_ask_google_gemini_whether_anmd.html",
+                "articles/youtube_now_shutting_down_channels_postimd.html"
+            ];
+            
+            // Generate articles with tags
+            const generatedArticles = articleFiles.map(function(filePath) {
+                // Extract filename from path
+                const filename = filePath.split('/').pop();
+                // Generate a simple title from filename
+                const title = filename.replace(/^./, function(s) { return s.toUpperCase(); })
+                                     .replace(/md.html$/, '')
+                                     .replace(/-/g, ' ')
+                                     .replace(/\d+_/g, '')
+                                     .trim();
+                // Extract tags based on filename and content (simplified)
+                const tags = ['ai'];
+                if (filename.includes('amazon')) tags.push('amazon');
+                if (filename.includes('openai')) tags.push('openai');
+                if (filename.includes('google')) tags.push('google');
+                if (filename.includes('meta')) tags.push('meta');
+                if (filename.includes('apple')) tags.push('apple');
+                if (filename.includes('microsoft')) tags.push('microsoft');
+                if (filename.includes('deepmind')) tags.push('deepmind');
+                if (filename.includes('anthropic')) tags.push('anthropic');
+                if (filename.includes('tesla')) tags.push('tesla');
+                if (filename.includes('youtube')) tags.push('youtube');
+                
+                return {
+                    filename: filename,
+                    title: title,
+                    tags: tags,
+                    url: filePath
+                };
+            });
+            
+            // Store generated articles
+            window.articles = generatedArticles;
+            
+            // Initialize articles
+            initializeArticles();
+        }
+        
+        // Initialize articles for filtering and pagination
+        function initializeArticles() {
+            filterArticles();
+        }
+        
+        // Filter articles by selected tags
+        function filterArticles() {
+            const allArticles = window.articles;
+            
+            // Filter articles based on selected tags
+            filteredArticles = allArticles.filter(function(article) {
+                const articleTags = article.tags;
+                let shouldShow = false;
+                
+                // Check if "all" is active
+                const allButton = document.querySelector(".tag-btn[data-tag='all'].active");
+                if (allButton) {
+                    shouldShow = true;
+                } 
+                // Check if "latest" is active (for now, show all articles)
+                else if (document.querySelector(".tag-btn[data-tag='latest'].active")) {
+                    shouldShow = true;
+                }
+                // Check if article has all selected tags
+                else if (selectedTags.size > 0) {
+                    // Article should have all selected tags
+                    shouldShow = Array.from(selectedTags).every(function(tag) {
+                        return articleTags.includes(tag);
+                    });
+                } else {
+                    // No tags selected, show all
+                    shouldShow = true;
+                }
+                
+                return shouldShow;
+            });
+            
+            // Render the filtered articles with pagination
+            renderArticles();
+            // Update pagination controls
+            renderPagination();
+        }
+        
+        // Render articles for the current page
+        function renderArticles() {
+            // Clear existing articles
+            webnovelContent.innerHTML = "";
+            
+            // Calculate start and end indices for current page
+            const startIndex = (currentPage - 1) * articlesPerPage;
+            const endIndex = startIndex + articlesPerPage;
+            
+            // Show only the articles for the current page
+            const articlesToShow = filteredArticles.slice(startIndex, endIndex);
+            
+            // Generate HTML for articles
+            const articlesHTML = articlesToShow.map(function(article) {
+                const tagHTML = article.tags.map(function(tag) {
+                    return '<span class="article-tag">' + tag + '</span>';
+                }).join(' ');
+                
+                return '<div class="webnovel-article" data-tags="' + article.tags.join(' ') + '">' +
+                       '    <h2 class="webnovel-title">' +
+                       '        <a href="' + article.url + '" class="webnovel-title-link">' + article.title + '</a>' +
+                       '    </h2>' +
+                       '    <div class="article-tags">' + tagHTML + '</div>' +
+                       '</div>';
+            }).join('\n');
+            
+            // Insert articles into the DOM
+            webnovelContent.innerHTML = articlesHTML;
+        }
+        
+        // Render pagination controls
+        function renderPagination() {
+            // Calculate total pages
+            const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
+            
+            // Check if pagination container exists, if not create it
+            let paginationContainer = document.getElementById("pagination");
+            if (!paginationContainer) {
+                paginationContainer = document.createElement("div");
+                paginationContainer.id = "pagination";
+                paginationContainer.className = "pagination";
+                webnovelContent.parentNode.appendChild(paginationContainer);
+            }
+            
+            // Clear existing pagination controls
+            paginationContainer.innerHTML = "";
+            
+            // Create previous button
+            const prevButton = document.createElement("button");
+            prevButton.textContent = "上一页";
+            prevButton.className = "pagination-btn";
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener("click", function() {
+                if (currentPage > 1) {
+                    currentPage--;
+                    renderArticles();
+                    renderPagination();
+                }
+            });
+            paginationContainer.appendChild(prevButton);
+            
+            // Create page input container
+            const pageInputContainer = document.createElement("div");
+            pageInputContainer.className = "page-input-container";
+            pageInputContainer.style.display = "flex";
+            pageInputContainer.style.alignItems = "center";
+            pageInputContainer.style.gap = "8px";
+            pageInputContainer.style.margin = "0 15px";
+            
+            // Create page input label
+            const pageLabel = document.createElement("span");
+            pageLabel.textContent = "第";
+            pageLabel.style.color = "#5a3e2b";
+            pageLabel.style.fontWeight = "bold";
+            pageInputContainer.appendChild(pageLabel);
+            
+            // Create page input box
+            const pageInput = document.createElement("input");
+            pageInput.type = "number";
+            pageInput.className = "page-input";
+            pageInput.value = currentPage;
+            pageInput.min = "1";
+            pageInput.max = totalPages;
+            pageInput.style.width = "60px";
+            pageInput.style.padding = "5px 8px";
+            pageInput.style.border = "1px solid #d4a76a";
+            pageInput.style.borderRadius = "4px";
+            pageInput.style.fontSize = "0.9rem";
+            pageInput.style.textAlign = "center";
+            pageInput.addEventListener("keypress", function(e) {
+                if (e.key === "Enter") {
+                    const pageNum = parseInt(pageInput.value);
+                    if (pageNum >= 1 && pageNum <= totalPages) {
+                        currentPage = pageNum;
+                        renderArticles();
+                        renderPagination();
+                    }
+                }
+            });
+            pageInputContainer.appendChild(pageInput);
+            
+            // Create page total label
+            const pageTotalLabel = document.createElement("span");
+            pageTotalLabel.textContent = "页 / 共 " + totalPages + " 页";
+            pageTotalLabel.style.color = "#5a3e2b";
+            pageTotalLabel.style.fontWeight = "bold";
+            pageInputContainer.appendChild(pageTotalLabel);
+            
+            paginationContainer.appendChild(pageInputContainer);
+            
+            // Create next button
+            const nextButton = document.createElement("button");
+            nextButton.textContent = "下一页";
+            nextButton.className = "pagination-btn";
+            nextButton.disabled = currentPage === totalPages;
+            nextButton.addEventListener("click", function() {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    renderArticles();
+                    renderPagination();
+                }
+            });
+            paginationContainer.appendChild(nextButton);
+        }
+    </script>
+</body>
+</html>

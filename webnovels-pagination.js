@@ -131,7 +131,7 @@ function applyTagFilter() {
     // Reset to first page
     ARTICLE_PAGINATION.currentPage = 1;
     
-    // If 'all' tag is selected, show all articles
+    // If 'all' tag is selected, show all valid articles
     if (TAG_FILTER.allTagBtn && TAG_FILTER.allTagBtn.classList.contains('active')) {
         ARTICLE_PAGINATION.filteredArticles = [...ARTICLE_PAGINATION.allArticles];
     } else {

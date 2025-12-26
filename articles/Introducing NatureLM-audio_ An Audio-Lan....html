@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing NatureLM-audio: An Audio-Language Foundation Model for Bioacoustics - English Novel Reader</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f9f7f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+        }
+        
+        .article-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        .article-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-heading {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            color: #3a3a3a;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .section-subheading {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .paragraph-block {
+            margin-bottom: 25px;
+        }
+        
+        .english-text {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #2c2c2c;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .chinese-text {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            padding-left: 20px;
+            border-left: 3px solid #d4a76a;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                margin: 80px 15px 30px;
+                padding: 25px;
+            }
+            
+            .article-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-heading {
+                font-size: 1.3rem;
+            }
+            
+            .english-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="../novels.html">小说</a></li>
+            <li><a href="../webnovels.html" class="active">网文</a></li>
+            <li><a href="../about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="article-content">
+        <a href="../webnovels.html" class="back-btn">← 返回网文列表</a>
+        <h1 class="article-title">Introducing NatureLM-audio: An Audio-Language Foundation Model for Bioacoustics</h1>
+        <div class="paragraph-block">
+            <p class="english-text">www.earthspecies.org Posted by</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">By David Robinson, Marius Miron, Masato Hagiwara, Olivier Pietquin</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Key Takeaways</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Introducing NatureLM-Audio
+
+NatureLM-Audio is the first large audio-language model tailored specifically for animal sounds.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Analyzing animal sounds unlocks profound insights into the natural world - from decoding complex communication and behaviors to monitoring the health of entire ecosystems. However, existing machine learning methods in this field are limited to a narrow range of species and tasks, hindering our ability to fully leverage the potential of bioacoustic data. On the other hand, general-purpose audio LLMs have poor domain knowledge about species and animal behavior.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">To address these challenges, our team is excited to announce NatureLM-audio -- the first large audio-language model tailored for animal sounds.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Trained on a newly compiled dataset combining large bioacoustic archives, human speech, and music, this model can solve a wide range of bioacoustics tasks zero-shot by simply being prompted with natural language queries and audio. From this input, it generates free-form text answers, greatly enhancing usability.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">For example, NatureLM-audio can classify or detect thousands of species across diverse taxa including birds, whales, and anurans -- without the need to retrain the model for each new task and without machine learning and programming expertise.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Evaluating on a novel benchmark, BEANS-Zero, we find NatureLM-audio can complete multiple tasks previously unexplored at a cross-species level, such as predicting life-stage and simple call-types of birds, and captioning bioacoustic audio. These new capabilities show promise to accelerate data processing for communication studies across a wide range of species.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">NatureLM-audio also demonstrates preliminary evidence of emergent abilities that address the pervasive issue of data scarcity in bioacoustics. Notably, the model can generalize to completely unseen species, and demonstrates task transfer from speech and music to (non-human) animals. By unifying these tasks and diverse taxa into a single, flexible model that users can interact with through natural language, we believe NatureLM-audio represents a significant step forward for bioacoustic analysis.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Building A Large Language Model for Animal Sounds</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">In fields like speech and music processing, large audio-language models have recently achieved remarkable success. These models excel in diverse tasks, exhibit emergent abilities to perform entirely new tasks, and offer the flexibility of language-based prompting. Typically, they are built by adapting an existing language model to process audio by connecting it with an audio encoder. This approach allows the model to interpret audio inputs while leveraging the extensive knowledge already embedded in the language model. As a result, the model can take both an audio sample and a text prompt as input and generate a response in natural language. Trained in this manner, the model can learn multiple tasks simultaneously, each prompted separately using language instructions.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">We adopted this approach for bioacoustics. We developed NatureLM-audio by compiling and training on a large dataset of millions of audio-text pairs. The majority of this data comes from bioacoustic archives such as Xeno-canto, iNaturalist, the Watkins Marine Mammal Sound Database, and the Animal Sound Archive. We also included general audio, human speech, and music data, aiming to transfer learned abilities from human audio processing to animal sounds. We trained NatureLM-audio on this comprehensive dataset by connecting a self-supervised pretrained audio encoder to a leading language model (LLaMA 3.1-8B).</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Evaluating NatureLM-audio Across Species and Tasks</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">To evaluate the performance of NatureLM-audio, we enhanced our existing benchmark, BEANS, to create BEANS-Zero (Benchmark of Animal Sounds Zero-Shot). In addition to core bioacoustic tasks, this benchmark is designed to assess the model's ability to generalize to unseen species and tasks without additional training---critical capabilities for advancing bioacoustic research. BEANS-Zero provides a standardized way to measure zero-shot performance across various bioacoustic tasks, enabling consistent comparisons and fostering progress in the field.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Zero-Shot Species Classification and Detection Across Taxa</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Accurate classification and detection of animal species through their vocalizations are fundamental tasks in animal communication research. These processes are essential for understanding species presence, behavior, and population dynamics. Identifying the precise moments when species vocalize - the onset and offset of sounds - is often the critical first step in analyzing long audio recordings.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">To test classification and detection, we evaluated NatureLM-audio on BEANS-Zero "zero-shot," meaning we ran the model on all datasets without fine-tuning on the benchmark. Compared with other existing large audio-language models, NatureLM-audio achieves state-of-the-art performance on most tasks in the benchmark, including important tasks like classifying diverse bird and marine mammal sounds.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">While previous Earth Species' models including AVES achieved strong performance on these tasks, NatureLM-audio performs even without fine-tuning on the datasets. This out-of-the-box performance means the model can be used to detect and classify a broad range of species, without the need for specialized skills in machine learning to further train.
+
+Compared with other existing large audio-language models, NatureLM-audio achieves state-of-the-art performance on most tasks.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Generalizing to Unseen Species</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Data shortage is a characterizing trait of bioacoustics. Many species are rare, with few recorded calls. For others, including many marine species, collecting and annotating data is arduous and expensive. To tackle this challenge, we investigate NatureLM for two non-intuitive abilities: classifying species unseen during training, and completing unseen tasks.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">To investigate classification of unseen species, we ask the model to predict the scientific names of species held out in BEANS-Zero recordings. 20% of the time, the model is able to predict the scientific name of the correct species, given a call and a choice between two hundred species it has never heard. A random classification performance would give a success rate of only 0.5%.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">How can a machine learning model identify an animal it has never heard? While traditional models are constrained to a fixed set of classes, NatureLM-audio responds freely via human language text. The underlying language model encodes significant knowledge of animal species. Scientific names have a compositional, binomial structure including genus and species (e.g. Homo sapiens). Both knowledge and name structure can be exploited, and in many practical cases, just getting the genus correct is enough to identify a species based on options and location. We are excited by this early result and its potential to address a fundamental challenge in the field.
+
+NatureLM-audio is able to predict the scientific name of the correct species 20% of the time given a call and a choice between two hundred species it has never heard.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Novel Tasks and Transfer from Speech</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Going beyond the commonplace species prediction in bioacoustics, we evaluate four largely unstudied tasks, each with significant ecological implications.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Finer-Grained Monitoring through New Classification Abilities</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Superversion for these tasks is extracted from bioacoustic metadata as semi-structured text -- we believe this approach unlocks large amounts of underutilized bioacoustic information, stored as unstructured text and field notes for audio recordings.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Captioning Bioacoustic Audio
+
+NatureLM-audio is able to caption bioacoustic audio with descriptions of animal sounds.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">As a generative model, NatureLM-audio uniquely enables captioning of bioacoustic audio - generating descriptive annotations of animal sounds. This opens up future applications like characterizing call-types, behaviors, or even captioning nature documentaries. We believe this task requires significant progress, but are excited by the new avenue for exploration.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Transfer from Speech and Music</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">To address data scarcity in bioacoustics, we investigated the model's ability to generalize to completely unseen tasks. We evaluated NatureLM-audio on counting Zebra Finch individuals -- a task it was not explicitly trained on. Surprisingly, the model achieved 38.3% accuracy compared to random chance and baselines at 25%. We hypothesized that this performance stems from training on speech and music tasks, such as counting the number of human speakers in a recording. An ablation study confirmed that without training on speech and music, the model's performance on counting birds drops to random levels. This demonstrates that NatureLM-audio transfers the ability to count human speakers to counting bird speakers. This finding opens up exciting avenues for addressing data shortages in bioacoustics by transferring learned abilities from more abundant human speech and music datasets.
+
+NatureLM-audio shows promise in supporting the data scarcity challenge in bioacoustics with performance gains thanks to training on speech and music.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">What's Next for NatureLM?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">NatureLM-audio promises to address some of the persistent challenges to using machine learning in bioacoustics.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">With results like generalization to unseen species and transfer from speech and music to bioacoustics, we hope to address the data shortages posed by challenging field collection conditions and rare species. With new abilities like lifestage prediction and call-type prediction in birds, large-scale acoustic monitoring could provide finer-grained insights into populations and ecosystem health as well as animal behavior. And with a single model able to complete a wide variety of bioacoustic tasks without retraining, we hope to reduce the barriers to entry of using machine learning to the benefit of biodiversity.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">We will continue to scale this approach by incorporating additional modalities -- such as visual data and accelerometer readings from animal-borne tags. We'll open source the code soon and we have plans to develop an intuitive UI to give ethologists and conservation biologists direct access to the model for use with their own data. As we advance this technology, we remain vigilant about ethical considerations---addressing potential biases in species representation and mitigating risks of misuse, such as tracking endangered wildlife. We're committed to responsibly deploying these tools to foster a richer understanding of the communication systems of our fellow species and to strengthen conservation efforts.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">To learn more, see the preprint in arXiv here or check out our demo page.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Read in Cubox</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+    </div>
+
+    <!-- Translation Tooltip HTML -->
+    <div class="translation-tooltip" id="translationTooltip" style="display: none; position: fixed; max-width: 400px; background-color: rgba(255, 255, 255, 0.98); border: 2px solid #5a3e2b; border-radius: 8px; padding: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 1000; font-family: 'Microsoft YaHei', sans-serif;">
+        <div class="tooltip-translation" style="color: #5a3e2b; font-size: 1rem; font-weight: 500; line-height: 1.6;">翻译中...</div>
+    </div>
+    <!-- Translation Script -->
+    <script>
+        // Article Translation Features
+        // Features: Click-to-translate near cursor
+        
+        // Global variables
+        let selectedParagraph = null;
+        
+        // Translation API (using free MyMemory API)
+        const TRANSLATION_API = 'https://api.mymemory.translated.net/get';
+        
+        // DOM elements
+        let translationTooltip;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            translationTooltip = document.getElementById('translationTooltip');
+            
+            // Add click listener to close tooltip when clicking outside
+            document.addEventListener('click', function(e) {
+                // Check if click is outside tooltip and not on a selectable paragraph
+                if (translationTooltip && 
+                    !translationTooltip.contains(e.target) && 
+                    !e.target.classList.contains('selectable')) {
+                    hideTranslation();
+                }
+            });
+            
+            // Add selectable class to all English text paragraphs in articles
+            const englishParagraphs = document.querySelectorAll('.english-text');
+            englishParagraphs.forEach(paragraph => {
+                // Only make English text selectable
+                if (paragraph.textContent.trim()) {
+                    paragraph.classList.add('selectable');
+                    
+                    // Add click listener for translation
+                    paragraph.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Prevent document click from firing
+                        handleParagraphClick(this, e);
+                    });
+                }
+            });
+        });
+        
+        // Handle paragraph click for translation
+        function handleParagraphClick(element, event) {
+            // Remove previous selection
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+            }
+            
+            // Mark as selected
+            element.classList.add('selected');
+            selectedParagraph = element;
+            
+            // Get the text to translate
+            const textToTranslate = element.textContent;
+            
+            // Position tooltip near the click
+            positionTooltip(event);
+            
+            // Show tooltip with loading state
+            showTranslation(textToTranslate);
+            
+            // Fetch translation
+            translateText(textToTranslate);
+        }
+        
+        // Position tooltip near cursor but ensure it stays on screen
+        function positionTooltip(event) {
+            const tooltip = translationTooltip;
+            const offset = 15; // Offset from cursor
+            
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Initial position near cursor
+            let left = event.pageX + offset;
+            let top = event.pageY + offset;
+            
+            // Show tooltip temporarily to get its dimensions
+            tooltip.style.display = 'block';
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+            
+            // Get tooltip dimensions
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const tooltipWidth = tooltipRect.width;
+            const tooltipHeight = tooltipRect.height;
+            
+            // Adjust if tooltip goes off right edge
+            if (event.clientX + tooltipWidth + offset > viewportWidth) {
+                left = event.pageX - tooltipWidth - offset;
+            }
+            
+            // Adjust if tooltip goes off bottom edge
+            if (event.clientY + tooltipHeight + offset > viewportHeight) {
+                top = event.pageY - tooltipHeight - offset;
+            }
+            
+            // Ensure tooltip doesn't go off left or top edges
+            if (left < 10) left = 10;
+            if (top < 80) top = 80; // Account for top nav
+            
+            // Set final position
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+        
+        // Show translation tooltip
+        function showTranslation(originalText) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Show loading state
+            translationDiv.textContent = '翻译中...';
+            translationDiv.style.color = '#999';
+            
+            // Show tooltip
+            translationTooltip.style.display = 'block';
+        }
+        
+        // Hide translation tooltip
+        function hideTranslation() {
+            translationTooltip.style.display = 'none';
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+                selectedParagraph = null;
+            }
+        }
+        
+        // Translate text using free API
+        async function translateText(text) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Limit text length for API (MyMemory has a 500 character limit)
+            const textToTranslate = text.length > 500 ? text.substring(0, 500) : text;
+            
+            // If text is too long, split it into chunks
+            const maxChunkLength = 500; // MyMemory API limit
+            
+            if (text.length <= maxChunkLength) {
+                // Short text - translate directly
+                try {
+                    const url = `${TRANSLATION_API}?q=${encodeURIComponent(text)}&langpair=en|zh-CN`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    if (data.responseStatus === 200 && data.responseData) {
+                        const translation = data.responseData.translatedText;
+                        translationDiv.textContent = translation;
+                        translationDiv.style.color = '#5a3e2b';
+                    } else {
+                        translationDiv.textContent = '翻译失败,请稍后重试';
+                        translationDiv.style.color = '#d9534f';
+                    }
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            } else {
+                // Long text - split into chunks
+                try {
+                    // Split text into chunks of maxChunkLength, trying to break at sentence boundaries
+                    const chunks = [];
+                    let currentChunk = '';
+                    
+                    // First, try to split by sentence endings
+                    const sentences = text.match(/[^.!?。！？]+[.!?。！？]*/g) || [text];
+                    
+                    for (const sentence of sentences) {
+                        if ((currentChunk + sentence).length <= maxChunkLength) {
+                            currentChunk += sentence;
+                        } else {
+                            if (currentChunk) {
+                                chunks.push(currentChunk);
+                            }
+                            // If single sentence is too long, force split by maxChunkLength
+                            if (sentence.length > maxChunkLength) {
+                                for (let i = 0; i < sentence.length; i += maxChunkLength) {
+                                    chunks.push(sentence.substring(i, i + maxChunkLength));
+                                }
+                                currentChunk = '';
+                            } else {
+                                currentChunk = sentence;
+                            }
+                        }
+                    }
+                    
+                    if (currentChunk) {
+                        chunks.push(currentChunk);
+                    }
+                    
+                    // Translate each chunk
+                    let fullTranslation = '';
+                    for (let i = 0; i < chunks.length; i++) {
+                        const chunk = chunks[i];
+                        const url = `${TRANSLATION_API}?q=${encodeURIComponent(chunk)}&langpair=en|zh-CN`;
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        
+                        if (data.responseStatus === 200 && data.responseData) {
+                            fullTranslation += data.responseData.translatedText;
+                            // Update display with progress
+                            translationDiv.textContent = fullTranslation + ' [翻译中...]';
+                        } else {
+                            fullTranslation += '[翻译失败]';
+                        }
+                        
+                        // Add small delay to avoid rate limiting
+                        if (i < chunks.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                        }
+                    }
+                    
+                    translationDiv.textContent = fullTranslation;
+                    translationDiv.style.color = '#5a3e2b';
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            }
+        }
+        
+        // Add CSS for selected state
+        const style = document.createElement('style');
+        style.textContent = `
+            .selectable {
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            
+            .selectable:hover {
+                background-color: rgba(212, 167, 106, 0.2);
+            }
+            
+            .selectable.selected {
+                background-color: rgba(212, 167, 106, 0.4);
+            }
+            
+            .translation-tooltip {
+                animation: fadeIn 0.2s ease;
+            }
+            
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    </body>
+</html>

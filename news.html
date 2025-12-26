@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI新闻 - English Novel Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #f8f4e9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: block; /* Override the flex layout from styles.css */
+        }
+        
+        /* Tags Header */
+        .tags-header {
+            background-color: #f8f5f2;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: center; /* Center the tags */
+        }
+        
+        .tags-header-content {
+            margin-bottom: 15px;
+        }
+        
+        .tags-header-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            gap: 20px;
+        }
+        
+        .tags-header h2 {
+            margin: 0;
+            color: #5a3e2b;
+            font-size: 1.3rem;
+        }
+        
+        .clear-filters-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .clear-filters-btn:hover {
+            background-color: #c9302c;
+        }
+        
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center; /* Center the tags */
+        }
+        
+        .tag-btn {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            padding: 4px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Microsoft YaHei', sans-serif;
+            text-align: center;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        
+        .tag-btn:hover {
+            background-color: #e9ecef;
+            border-color: #d4a76a;
+            color: #5a3e2b;
+        }
+        
+        .tag-btn.active {
+            background-color: rgba(212, 167, 106, 0.2);
+            border-color: #d4a76a;
+            color: #5a3e2b;
+            font-weight: bold;
+        }
+        
+        .result-count {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+        
+        .webnovel-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+            word-wrap: break-word;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        /* Ensure proper main content area */
+        .main-content {
+            width: 100%;
+            margin-left: 0 !important;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+        
+        .webnovel-article {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .webnovel-article:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .webnovel-title {
+            margin-bottom: 15px;
+        }
+        
+        .webnovel-title-link {
+            color: #5a3e2b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            font-weight: bold;
+            font-family: 'Microsoft YaHei', sans-serif;
+            word-wrap: break-word;
+            display: block;
+            line-height: 1.4;
+            text-align: left; /* Left align the title links */
+        }
+        
+        .webnovel-title-link:hover {
+            color: #d4a76a;
+        }
+        
+        .webnovel-description {
+            color: #666;
+            line-height: 1.6;
+            margin: 15px 0;
+            font-size: 1rem;
+            text-align: left;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .webnovel-source {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            text-align: left;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .webnovel-date {
+            color: #aaa;
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+            text-align: left;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            font-family: 'Microsoft YaHei', sans-serif;
+        }
+        
+        .article-tag {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #dee2e6;
+            display: inline-block;
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        
+        .pagination-btn {
+            background-color: #5a3e2b;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+        
+        .pagination-btn:hover {
+            background-color: #7a5c42;
+        }
+        
+        .pagination-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-input {
+            padding: 8px 12px;
+            border: 1px solid #5a3e2b;
+            border-radius: 4px;
+            width: 60px;
+            text-align: center;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="novels.html">小说</a></li>
+            <li><a href="webnovels.html">网文</a></li>
+            <li><a href="news.html" class="active">新闻</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content" style="width: 100%; margin-left: 0; margin-top: 10px;">
+            <!-- Page Header -->
+            <header>
+                <h1>Ai最新资讯</h1>
+            </header>
+            
+            <!-- Tags Header -->
+            <div class="tags-header">
+                <div class="tags-header-content">
+                    <div class="tags-header-top">
+                        <h2>News Tags <span class="result-count" id="resultCount"></span></h2>
+                        <button class="clear-filters-btn" onclick="clearAllFilters()">Clear Filters</button>
+                    </div>
+                    <div class="tags-container">
+                        <button class="tag-btn active" data-tag="all">All</button>
+                        <button class="tag-btn" data-tag="AI">AI</button>
+                        <button class="tag-btn" data-tag="technology">Technology</button>
+                        <button class="tag-btn" data-tag="business">Business</button>
+                        <button class="tag-btn" data-tag="ethics">Ethics</button>
+                        <button class="tag-btn" data-tag="chatbot">Chatbot</button>
+                        <button class="tag-btn" data-tag="nvidia">Nvidia</button>
+                        <button class="tag-btn" data-tag="elon-musk">Elon Musk</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="webnovel-content">
+                <!-- News Articles -->
+                <div class="webnovel-article" data-tags="AI ethics technology">
+                    <div class="webnovel-title">
+                        <a href="https://www.technologyreview.com/2025/12/23/1130396/how-i-learned-to-stop-worrying-and-love-ai-slop/" target="_blank" class="webnovel-title-link">
+                            How I learned to stop worrying and love AI slop | MIT Technology Review
+                            <div style="font-size: 0.9em; color: #d4a76a; margin-top: 5px;">我如何学会停止担忧并爱上AI垃圾内容</div>
+                        </a>
+                    </div>
+                    <div class="webnovel-source">MIT Technology Review</div>
+                    <div class="webnovel-date">2025-12-23</div>
+                    <div class="webnovel-description">
+                        The internet is being flooded with AI-generated content. But what happens when the machines start writing the internet? 
+                        <br><span style="color: #d4a76a;">互联网正被AI生成的内容淹没。但当机器开始编写互联网时会发生什么？</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="article-tag">AI</span>
+                        <span class="article-tag">Ethics</span>
+                        <span class="article-tag">Technology</span>
+                    </div>
+                </div>
+                
+                <div class="webnovel-article" data-tags="chatbot technology">
+                    <div class="webnovel-title">
+                        <a href="https://www.nytimes.com/2025/12/19/technology/why-do-ai-chatbots-use-i.html" target="_blank" class="webnovel-title-link">
+                            Why Do AI Chatbots Say 'I'? The Answer May Shape Our Future - The New York Times
+                            <div style="font-size: 0.9em; color: #d4a76a; margin-top: 5px;">为什么AI聊天机器人说"我"？答案可能塑造我们的未来</div>
+                        </a>
+                    </div>
+                    <div class="webnovel-source">The New York Times</div>
+                    <div class="webnovel-date">2025-12-19</div>
+                    <div class="webnovel-description">
+                        When chatbots say 'I,' they're mimicking human language patterns. But the implications run deeper than you might think.
+                        <br><span style="color: #d4a76a;">当聊天机器人说"我"时，它们在模仿人类语言模式。但其影响可能比你想象的更深。</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="article-tag">Chatbot</span>
+                        <span class="article-tag">Technology</span>
+                    </div>
+                </div>
+                
+                <div class="webnovel-article" data-tags="elon-musk AI business">
+                    <div class="webnovel-title">
+                        <a href="https://www.yahoo.com/news/articles/elon-musk-says-hes-having-173017488.html" target="_blank" class="webnovel-title-link">
+                            Elon Musk Says He's Been Having 'AI Nightmares' Lately
+                            <div style="font-size: 0.9em; color: #d4a76a; margin-top: 5px;">埃隆·马斯克称最近一直在做"AI噩梦"</div>
+                        </a>
+                    </div>
+                    <div class="webnovel-source">Yahoo News</div>
+                    <div class="webnovel-date">2025-12-24</div>
+                    <div class="webnovel-description">
+                            Elon Musk shares his concerns about artificial intelligence development, calling for more responsible approaches to AI safety.
+                            <br><span style="color: #d4a76a;">埃隆·马斯克分享了他对人工智能发展的担忧，呼吁对AI安全采取更负责任的方法。</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="article-tag">Elon Musk</span>
+                        <span class="article-tag">AI</span>
+                        <span class="article-tag">Business</span>
+                    </div>
+                </div>
+                
+                <div class="webnovel-article" data-tags="nvidia business technology">
+                    <div class="webnovel-title">
+                        <a href="https://www.cnbc.com/2025/12/24/nvidia-buying-ai-chip-startup-groq-for-about-20-billion-biggest-deal.html" target="_blank" class="webnovel-title-link">
+                            Nvidia buying AI chip startup Groq for about $20 billion in biggest deal yet
+                            <div style="font-size: 0.9em; color: #d4a76a; margin-top: 5px;">英伟达以约200亿美元收购AI芯片初创公司Groq，创下最大交易记录</div>
+                        </a>
+                    </div>
+                    <div class="webnovel-source">CNBC</div>
+                    <div class="webnovel-date">2025-12-24</div>
+                    <div class="webnovel-description">
+                        The acquisition represents Nvidia's biggest deal yet as it seeks to strengthen its position in the AI chip market.
+                        <br><span style="color: #d4a76a;">此次收购代表了英伟达迄今为止最大的交易，旨在加强其在AI芯片市场的地位。</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="article-tag">Nvidia</span>
+                        <span class="article-tag">Business</span>
+                        <span class="article-tag">Technology</span>
+                    </div>
+                </div>
+                
+                <div class="webnovel-article" data-tags="AI education technology">
+                    <div class="webnovel-title">
+                        <a href="https://blog.google/technology/ai/google-ai-news-recap-2025/" target="_blank" class="webnovel-title-link">
+                            Can teacher wisdom steer the AI transition in education? - Fast Company
+                            <div style="font-size: 0.9em; color: #d4a76a; margin-top: 5px;">教师的智慧能否引导教育中的AI转型？</div>
+                        </a>
+                    </div>
+                    <div class="webnovel-source">Fast Company</div>
+                    <div class="webnovel-date">2025-12-24</div>
+                    <div class="webnovel-description">
+                        Exploring how educators can guide the integration of AI in classrooms while maintaining human-centered learning.
+                        <br><span style="color: #d4a76a;">探讨教育者如何指导AI在课堂中的整合，同时保持以人为本的学习。</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="article-tag">AI</span>
+                        <span class="article-tag">Education</span>
+                        <span class="article-tag">Technology</span>
+                    </div>
+                </div>
+                
+                <div class="webnovel-article" data-tags="AI technology">
+                    <div class="webnovel-title">
+                        <a href="https://blog.google/technology/ai/google-ai-news-recap-2025/" target="_blank" class="webnovel-title-link">
+                            Google AI news recap 2025 - Google AI Blog
+                            <div style="font-size: 0.9em; color: #d4a76a; margin-top: 5px;">谷歌AI新闻回顾2025</div>
+                        </a>
+                    </div>
+                    <div class="webnovel-source">Google AI Blog</div>
+                    <div class="webnovel-date">2025-12-25</div>
+                    <div class="webnovel-description">
+                        A comprehensive review of Google's AI developments and achievements throughout 2025.
+                        <br><span style="color: #d4a76a;">全面回顾谷歌在2025年期间的AI发展和成就。</span>
+                    </div>
+                    <div class="article-tags">
+                        <span class="article-tag">AI</span>
+                        <span class="article-tag">Technology</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn" id="prevBtn" onclick="goToPrevPage()" disabled>上一页</button>
+                <input type="number" id="pageInput" class="page-input" value="1" min="1" max="1" onchange="goToPage()">
+                <span>/ 1 页</span>
+                <button class="pagination-btn" id="nextBtn" onclick="goToNextPage()" disabled>下一页</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Tag filtering functionality
+        let selectedTags = new Set(['all']);
+        const ARTICLES_PER_PAGE = 10;
+        let currentPage = 1;
+        let filteredArticles = [];
+        let allArticles = [];
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all articles
+            allArticles = Array.from(document.querySelectorAll('.webnovel-article'));
+            filteredArticles = allArticles;
+            
+            // Add event listeners to tag buttons
+            const tagButtons = document.querySelectorAll('.tag-btn');
+            tagButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const tag = this.getAttribute('data-tag');
+                    
+                    if (tag === 'all') {
+                        // If 'all' is clicked, clear all other tags
+                        selectedTags.clear();
+                        selectedTags.add('all');
+                        
+                        // Update UI
+                        tagButtons.forEach(btn => {
+                            if (btn.getAttribute('data-tag') === 'all') {
+                                btn.classList.add('active');
+                            } else {
+                                btn.classList.remove('active');
+                            }
+                        });
+                    } else {
+                        // Remove 'all' tag if it exists
+                        if (selectedTags.has('all')) {
+                            selectedTags.delete('all');
+                        }
+                        
+                        // Toggle the clicked tag
+                        if (selectedTags.has(tag)) {
+                            selectedTags.delete(tag);
+                        } else {
+                            selectedTags.add(tag);
+                        }
+                        
+                        // Update 'all' button state
+                        document.querySelector('.tag-btn[data-tag="all"]').classList.remove('active');
+                    }
+                    
+                    // Update UI for clicked button
+                    if (tag !== 'all') {
+                        this.classList.toggle('active', selectedTags.has(tag));
+                    }
+                    
+                    // Update all buttons' active states
+                    tagButtons.forEach(btn => {
+                        const btnTag = btn.getAttribute('data-tag');
+                        if (btnTag !== 'all') {
+                            btn.classList.toggle('active', selectedTags.has(btnTag));
+                        }
+                    });
+                    
+                    // Filter articles
+                    filterArticles();
+                });
+            });
+            
+            // Initial update
+            updateResultCount();
+        });
+
+        function filterArticles() {
+            if (selectedTags.has('all')) {
+                filteredArticles = allArticles;
+            } else {
+                // Show articles that match ALL of the selected tags (AND logic)
+                filteredArticles = allArticles.filter(article => {
+                    const articleTags = article.getAttribute('data-tags');
+                    if (!articleTags) return false;
+                    
+                    const tags = articleTags.split(' ');
+                    // Check if article has ALL of the selected tags
+                    return Array.from(selectedTags).every(selectedTag => tags.includes(selectedTag));
+                });
+            }
+            
+            currentPage = 1;
+            updatePagination();
+            updateResultCount();
+        }
+
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+            const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+            const endIndex = startIndex + ARTICLES_PER_PAGE;
+            
+            // Hide all articles first
+            allArticles.forEach(article => article.style.display = 'none');
+            
+            // Show only current page articles
+            filteredArticles.slice(startIndex, endIndex).forEach(article => {
+                article.style.display = 'block';
+            });
+            
+            // Update pagination controls
+            document.getElementById('prevBtn').disabled = currentPage === 1;
+            document.getElementById('nextBtn').disabled = currentPage === totalPages || totalPages === 0;
+            document.getElementById('pageInput').value = currentPage;
+            document.getElementById('pageInput').max = totalPages || 1;
+        }
+
+        function updateResultCount() {
+            const count = filteredArticles.length;
+            document.getElementById('resultCount').textContent = `(${count})`;
+        }
+
+        function goToPrevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                updatePagination();
+            }
+        }
+
+        function goToNextPage() {
+            const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+            if (currentPage < totalPages) {
+                currentPage++;
+                updatePagination();
+            }
+        }
+
+        function goToPage() {
+            const totalPages = Math.ceil(filteredArticles.length / ARTICLES_PER_PAGE);
+            const pageInput = document.getElementById('pageInput');
+            let page = parseInt(pageInput.value);
+            
+            if (isNaN(page) || page < 1) page = 1;
+            if (totalPages > 0 && page > totalPages) page = totalPages;
+            
+            pageInput.value = page;
+            currentPage = page;
+            updatePagination();
+        }
+
+        function clearAllFilters() {
+            // Reset to 'all' selected
+            selectedTags.clear();
+            selectedTags.add('all');
+            
+            // Update UI
+            document.querySelectorAll('.tag-btn').forEach(btn => {
+                if (btn.getAttribute('data-tag') === 'all') {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Reset filter
+            filterArticles();
+        }
+    </script>
+</body>
+</html>

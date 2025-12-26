@@ -1,0 +1,3010 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网文 - English Novel Reader</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional styles for webnovels - fix for layout issues */
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Fix container layout */
+        .container {
+            display: block;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Fix main content area */
+        .main-content {
+            width: 100%;
+            margin-left: 0 !important;
+            padding: 30px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        /* Fix for overlapping content */
+        .webnovel-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+            overflow-x: hidden;
+            word-wrap: break-word;
+            clear: both;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        /* Ensure articles are properly spaced and not overlapping */
+        .webnovel-article {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            clear: both;
+            display: block;
+            overflow: hidden;
+        }
+        
+        .webnovel-article:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        /* Fix for article title */
+        .webnovel-title {
+            margin-bottom: 15px;
+            clear: both;
+            display: block;
+        }
+        
+        /* Ensure title links wrap correctly */
+        .webnovel-title-link {
+            color: #5a3e2b;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            font-weight: bold;
+            font-family: Georgia, serif;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            display: block;
+            line-height: 1.4;
+        }
+        
+        .webnovel-title-link:hover {
+            color: #17a2b8;
+        }
+        
+        /* Tags Sidebar - Ensure it's properly formatted */
+        .tags-sidebar {
+            display: flex;
+            flex-direction: row;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            clear: both;
+        }
+        
+        .tag-btn {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            padding: 4px 12px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+            font-family: 'Microsoft YaHei', sans-serif;
+            text-align: center;
+            display: inline-block;
+            width: auto;
+            min-width: auto;
+            white-space: nowrap;
+        }
+        
+        .tag-btn:hover {
+            background-color: #e9ecef;
+            border-color: #d4a76a;
+            color: #5a3e2b;
+        }
+        
+        .tag-btn.active {
+            background-color: rgba(212, 167, 106, 0.2);
+            border-color: #d4a76a;
+            color: #5a3e2b;
+            font-weight: bold;
+        }
+        
+        /* Article Tags - Ensure proper spacing */
+        .article-tags {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            clear: both;
+        }
+        
+        .article-tag {
+            background-color: #f8f9fa;
+            color: #6c757d;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid #dee2e6;
+            display: inline-block;
+        }
+        
+        /* Pagination Styles */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            padding: 20px 0;
+        }
+        
+        .pagination-btn {
+            background-color: #5a3e2b;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+        }
+        
+        .pagination-btn:hover {
+            background-color: #7a5c42;
+        }
+        
+        .pagination-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .page-input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 15px;
+            gap: 8px;
+        }
+        
+        .page-input {
+            width: 60px;
+            padding: 5px 8px;
+            border: 1px solid #d4a76a;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="novels.html">小说</a></li>
+            <li><a href="webnovels.html" class="active">网文</a></li>
+            <li><a href="about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="container">
+        <!-- Main Content -->
+        <div class="main-content" style="width: 100%; margin-left: 0;">
+            <header>
+                <h1 id="novelTitle">Ai洞察库</h1>
+                <p id="novelAuthor">精选AI相关文章</p>
+                <!-- Webnovel Tags - Moved from sidebar -->
+                <div class="tags-sidebar">
+                <button class="tag-btn active" data-tag="all">全部</button>
+                <button class="tag-btn" data-tag="latest">最新</button>
+                <button class="tag-btn" data-tag="ai">ai</button>
+<button class="tag-btn" data-tag="amazon">amazon</button>
+<button class="tag-btn" data-tag="openai">openai</button>
+<button class="tag-btn" data-tag="google">google</button>
+<button class="tag-btn" data-tag="meta">meta</button>
+<button class="tag-btn" data-tag="apple">apple</button>
+<button class="tag-btn" data-tag="microsoft">microsoft</button>
+<button class="tag-btn" data-tag="deepmind">deepmind</button>
+<button class="tag-btn" data-tag="anthropic">anthropic</button>
+<button class="tag-btn" data-tag="tesla">tesla</button>
+<button class="tag-btn" data-tag="youtube">youtube</button>
+                </div>
+            </header>
+            
+            <main>
+                <div class="webnovel-content" id="webnovelContent">
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft deepmind anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/10_ai_predictions_for_2026md.html" class="webnovel-title-link">
+                                10 AI Predictions For 2026
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/48_hours_without_ai_-_the_new_york_timmd.html" class="webnovel-title-link">
+                                48 Hours Without Ai - The New York Timmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/5_reasons_why_expert_agents_are_better_than_generic_ai.html" class="webnovel-title-link">
+                                5 Reasons Why Expert Agents Are Better than Generic AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/_new_ai_enables_people_without_cad_training_to_create_3d_models_from_hand_sketches.html" class="webnovel-title-link">
+                                ✍️ New AI enables people without CAD training to create 3D models from hand sketches
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/_new_ai_enables_people_without_cad_tramd.html" class="webnovel-title-link">
+                                 New Ai Enables People Without Cad Tramd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/a_history_professor_says_ai_didnt_break_college_---_it_exposed_how_broken_it_already_was.html" class="webnovel-title-link">
+                                A history professor says AI didn't break college --- it exposed how broken it already was
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/actor_joseph_gordon-levitt_wonders_why_amd.html" class="webnovel-title-link">
+                                Actor Joseph Gordon-Levitt wonders why AI companies don't have to 'follow any laws'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google meta tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/after_eliminating_25_of_its_staff_the_irs_is_turning_to_ai_agents_it_would_be_negligence_not_to_use_ai_tools.html" class="webnovel-title-link">
+                                After Eliminating 25% Of Its Staff, The IRS Is Turning To AI Agents. 'It Would Be Negligence' Not To Use AI Tools
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/after_eliminating_25_of_its_staff_the_md.html" class="webnovel-title-link">
+                                After Eliminating 25 Of Its Staff The Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_act___shaping_europes_digital_futuremd.html" class="webnovel-title-link">
+                                Ai Act   Shaping Europes Digital Futuremd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_business_strategy_ai_in_action_deep_dives_human-ai_relationships_retail__logistics_ai_world_of_work.html" class="webnovel-title-link">
+                                AI Business Strategy AI in Action Deep Dives Human-AI Relationships Retail \& Logistics AI World of Work
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_code_you_can_trust_-_fast_companymd.html" class="webnovel-title-link">
+                                Ai Code You Can Trust - Fast Companymd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google microsoft anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_coding_is_now_everywhere_but_not_evemd.html" class="webnovel-title-link">
+                                AI coding is now everywhere. But not everyone is convinced.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_could_already_replace_nearly_12_of_jmd.html" class="webnovel-title-link">
+                                Ai Could Already Replace Nearly 12 Of Jmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_could_already_replace_nearly_12_of_jobs_-_mit.html" class="webnovel-title-link">
+                                AI could already replace nearly 12% of jobs - MIT
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_could_increase_divide_between_rich_and_poor_states_un_report_warns.html" class="webnovel-title-link">
+                                AI could increase divide between rich and poor states, UN report warns
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_data_center_boom_mints_billionaires_amd.html" class="webnovel-title-link">
+                                Ai Data Center Boom Mints Billionaires Amd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_data_centers_are_hiking_electricity_costs_in_some_states_as_expert_warns_theres_so_much_more_to_come.html" class="webnovel-title-link">
+                                AI Data Centers Are Hiking Electricity Costs in Some States as Expert Warns 'There's So Much More to Come'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google meta apple microsoft tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_data_centres_could_have_a_carbon_footprint_that_matches_small_european_country_new_study_finds.html" class="webnovel-title-link">
+                                AI data centres could have a carbon footprint that matches small European country, new study finds
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_didnt_break_college__it_exposed_a_bmd.html" class="webnovel-title-link">
+                                Ai Didnt Break College  It Exposed A Bmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google apple microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_finds_its_way_into_apples_top_apps_of_the_year.html" class="webnovel-title-link">
+                                AI finds its way into Apple's top apps of the year
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_finds_its_way_into_apples_top_apps_omd.html" class="webnovel-title-link">
+                                Ai Finds Its Way Into Apples Top Apps Omd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_hasnt_cratered_jobs_new_yale_study_md.html" class="webnovel-title-link">
+                                Ai Hasnt Cratered Jobs New Yale Study Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_hasnt_cratered_jobs_new_yale_study_says.html" class="webnovel-title-link">
+                                AI Hasn't Cratered Jobs, New Yale Study Says
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon apple">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_helps_drive_record_118_billion_in_black_friday_online_spending.html" class="webnovel-title-link">
+                                AI helps drive record $11.8 billion in Black Friday online spending
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">apple</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_helps_drive_record_118_billion_in_bmd.html" class="webnovel-title-link">
+                                Ai Helps Drive Record 118 Billion In Bmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_a_bubble_maybe_thats_ok.html" class="webnovel-title-link">
+                                A.I. Is a Bubble. Maybe That's OK.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_a_tool_not_a_soul.html" class="webnovel-title-link">
+                                Ai Is A Tool Not A Soul
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_beating_doctors_at_empathy_--_because_weve_turned_doctors_into_robots.html" class="webnovel-title-link">
+                                AI is beating doctors at empathy -- because we've turned doctors into robots
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_beating_doctors_at_empathy__becaumd.html" class="webnovel-title-link">
+                                Ai Is Beating Doctors At Empathy  Becaumd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_destroying_the_university_and_learning_itself.html" class="webnovel-title-link">
+                                AI is Destroying the University and Learning Itself
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_making_its_way_into_religion___themd.html" class="webnovel-title-link">
+                                Ai Is Making Its Way Into Religion   Themd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_is_screening_for_tb_is_it_doing_a_gomd.html" class="webnovel-title-link">
+                                Ai Is Screening For Tb Is It Doing A Gomd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_isnt_replacing_jobs_ai_spending_is_md.html" class="webnovel-title-link">
+                                Ai Isnt Replacing Jobs Ai Spending Is Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_math_genius_delivers_100_accurate_remd.html" class="webnovel-title-link">
+                                Ai Math Genius Delivers 100 Accurate Remd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft deepmind">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_math_genius_delivers_100_accurate_results.html" class="webnovel-title-link">
+                                AI math genius delivers 100% accurate results
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai microsoft anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_may_be_scoring_your_college_essay_welcome_to_the_new_era_of_admissions.html" class="webnovel-title-link">
+                                AI may be scoring your college essay. Welcome to the new era of admissions
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ai_pioneer_fei-fei_li_ushers_in_the_next_frontier_of_artificial_intelligence.html" class="webnovel-title-link">
+                                AI Pioneer Fei-Fei Li Ushers In The Next Frontier Of Artificial Intelligence
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ais_dial-up_eramd.html" class="webnovel-title-link">
+                                Ais Dial-Up Eramd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ais_future_runs_on_water_-_fast_companymd.html" class="webnovel-title-link">
+                                Ais Future Runs On Water - Fast Companymd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/amazon_in_talks_to_invest_about_10_billmd.html" class="webnovel-title-link">
+                                Amazon in talks to invest about $10 billion in OpenAI, source says
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon">
+                        <h2 class="webnovel-title">
+                            <a href="articles/amazon_releases_ai_agents_it_says_can_work_for_days_at_a_time.html" class="webnovel-title-link">
+                                Amazon Releases AI Agents It Says Can Work for Days at a Time
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/amazon_sues_perplexity_over_covert_ai_agent_access_to_marketplace.html" class="webnovel-title-link">
+                                Amazon sues Perplexity over covert AI agent access to marketplace
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/amd_ceo_lisa_su_says_concerns_about_an_ai_bubble_are_overblown.html" class="webnovel-title-link">
+                                AMD CEO Lisa Su Says Concerns About an AI Bubble Are Overblown
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/amd_ceo_lisa_su_says_concerns_about_an_amd.html" class="webnovel-title-link">
+                                Amd Ceo Lisa Su Says Concerns About An Amd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/an_ai-generated_song_topped_billboards_md.html" class="webnovel-title-link">
+                                An Ai-Generated Song Topped Billboards Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google meta apple microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/apple_ai_head_john_giannandrea_to_leave_after_chaotic_stint.html" class="webnovel-title-link">
+                                Apple AI Head John Giannandrea to Leave After Chaotic Stint
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/apple_artificial_intelligence_head_to_lemd.html" class="webnovel-title-link">
+                                Apple Artificial Intelligence Head To Lemd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/are_ai_chatbots_changing_how_we_shop____md.html" class="webnovel-title-link">
+                                Are Ai Chatbots Changing How We Shop    Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/are_you_listening_to_bots__survey_shows_md.html" class="webnovel-title-link">
+                                Are You Listening To Bots  Survey Shows Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/are_you_listening_to_bots_survey_shows_ai_music_is_virtually_undetectable.html" class="webnovel-title-link">
+                                Are you listening to bots? Survey shows AI music is virtually undetectable
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/as_ai_wipes_jobs_google_ceo_sundar_pichai_says_its_up_to_everyday_people_to_adapt_accordingly_we_will_have_to_work_through_societal_disruption.html" class="webnovel-title-link">
+                                As AI wipes jobs, Google CEO Sundar Pichai says it's up to everyday people to adapt accordingly: 'We will have to work through societal disruption'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/as_ai_wipes_jobs_google_ceo_sundar_pichmd.html" class="webnovel-title-link">
+                                As Ai Wipes Jobs Google Ceo Sundar Pichmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/behind_googles_55bn_funding_in_germanmd.html" class="webnovel-title-link">
+                                Behind Googles 55Bn Funding In Germanmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/behind_googles_55bn_funding_in_germany_ai_data_centres.html" class="webnovel-title-link">
+                                Behind Google's €5.5bn Funding in Germany AI Data Centres
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google deepmind anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/bezos_62b_ai_venture_quietly_acquires_agentic_computing_startup.html" class="webnovel-title-link">
+                                Bezos' $6.2B AI Venture Quietly Acquires Agentic Computing Startup
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/bezos_62b_ai_venture_quietly_acquiresmd.html" class="webnovel-title-link">
+                                Bezos 62B Ai Venture Quietly Acquiresmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/big_techs_spend_little_earn_lots_formd.html" class="webnovel-title-link">
+                                Big Techs Spend Little Earn Lots Formd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon meta microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/big_techs_spend_little_earn_lots_formula_is_threatened_by_ai.html" class="webnovel-title-link">
+                                Big Tech's 'Spend Little, Earn Lots' Formula Is Threatened By AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">meta</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/can_ai_reduce_the_prison_population.html" class="webnovel-title-link">
+                                Can AI Reduce the Prison Population?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/can_ai_reduce_the_prison_population____cmd.html" class="webnovel-title-link">
+                                Can Ai Reduce The Prison Population    Cmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/can_artificial_intelligence_really_help_md.html" class="webnovel-title-link">
+                                Can Artificial Intelligence Really Help Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/can_artificial_intelligence_really_help_us_talk_to_the_animals.html" class="webnovel-title-link">
+                                Can artificial intelligence really help us talk to the animals?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/can_schools_survive_in_the_age_of_ai_md.html" class="webnovel-title-link">
+                                Can Schools Survive In The Age Of Ai Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/ceos_are_making_the_business_case_for_ai---and_dispelling_talk_of_a_bubble.html" class="webnovel-title-link">
+                                CEOs are making the business case for AI---and dispelling talk of a bubble
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/chatgpt_and_openai_still_have_a_winning_md.html" class="webnovel-title-link">
+                                Chatgpt And Openai Still Have A Winning Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/chatgpt_wants_to_join_your_group_chats.html" class="webnovel-title-link">
+                                ChatGPT wants to join your group chats
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/chatgpt_wants_to_join_your_group_chats_-md.html" class="webnovel-title-link">
+                                Chatgpt Wants To Join Your Group Chats -Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/cloudflare_has_blocked_416_billion_ai_bot_requests_since_july_1.html" class="webnovel-title-link">
+                                Cloudflare Has Blocked 416 Billion AI Bot Requests Since July 1
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/coca-colas_ai_holiday_ads_spark_viewer_md.html" class="webnovel-title-link">
+                                Coca-Colas Ai Holiday Ads Spark Viewer Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai youtube">
+                        <h2 class="webnovel-title">
+                            <a href="articles/coca-colas_new_holiday_ads_went_full_ai_again__fans_call_it_intentional_ragebait.html" class="webnovel-title-link">
+                                Coca-Cola's New Holiday Ads Went Full AI Again \& Fans Call It 'Intentional Ragebait'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">youtube</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/colleges_are_using_ai_tools_to_analyze_amd.html" class="webnovel-title-link">
+                                Colleges Are Using Ai Tools To Analyze Amd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/data_centers_in_space_--_why_data_processing_is_moving_from_the_ground_to_on-orbit.html" class="webnovel-title-link">
+                                Data Centers In Space -- Why Data Processing is Moving from the Ground to On-Orbit
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/data_centers_in_space_-_why_data_processmd.html" class="webnovel-title-link">
+                                Data Centers In Space - Why Data Processmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/digital_future_daily.html" class="webnovel-title-link">
+                                Digital Future Daily
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/dont_expect_ai_to_disrupt_googles_monopoly_on_search.html" class="webnovel-title-link">
+                                Don't Expect AI To Disrupt Google's Monopoly on Search
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/effective_harnesses_for_long-running_agents.html" class="webnovel-title-link">
+                                Effective harnesses for long-running agents
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musk_lists_his_three_most_importantmd.html" class="webnovel-title-link">
+                                Elon Musk Lists His Three Most Importantmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musk_says_ai_research_into_ancient_md.html" class="webnovel-title-link">
+                                Elon Musk Says Ai Research Into Ancient Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musk_says_ai_research_into_ancient_rome_will_rewrite_history.html" class="webnovel-title-link">
+                                Elon Musk says AI research into ancient Rome will 'rewrite history'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musk_says_that_in_10_to_20_years_wmd.html" class="webnovel-title-link">
+                                Elon Musk Says That In 10 To 20 Years Wmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai meta tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musk_says_that_in_10_to_20_years_work_will_be_optional_and_money_will_be_irrelevant_thanks_to_ai_and_robotics.html" class="webnovel-title-link">
+                                Elon Musk says that in 10 to 20 years, work will be optional and money will be irrelevant thanks to AI and robotics
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">meta</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musks_ai_chatbot_grok_ranks_him_as_world_historys_greatest_human_with_genius-level_intellect.html" class="webnovel-title-link">
+                                Elon Musk's AI chatbot Grok ranks him as world history's greatest human with 'genius-level intellect'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/elon_musks_ai_chatbot_grok_ranks_him_asmd.html" class="webnovel-title-link">
+                                Elon Musks Ai Chatbot Grok Ranks Him Asmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/exclusive___inside_microsofts_new_ai_smd.html" class="webnovel-title-link">
+                                Exclusive   Inside Microsofts New Ai Smd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/explore_new_ways_to_plan_and_book_travelmd.html" class="webnovel-title-link">
+                                Explore New Ways To Plan And Book Travelmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fda_offers_staff_agentic_ai_to_support_premarket_reviews_administrative_tasks.html" class="webnovel-title-link">
+                                FDA offers staff 'agentic AI' to support premarket reviews, administrative tasks
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fda_offers_staff_agentic_ai_to_supportmd.html" class="webnovel-title-link">
+                                Fda Offers Staff Agentic Ai To Supportmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fei-fei_li_debuts_world-generating_ai_momd.html" class="webnovel-title-link">
+                                Fei-Fei Li Debuts World-Generating Ai Momd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fei-fei_li_the_godmother_of_ai_got_hmd.html" class="webnovel-title-link">
+                                Fei-Fei Li The Godmother Of Ai Got Hmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fei-fei_li_the_godmother_of_ai_whose_startup_is_now_valued_at_north_of_1_billion_got_her_start_as_a_dry_cleaner.html" class="webnovel-title-link">
+                                Fei-Fei Li, the 'Godmother of AI' whose startup is now valued at north of $1 billion, got her start as a dry cleaner
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fei-fei_li_wins_queen_elizabeth_prize_for_engineering__stanford_hai.html" class="webnovel-title-link">
+                                Fei-Fei Li Wins Queen Elizabeth Prize for Engineering \| Stanford HAI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fei-fei_lis_world_labs_unveils_its_world-generating_ai_model.html" class="webnovel-title-link">
+                                Fei-Fei Li's World Labs unveils its world-generating AI model
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google apple microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/forget_chatbots_this_is_the_ai_technolomd.html" class="webnovel-title-link">
+                                Forget Chatbots. This Is the AI Technology to Watch in 2026
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/fort_smith_mercy_among_first_to_use_ambimd.html" class="webnovel-title-link">
+                                Fort Smith Mercy Among First To Use Ambimd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/from_more_meat_to_less_waste__how_food_cmd.html" class="webnovel-title-link">
+                                From More Meat To Less Waste  How Food Cmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/from_more_meat_to_less_waste_how_food_companies_use_ai.html" class="webnovel-title-link">
+                                From more meat to less waste: How food companies use AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/from_words_to_worlds__spatial_intelligenmd.html" class="webnovel-title-link">
+                                From Words To Worlds  Spatial Intelligenmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/from_words_to_worlds_spatial_intelligence_is_ais_next_frontier.html" class="webnovel-title-link">
+                                From Words to Worlds: Spatial Intelligence is AI's Next Frontier
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/gemini_3_just_scored_100_on_a_critical_md.html" class="webnovel-title-link">
+                                Gemini 3 Just Scored 100 On A Critical Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google meta anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/gemini_3_just_scored_100_on_a_critical_test_all_other_ai_models_fail.html" class="webnovel-title-link">
+                                Gemini 3 Just Scored 100% On A Critical Test All Other AI Models Fail
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google apple">
+                        <h2 class="webnovel-title">
+                            <a href="articles/gemini_has_arrived_in_maps_making_it_more_user-friendly_for_drivers_who_enjoy_a_hands-free_experience.html" class="webnovel-title-link">
+                                Gemini has arrived in Maps, making it more user-friendly for drivers who enjoy a hands-free experience.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/geoffrey_hinton_doesnt_think_ceos_have_md.html" class="webnovel-title-link">
+                                Geoffrey Hinton Doesnt Think Ceos Have Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/god_is_now_just_one_text_away_because_of_ai.html" class="webnovel-title-link">
+                                God is now just one text away because of AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google meta microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/godfather_of_ai_geoffrey_hinton_says_google_is_beginning_to_overtake_openai_my_guess_is_google_will_win.html" class="webnovel-title-link">
+                                'Godfather of AI' Geoffrey Hinton says Google is 'beginning to overtake' OpenAI: 'My guess is Google will win'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/godfather_of_ai_says_google_is_beginnmd.html" class="webnovel-title-link">
+                                Godfather Of Ai Says Google Is Beginnmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_ai_and_learning_forum__ben_gomes_md.html" class="webnovel-title-link">
+                                Google Ai And Learning Forum  Ben Gomes Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google apple">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_and_apple_redefine_ai_trust_as_privacy_becomes_the_new_premium.html" class="webnovel-title-link">
+                                Google and Apple redefine AI trust as privacy becomes the new premium
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_augments_ai_shopping_with_conversmd.html" class="webnovel-title-link">
+                                Google Augments Ai Shopping With Conversmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_discover_is_testing_ai-generated_headlines_and_they_arent_good.html" class="webnovel-title-link">
+                                Google Discover is testing AI-generated headlines and they aren't good
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_discover_is_testing_ai-generated_md.html" class="webnovel-title-link">
+                                Google Discover Is Testing Ai-Generated Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_is_launching_gemini_3_its_most_intelligent_ai_model_yet.html" class="webnovel-title-link">
+                                Google is launching Gemini 3, its 'most intelligent' AI model yet
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_is_launching_gemini_3_its_most_md.html" class="webnovel-title-link">
+                                Google Is Launching Gemini 3 Its Most Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_maps_gets_smarter_with_gemini_ai_md.html" class="webnovel-title-link">
+                                Google Maps Gets Smarter With Gemini Ai Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_maps_releases_new_ai_tools_that_lmd.html" class="webnovel-title-link">
+                                Google Maps Releases New Ai Tools That Lmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google meta deepmind anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_researchers_figure_how_to_get_ai_md.html" class="webnovel-title-link">
+                                Struggling to get AI agents to work? This Google research could help \| Fortune
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">deepmind</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_says_gemini_3_flash_ai_is_as_fast_as_traditional_search.html" class="webnovel-title-link">
+                                Google Says Gemini 3 Flash AI Is as Fast as Traditional Search
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google apple">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_says_it_isnt_using_your_gmail_to_train_ai.html" class="webnovel-title-link">
+                                Google says it isn't using your Gmail to train AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span> <span class="article-tag">apple</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_says_it_isnt_using_your_gmail_tomd.html" class="webnovel-title-link">
+                                Google Says It Isnt Using Your Gmail Tomd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_tells_employees_it_must_double_capacity_every_6_months_to_meet_ai_demand.html" class="webnovel-title-link">
+                                Google tells employees it must double capacity every 6 months to meet AI demand
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_tests_direct_link_to_ai_mode_from_search.html" class="webnovel-title-link">
+                                Google Tests Direct Link To AI Mode From Search
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/google_tests_merging_ai_overviews_with_ai_mode.html" class="webnovel-title-link">
+                                Google tests merging AI Overviews with AI Mode
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/googles_ai_overviews_are_killing_search_a_new_study_shows_the_best_way_to_protect_your_traffic.html" class="webnovel-title-link">
+                                Google's AI Overviews Are Killing Search. A New Study Shows the Best Way to Protect Your Traffic
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/googles_ai_overviews_are_killing_searchmd.html" class="webnovel-title-link">
+                                Googles Ai Overviews Are Killing Searchmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/googles_sundar_pichai_says_ai_could_do_his_job_one_day.html" class="webnovel-title-link">
+                                Google's Sundar Pichai says AI could do his job one day
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/googles_sundar_pichai_says_ai_could_do_md.html" class="webnovel-title-link">
+                                Googles Sundar Pichai Says Ai Could Do Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google deepmind">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_can_help_educators_focus_on_what_matters_most.html" class="webnovel-title-link">
+                                How AI can help educators focus on what matters most
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">deepmind</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_can_make_travel_easier_cheaper_and_more_personalized.html" class="webnovel-title-link">
+                                How AI can make travel easier, cheaper, and more personalized
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_can_make_travel_easier_cheaper_md.html" class="webnovel-title-link">
+                                How Ai Can Make Travel Easier Cheaper Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai apple">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_can_monitor_your_movements_to_improve_your_health.html" class="webnovel-title-link">
+                                How AI can monitor your movements to improve your health
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">apple</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai apple meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_can_use_your_personal_data_to_hurt_your_neighbor.html" class="webnovel-title-link">
+                                How A.I. Can Use Your Personal Data to Hurt Your Neighbor
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">apple</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_could_reboot_science_and_revive_lmd.html" class="webnovel-title-link">
+                                How Ai Could Reboot Science And Revive Lmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_is_changing_career_and_technical_education.html" class="webnovel-title-link">
+                                How AI Is Changing Career and Technical Education
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_is_changing_career_and_technical_md.html" class="webnovel-title-link">
+                                How Ai Is Changing Career And Technical Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_is_rewriting_the_healthcare_playbook.html" class="webnovel-title-link">
+                                How AI Is Rewriting the Healthcare Playbook
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_is_transforming_skin_cancer_diagnosis.html" class="webnovel-title-link">
+                                How AI Is Transforming Skin Cancer Diagnosis
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_is_transforming_work_at_anthropicmd.html" class="webnovel-title-link">
+                                How Ai Is Transforming Work At Anthropicmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_may_impact_specialty_margins_and_md.html" class="webnovel-title-link">
+                                How Ai May Impact Specialty Margins And Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ai_may_impact_specialty_margins_and_referrals_in_2026.html" class="webnovel-title-link">
+                                How AI may impact specialty margins and referrals in 2026
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_amazon_is_making_it_easier_to_shop_bmd.html" class="webnovel-title-link">
+                                How Amazon Is Making It Easier To Shop Bmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_amazon_is_using_generative_and_agentic_ai_to_transform_the_shopping_experience.html" class="webnovel-title-link">
+                                How Amazon is using generative and agentic AI to transform the shopping experience
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_ford_is_embracing_ai_to_drive_innovation_in_the_automotive_industry.html" class="webnovel-title-link">
+                                How Ford Is Embracing AI To Drive Innovation In The Automotive Industry
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_google_and_vitality_are_partnering_for_ai_healthcare.html" class="webnovel-title-link">
+                                How Google and Vitality are Partnering for AI Healthcare
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_openai_led_google_to_rethink_its_ai_md.html" class="webnovel-title-link">
+                                How Openai Led Google To Rethink Its Ai Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_openai_led_google_to_rethink_its_ai_strategy.html" class="webnovel-title-link">
+                                How OpenAI Led Google to Rethink its AI Strategy
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_reliable_is_ai_information.html" class="webnovel-title-link">
+                                How reliable is AI information?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_reliable_is_ai_information____msutomd.html" class="webnovel-title-link">
+                                How Reliable Is Ai Information    Msutomd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_sovereign_ai_is_reshaping_global_innovation.html" class="webnovel-title-link">
+                                How Sovereign AI is Reshaping Global Innovation
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_this_21-year-old_college_student_used_ai_to_build_his_learning_with_lyrics_instagram_and_tiktok_accounts.html" class="webnovel-title-link">
+                                How this 21-year-old college student used AI to build his 'Learning with Lyrics' Instagram and TikTok accounts
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_this_21-year-old_student_used_ai_to_md.html" class="webnovel-title-link">
+                                How This 21-Year-Old Student Used Ai To Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_to_get_out_of_ai_pilot_purgatory.html" class="webnovel-title-link">
+                                How To Get Out Of Ai Pilot Purgatory
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_to_stop_ai_from_eating_the_open_intemd.html" class="webnovel-title-link">
+                                How To Stop Ai From Eating The Open Intemd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/how_universities_are_building_human-centmd.html" class="webnovel-title-link">
+                                How Universities Are Building Human-Centmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/human-ai_teaming_in_healthcare_1__1__2.html" class="webnovel-title-link">
+                                Human-AI teaming in healthcare: 1 + 1 \> 2?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/human-ai_teaming_in_healthcare__1__1___md.html" class="webnovel-title-link">
+                                Human-Ai Teaming In Healthcare  1  1   Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/i_completed_a_coursera_ai_certificationmd.html" class="webnovel-title-link">
+                                I Completed A Coursera Ai Certificationmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/i_was_wrong_universities_dont_fear_aimd.html" class="webnovel-title-link">
+                                I was wrong. Universities don't fear AI. They fear self-reflection
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/im_a_marine_biologist_this_is_how_i_talk_to_whales.html" class="webnovel-title-link">
+                                I'm a Marine Biologist. This Is How I Talk to Whales.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/im_an_ai_developer_heres_how_im_raising_my_son.html" class="webnovel-title-link">
+                                I'm an A.I. Developer. Here's How I'm Raising My Son.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google apple microsoft youtube">
+                        <h2 class="webnovel-title">
+                            <a href="articles/industry_products.html" class="webnovel-title-link">
+                                Industry Products
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">youtube</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/inside_cursor_-_colossusmd.html" class="webnovel-title-link">
+                                Inside Cursor - Colossusmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/inside_microsofts_new_ai_super_factory.html" class="webnovel-title-link">
+                                Inside Microsoft's New AI 'Super Factory'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/inside_three_longterm_relationships_withmd.html" class="webnovel-title-link">
+                                Inside Three Longterm Relationships Withmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/institutional_ai_resources_for_faculty_and_students.html" class="webnovel-title-link">
+                                Institutional AI Resources for Faculty and Students
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/insurances_new_operating_system_for_2026_ai.html" class="webnovel-title-link">
+                                Insurance's new operating system for 2026: AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/insurances_new_operating_system_for_202md.html" class="webnovel-title-link">
+                                Insurances New Operating System For 202Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/interview__freepik_boss_tells_us_the_limmd.html" class="webnovel-title-link">
+                                Interview  Freepik Boss Tells Us The Limmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/interview_freepik_boss_tells_us_the_limits_of_ai_why_storytelling_matters_and_how_not_to_tangle_yourself_up_in_a_copyright_nightmare.html" class="webnovel-title-link">
+                                Interview: Freepik boss tells us the limits of AI, why storytelling matters, and how not to tangle yourself up in a copyright nightmare
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/introducing_naturelm-audio__an_audio-lanmd.html" class="webnovel-title-link">
+                                Introducing Naturelm-Audio  An Audio-Lanmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/introducing_naturelm-audio_an_audio-language_foundation_model_for_bioacoustics.html" class="webnovel-title-link">
+                                Introducing NatureLM-audio: An Audio-Language Foundation Model for Bioacoustics
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/is_physical_world_ai_the_future_of_autonomous_machines.html" class="webnovel-title-link">
+                                Is physical world AI the future of autonomous machines?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/jeff_bezos_is_reportedly_becoming_a_ceo_again---and_its_for_a_62_billion_ai_startup_called_project_prometheus.html" class="webnovel-title-link">
+                                Jeff Bezos is reportedly becoming a CEO again---and it's for a $6.2 billion AI startup called 'Project Prometheus'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/jeff_bezos_is_reportedly_becoming_a_ceo_md.html" class="webnovel-title-link">
+                                Jeff Bezos Is Reportedly Becoming A Ceo Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/justice_in_the_age_of_algorithms__guardrmd.html" class="webnovel-title-link">
+                                Justice In The Age Of Algorithms  Guardrmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/justice_in_the_age_of_algorithms_guardrails_for_ai.html" class="webnovel-title-link">
+                                Justice in the Age of Algorithms: Guardrails for AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google apple microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/knicks_player_miles_mcbride_launches_a_location-sharing_friendship_app_to_rival_snap_map.html" class="webnovel-title-link">
+                                Knicks player Miles McBride launches a location-sharing friendship app to rival Snap Map
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/lisa_su_thinks_ai_is_the_right_gamble_should_investors_shed_their_fear_of_heavy_ai_spend.html" class="webnovel-title-link">
+                                Lisa Su Thinks AI is the "Right Gamble." Should Investors Shed Their Fear of Heavy AI Spend?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/lisa_su_thinks_ai_is_the_right_gamblemd.html" class="webnovel-title-link">
+                                Lisa Su Thinks Ai Is The Right Gamblemd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/microsoft_built_a_fake_marketplace_to_test_ai_agents_---_they_failed_in_surprising_ways.html" class="webnovel-title-link">
+                                Microsoft built a fake marketplace to test AI agents --- they failed in surprising ways
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/microsoft_excel_powers_an_ai-resistant_md.html" class="webnovel-title-link">
+                                Microsoft Excel Powers An Ai-Resistant Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/mit_researchers_speak_objects_into_exismd.html" class="webnovel-title-link">
+                                Mit Researchers Speak Objects Into Exismd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/mit_researchers_speak_objects_into_existence_using_ai_and_robotics.html" class="webnovel-title-link">
+                                MIT researchers "speak objects into existence" using AI and robotics
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/more_people_are_using_ai_chatbots_but_fmd.html" class="webnovel-title-link">
+                                More People Are Using Ai Chatbots But Fmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/more_people_are_using_ai_chatbots_but_for_what.html" class="webnovel-title-link">
+                                More people are using AI chatbots, but for what?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/new_ai_system_helps_mercy_nurses_spend_more_time_with_patients.html" class="webnovel-title-link">
+                                New AI system helps Mercy nurses spend more time with patients
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/new_research_shows_how_ai_could_transform_math_physics_cancer_research_and_more.html" class="webnovel-title-link">
+                                New Research Shows How AI Could Transform Math, Physics, Cancer Research, and More
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/new_ways_to_plan_travel_with_ai_in_search.html" class="webnovel-title-link">
+                                New ways to plan travel with AI in Search
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/news_summaries_from_ai_chatbots_have_major_accuracy_problems.html" class="webnovel-title-link">
+                                News summaries from AI chatbots have major accuracy problems
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/one_sister_earns_a_decent_living_fixing_cars_while_the_other_struggles_as_a_writer.html" class="webnovel-title-link">
+                                One sister earns a decent living fixing cars while the other struggles as a writer
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_continues_to_push_for_government_help_in_ai_growth.html" class="webnovel-title-link">
+                                OpenAI Continues to Push for Government Help in AI Growth
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_continues_to_push_for_government_md.html" class="webnovel-title-link">
+                                Openai Continues To Push For Government Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_data_center_plans_highlight_ai_inmd.html" class="webnovel-title-link">
+                                OpenAI Data Center Plans Highlight AI Investment Momentum
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_declares_code_red_as_google_catches_up_in_ai_race.html" class="webnovel-title-link">
+                                OpenAI declares 'code red' as Google catches up in AI race
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_declares_code_red_as_google_catmd.html" class="webnovel-title-link">
+                                Openai Declares Code Red As Google Catmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_google_microsoft__why_are_ai_gimd.html" class="webnovel-title-link">
+                                Openai Google Microsoft  Why Are Ai Gimd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_google_microsoft_why_are_ai_giants_suddenly_giving_india_free_ai_subscriptions.html" class="webnovel-title-link">
+                                OpenAI, Google, Microsoft: Why are AI Giants Suddenly Giving India Free AI Subscriptions?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/openai_says_ai_browsers_may_always_be_vumd.html" class="webnovel-title-link">
+                                OpenAI says AI browsers may always be vulnerable to prompt injection attacks
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/opinion___ai_is_a_bubble_maybe_thatsmd.html" class="webnovel-title-link">
+                                Opinion   Ai Is A Bubble Maybe Thatsmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/opinion___how_ai_can_use_your_personalmd.html" class="webnovel-title-link">
+                                Opinion   How Ai Can Use Your Personalmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/opinion___how_to_prepare_your_kids_for_tmd.html" class="webnovel-title-link">
+                                Opinion   How To Prepare Your Kids For Tmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/opinion___how_to_use_ai_to_talk_to_whamd.html" class="webnovel-title-link">
+                                Opinion   How To Use Ai To Talk To Whamd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/opinion___youre_a_computer_science_majomd.html" class="webnovel-title-link">
+                                Opinion   Youre A Computer Science Majomd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/podcast___lowes_ai_reset__the_infrastrumd.html" class="webnovel-title-link">
+                                Podcast   Lowes Ai Reset  The Infrastrumd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/podcast__lowes_ai_reset_the_infrastructure_and_strategy_behind_a_retail_giants_transformation.html" class="webnovel-title-link">
+                                PODCAST \| Lowe's AI Reset: The Infrastructure and Strategy Behind a Retail Giant's Transformation
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/reaping_the_benefits_of_ai_without_the_brain_rot.html" class="webnovel-title-link">
+                                Reaping the Benefits of AI Without the Brain Rot
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/reddit_co-founder_alexis_ohanian_says_ai_is_here_to_stay.html" class="webnovel-title-link">
+                                Reddit co-founder Alexis Ohanian says AI is 'here to stay'
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/researchers_call_for_more_conversation-rich_learning_as_ai_spreads.html" class="webnovel-title-link">
+                                Researchers call for more conversation-rich learning as AI spreads
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft deepmind">
+                        <h2 class="webnovel-title">
+                            <a href="articles/simulars_ai_agent_wants_to_run_your_mac_windows_pc_for_you.html" class="webnovel-title-link">
+                                Simular's AI agent wants to run your Mac, Windows PC for you
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span> <span class="article-tag">deepmind</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/simulars_ai_agent_wants_to_run_your_macmd.html" class="webnovel-title-link">
+                                Simulars Ai Agent Wants To Run Your Macmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/stanford_founders_yc-backed_startup_autmd.html" class="webnovel-title-link">
+                                Stanford Founders Yc-Backed Startup Autmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/stanford_founders_yc-backed_startup_automates_clinic_operations_with_ai_voice_agents.html" class="webnovel-title-link">
+                                Stanford founders' YC-backed startup automates clinic operations with AI voice agents
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/state_of_agentic_ai_founders_editionmd.html" class="webnovel-title-link">
+                                State Of Agentic Ai Founders Editionmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/study_highlights_ai_limits_in_heart_caremd.html" class="webnovel-title-link">
+                                Study Highlights Ai Limits In Heart Caremd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/texas_schools_are_using_ai_to_screen_library_books_under_new_state_law.html" class="webnovel-title-link">
+                                Texas schools are using AI to screen library books under new state law
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_ai_boom_has_found_another_gear_whmd.html" class="webnovel-title-link">
+                                The Ai Boom Has Found Another Gear Whmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google apple microsoft anthropic">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_ai_boom_has_found_another_gear_why_cant_people_shake_their_worries.html" class="webnovel-title-link">
+                                The A.I. Boom Has Found Another Gear. Why Can't People Shake Their Worries?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_ai_boom_is_heralding_a_new_gold_rushmd.html" class="webnovel-title-link">
+                                The AI boom is heralding a new gold rush in the American west
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_ai_doctor_will_see_you_now_-_fast_comd.html" class="webnovel-title-link">
+                                The Ai Doctor Will See You Now - Fast Comd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_commoditization_of__ai-first__marketmd.html" class="webnovel-title-link">
+                                The Commoditization Of  Ai-First  Marketmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_commoditization_of_ai-first_marketing.html" class="webnovel-title-link">
+                                The commoditization of "AI-first" marketing
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_global_race_for_the_ai_app_layer_is_md.html" class="webnovel-title-link">
+                                The Global Race For The Ai App Layer Is Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_global_race_for_the_ai_app_layer_is_still_on__techcrunch.html" class="webnovel-title-link">
+                                The global race for the AI app layer is still on \| TechCrunch
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai microsoft anthropic tesla">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_godfather_of_ai_doesnt_think_ceos_have_thought_about_one_big_thing_that_could_happen_if_ai_kills_most_jobs.html" class="webnovel-title-link">
+                                The godfather of AI doesn't think CEOs have thought about one big thing that could happen if AI kills most jobs
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span> <span class="article-tag">tesla</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_google_antitrust_ruling_shows_how_aimd.html" class="webnovel-title-link">
+                                The Google Antitrust Ruling Shows How Aimd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai apple">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_most_downloaded_country_song_in_the_us_is_ai-generated.html" class="webnovel-title-link">
+                                The most downloaded country song in the US is AI-generated
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">apple</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_new_billionaires_behind_the_ai_data_center_boom.html" class="webnovel-title-link">
+                                The New Billionaires Behind the AI Data Center Boom
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_secret_to_avoiding_ai_slop_---_let_workers_job_craft_their_own_roles_around_ai_tools_researchers_say.html" class="webnovel-title-link">
+                                The secret to avoiding 'AI slop' --- let workers 'job craft' their own roles around AI tools, researchers say
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/the_secret_to_avoiding_ai_slop__let_womd.html" class="webnovel-title-link">
+                                The Secret To Avoiding Ai Slop  Let Womd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/they_fell_in_love_with_ai_chatbots_---_and_found_something_real.html" class="webnovel-title-link">
+                                They Fell in Love With A.I. Chatbots --- and Found Something Real
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/tiktok_will_let_you_choose_how_much_ai-gmd.html" class="webnovel-title-link">
+                                Tiktok Will Let You Choose How Much Ai-Gmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/to_ai_or_not_to_ai__do_college_students_md.html" class="webnovel-title-link">
+                                To Ai Or Not To Ai  Do College Students Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/to_ai_or_not_to_ai_do_college_students_appreciate_the_question.html" class="webnovel-title-link">
+                                To AI or not to AI? Do college students appreciate the question?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/trains_cancelled_over_fake_bridge_collapse_image.html" class="webnovel-title-link">
+                                Trains cancelled over fake bridge collapse image
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/using_ai_to_scan_the_earth_-_spacenewsmd.html" class="webnovel-title-link">
+                                Using Ai To Scan The Earth - Spacenewsmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/walmart_ai_strategy__us905b_bet_on_agenmd.html" class="webnovel-title-link">
+                                Walmart Ai Strategy  Us905B Bet On Agenmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/want_to_know_why_your_ai_agent_failed__tmd.html" class="webnovel-title-link">
+                                Want To Know Why Your Ai Agent Failed  Tmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/want_to_know_why_your_ai_agent_failed_theres_ai_for_that.html" class="webnovel-title-link">
+                                Want to Know Why Your AI Agent Failed? There's AI for That.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google deepmind">
+                        <h2 class="webnovel-title">
+                            <a href="articles/were_running_out_of_good_ideas_ai_might_be_how_we_find_new_ones.html" class="webnovel-title-link">
+                                We're running out of good ideas. AI might be how we find new ones.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">deepmind</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/what_could_possibly_go_wrong_if_an_entermd.html" class="webnovel-title-link">
+                                What Could Possibly Go Wrong If An Entermd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/what_happened_after_i_completed_the_coursera_certificate.html" class="webnovel-title-link">
+                                What Happened After I Completed The Coursera Certificate
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/what_the_ceo_of_the_worlds_largest_data_center_company---with_273_locations_in_36_countries---predicts_will_drive_the_business_forward.html" class="webnovel-title-link">
+                                What the CEO of the world's largest data center company---with 273 locations in 36 countries---predicts will drive the business forward
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/what_the_ceo_of_the_worlds_largest_datamd.html" class="webnovel-title-link">
+                                What The Ceo Of The Worlds Largest Datamd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/when_ai_agents_can_serve_people_and_businesses_whats_next.html" class="webnovel-title-link">
+                                When AI Agents Can Serve People And Businesses, What's Next?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/when_ai_hype_meets_ai_reality__a_reckonimd.html" class="webnovel-title-link">
+                                When Ai Hype Meets Ai Reality  A Reckonimd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta apple microsoft anthropic youtube">
+                        <h2 class="webnovel-title">
+                            <a href="articles/when_ai_hype_meets_ai_reality_a_reckoning_in_6_charts.html" class="webnovel-title-link">
+                                When AI Hype Meets AI Reality: A Reckoning in 6 Charts
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">apple</span> <span class="article-tag">microsoft</span> <span class="article-tag">anthropic</span> <span class="article-tag">youtube</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/white_collar_vs_blue_collar__two_sistermd.html" class="webnovel-title-link">
+                                White Collar Vs Blue Collar  Two Sistermd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/who_pays_when_ai_is_wrong.html" class="webnovel-title-link">
+                                Who Pays When Ai Is Wrong
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/who_pays_when_ai_is_wrong__-_the_new_ymd.html" class="webnovel-title-link">
+                                Who Pays When Ai Is Wrong  - The New Ymd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_ai_cannot_create_new_scientific_knowledge.html" class="webnovel-title-link">
+                                Why AI cannot create new scientific knowledge
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_ai_is_now_hrs_business.html" class="webnovel-title-link">
+                                Why AI is now HR's business
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_ai_is_now_hrs_business___wiredmd.html" class="webnovel-title-link">
+                                Why Ai Is Now Hrs Business   Wiredmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_are_we_talking_about_superintelligence.html" class="webnovel-title-link">
+                                Why Are We Talking About Superintelligence?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_chatgpt_still_has_a_winning_edge_over_googles_ai.html" class="webnovel-title-link">
+                                Why ChatGPT Still Has a Winning Edge Over Google's AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_data_centers_are_important_for_ai___md.html" class="webnovel-title-link">
+                                Why Data Centers Are Important For Ai   Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_data_centers_are_important_for_ai__the_techtank_podcast.html" class="webnovel-title-link">
+                                Why data centers are important for AI \| The TechTank Podcast
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_do_we_need_rules_on_ai.html" class="webnovel-title-link">
+                                Why do we need rules on AI?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_does_ai_keep_making_things_up_that_arent_true.html" class="webnovel-title-link">
+                                Why does AI keep making things up that aren't true?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_does_ai_write_like__that.html" class="webnovel-title-link">
+                                Why Does Ai Write Like  That
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_does_ai_write_like__that__-_the_nmd.html" class="webnovel-title-link">
+                                Why Does Ai Write Like  That  - The Nmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_employees_dont_trust_your_ai_strategy_and_how_to_fix_it.html" class="webnovel-title-link">
+                                Why Employees Don't Trust Your AI Strategy And How To Fix It
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_employees_dont_trust_your_ai_stratemd.html" class="webnovel-title-link">
+                                Why Employees Dont Trust Your Ai Stratemd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_every_leader_should_ask_whats_the_cmd.html" class="webnovel-title-link">
+                                Why Every Leader Should Ask Whats The Cmd
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_every_leader_should_ask_whats_the_cost_of_their_own_fear_of_ai.html" class="webnovel-title-link">
+                                Why Every Leader Should Ask What's The Cost Of Their Own Fear Of AI
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_is_ai_making_computers_and_games_consoles_more_expensive.html" class="webnovel-title-link">
+                                Why is AI making computers and games consoles more expensive?
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_some_health_clinics_are_turning_to_ai_to_screen_for_tuberculosis.html" class="webnovel-title-link">
+                                Why some health clinics are turning to AI to screen for tuberculosis
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon google tesla youtube">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_the_next_ai_revolution_will_happen_off-screen_samsara_ceo_sanjit_biswas.html" class="webnovel-title-link">
+                                Why the Next AI Revolution Will Happen Off-Screen: Samsara CEO Sanjit Biswas
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">google</span> <span class="article-tag">tesla</span> <span class="article-tag">youtube</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google">
+                        <h2 class="webnovel-title">
+                            <a href="articles/why_wikipedia_is_losing_traffic_to_ai_overviews_on_google.html" class="webnovel-title-link">
+                                Why Wikipedia Is Losing Traffic to AI Overviews on Google
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai amazon openai google meta microsoft tesla youtube">
+                        <h2 class="webnovel-title">
+                            <a href="articles/wreflection.html" class="webnovel-title-link">
+                                Wreflection
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">amazon</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span> <span class="article-tag">microsoft</span> <span class="article-tag">tesla</span> <span class="article-tag">youtube</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai">
+                        <h2 class="webnovel-title">
+                            <a href="articles/yelps_ai_can_now_scan_restaurant_menus_md.html" class="webnovel-title-link">
+                                Yelps Ai Can Now Scan Restaurant Menus Md
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/yelps_ai_can_now_scan_restaurant_menus_to_show_you_what_dishes_look_like.html" class="webnovel-title-link">
+                                Yelp's AI can now scan restaurant menus to show you what dishes look like
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai google meta">
+                        <h2 class="webnovel-title">
+                            <a href="articles/you_can_now_ask_google_gemini_whether_an_image_is_ai-generated_or_not.html" class="webnovel-title-link">
+                                You Can Now Ask Google Gemini Whether an Image is AI-Generated or Not
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">google</span> <span class="article-tag">meta</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai microsoft">
+                        <h2 class="webnovel-title">
+                            <a href="articles/youre_a_computer_science_major_dont_panic.html" class="webnovel-title-link">
+                                You're a Computer Science Major. Don't Panic.
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">microsoft</span>
+                        </div>
+                    </div>
+                    <div class="webnovel-article" data-tags="ai openai google youtube">
+                        <h2 class="webnovel-title">
+                            <a href="articles/youtube_now_shutting_down_channels_postimd.html" class="webnovel-title-link">
+                                YouTube Now Shutting Down Channels Posting AI Slop
+                            </a>
+                        </h2>
+                        <div class="article-tags">
+                            <span class="article-tag">ai</span> <span class="article-tag">openai</span> <span class="article-tag">google</span> <span class="article-tag">youtube</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script>
+        // Tag filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tagButtons = document.querySelectorAll('.tag-btn');
+            const articles = document.querySelectorAll('.webnovel-article');
+            
+            tagButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    tagButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const selectedTag = this.getAttribute('data-tag');
+                    
+                    articles.forEach(article => {
+                        if (selectedTag === 'all') {
+                            article.style.display = 'block';
+                        } else if (selectedTag === 'latest') {
+                            // Show first 20 articles for "latest"
+                            const index = Array.from(articles).indexOf(article);
+                            article.style.display = index < 20 ? 'block' : 'none';
+                        } else {
+                            const articleTags = article.getAttribute('data-tags');
+                            if (articleTags && articleTags.includes(selectedTag)) {
+                                article.style.display = 'block';
+                            } else {
+                                article.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

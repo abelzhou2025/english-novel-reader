@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why data centers are important for AI | The TechTank Podcast - English Novel Reader</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #f9f7f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .article-content {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            background-color: #5a3e2b;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-family: 'Microsoft YaHei', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        
+        .back-btn:hover {
+            background-color: #7a5c42;
+            transform: translateY(-2px);
+        }
+        
+        .article-title {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            color: #2c2c2c;
+            margin-bottom: 30px;
+            line-height: 1.3;
+            font-weight: 600;
+        }
+        
+        .article-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-heading {
+            font-family: Georgia, serif;
+            font-size: 1.5rem;
+            color: #3a3a3a;
+            margin-top: 35px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .section-subheading {
+            font-family: Georgia, serif;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .paragraph-block {
+            margin-bottom: 25px;
+        }
+        
+        .english-text {
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            color: #2c2c2c;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .chinese-text {
+            font-family: 'Microsoft YaHei', 'SimHei', sans-serif;
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.8;
+            padding-left: 20px;
+            border-left: 3px solid #d4a76a;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .article-content {
+                margin: 80px 15px 30px;
+                padding: 25px;
+            }
+            
+            .article-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-heading {
+                font-size: 1.3rem;
+            }
+            
+            .english-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <ul>
+            <li><a href="../index.html">首页</a></li>
+            <li><a href="../novels.html">小说</a></li>
+            <li><a href="../webnovels.html" class="active">网文</a></li>
+            <li><a href="../about.html">关于我</a></li>
+        </ul>
+    </nav>
+    
+    <div class="article-content">
+        <a href="../webnovels.html" class="back-btn">← 返回网文列表</a>
+        <h1 class="article-title">Why data centers are important for AI | The TechTank Podcast</h1>
+        <div class="paragraph-block">
+            <p class="english-text">www.brookings.edu Nicol Turner Lee, Aaron Klein</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: [00:00:00] You are listening to Tech Tank, a biweekly podcast from the Brookings Institution exploring the most consequential technology issues of our time, from racial bias and algorithms to the future of work Tech Tank takes big ideas and makes them accessible.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: Thanks for joining our Brookings Tech Tank podcast. I'm Darrell West, senior fellow in the Center for Technology Innovation at the Brookings Institution. Today we are going to analyze the crucial role that data centers play in the future of artificial intelligence. AI is the transformative technology of our time, yet undergirding its growing use is the need for state-of-the-art data centers. These facilities host the file servers and networking equipment that store, process, and analyze information. Hyperscaler data centers can have more than 5,000 file servers and cost a billion dollars a piece. Tech companies are investing hundreds of billions of dollars in new data centers to facilitate the AI applications, assistance, and agents that are coming online. My Brookings colleague, Nicol Turner, Lee and I have a new paper route entitled "The Future of Data Centers." It looks at what they are, their number and distribution barriers to development, and ways to overcome those challenges. Joining me to discuss this paper is Nicol Turner Lee. She is the director of our Center for Technology Innovation and a senior fellow in the Governance Studies program at Brookings. Nicol, welcome to our Tech Tank podcast.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: I know Darrell, it's always a pleasure to be with you, co-host, so I'm happy about this conversation we're having today.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: Now it's an exciting topic. There's been lots of interest in data centers. Almost every day there's, some news article, looking at this. So I think the timing of our paper actually is, very good. So what we do in our paper [00:02:00] is to try and help people understand the complicated issues surrounding data centers and why they are so important for the future of artificial intelligence without data centers. There won't be the capacity to use the cool new applications that are coming online. So perhaps we can start with what data centers are and how they operate. I have toured data centers and they are impressive facilities. They are huge. They have a large number of file servers, networking equipment, and digital devices that power AI and the internet in general. So for example, when you go to a website, such as Amazon, you are accessing information stored in data centers. When you purchase goods or use services, you are asking data centers to execute the commands you need in order to buy something. And ship it to your house. So this entire digital revolution cannot function without the data centers where all this information and infrastructure is stored.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">And as we note in our paper, these data centers have huge energy and water needs. So Nicol, could you discuss the extraordinary amount of electricity and water required to operate these data centers?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: Well, Darrell, I think that's what's so interesting, right? What we're trying to do in the paper is really explain to people, you know, what data centers are. Especially as you've mentioned, it shows up in the news probably daily about new data centers that are being built. Or communities that are essentially asking questions about what these data centers actually do. So I'm equally excited about the paper. Darrell, I just wanted to put that plug out there because I think it'll be a tremendous contribution to the conversation, especially on the explanation side. So as you mentioned, I mean, I think people do not often realize the amount of power that is required to essentially do a generative AI search. So for example, when people are using tools like OpenAI or, many of the other generative [00:04:00] tools, llama, et cetera, what you're essentially seeing, is this exertion of energy that is required for that individual, you know, computation.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">And if you add that and multiply that by trillions of other users. You're essentially putting stress on the system to accommodate the rising demand. And, I don't think people realize, and we say this in the paper, Darrell, which I think is gonna quantify for many people who just have no idea how much energy that these data centers consume. In 2023, data centers consumed about 4.4% of America's electrical power. And that's only going to rise. I mean, I think we're gonna see probably somewhere between 6.7 and 12% by 2028. And that's just in the United States, you know? Researchers like McKinsey have suggested that, you know, there's going to be this increased demand on electricity that will probably surpass, you know, what even residential communities use when it comes to power. And that's just one part of the equation. I had the opportunity not too long ago to see, the inside of a data center and look at some of the stacks that are actually running in there. I'm five foot six Darrell, and I know you're much taller than I am, but many of these, systems are quite tall, and quite intensive in not just power, but also water.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Some of these data centers consume as much as 500,000 gallons per day. And for people who are listening, much of that is due to something that's very rudimentary to most of us, which is to keep them cool. These, modules do require a level of cooling power, which is we, you know, we talk about in the paper and something I think people will start to realize, which is why we see more data centers in the north versus the deep south. You know, they do have to remain cool before they overheat and cause, much more damage, to many of the data [00:06:00] center infrastructure that is being built. So these, along with, you know, natural gas and other energy components, Darrell, are things that we talk about in the paper, but there were sort of explaining to everyday people why they're so significant in their operation.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: No, I think those are all great points. And you're exactly right that the energy needs of these data centers, is enormous. it's actually one of the limiting factors we really need to boost, the electrical capability, in this country. Now, Nicol, I know you live in Northern Virginia. you actually are in the epicenter of this whole data center revolution because it turns out Northern Virginia is the Silicon Valley of data centers like that is where the largest number of, data centers, reside, in the entire United States. So we do, present some data just about, the number of, data centers that exist, their distribution across, various states. and I'm just curious if you could talk a little bit about the geographic distribution of these data centers.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: Well, I mean, I think that's so interesting and yes, I do live in Northern Virginia and for anybody who travels as much as I do, and you're going along the Dulles corridor near the airport, you actually will see quite a few data centers that actually exist. You know, Darrell, when I first passed those buildings, I didn't have any idea what they were. You know what I thought they were? Furniture clearing houses or warehouse. I had no clue that all of that, architecture and infrastructure was actually running in those buildings 'cause they're pretty nondescript, right? Like you really don't know what's in them. I had to put that out there. You know, I think in Virginia, for example, we have 641 data centers in operation right now. And as Darrell mentioned, we do talk about this in the paper. And the projected growth of that number I think we'll be exponential in the next couple of years. I think there's about 400 more that are in the queue or have been announced to be actually built in the Northern Virginia area alone. And behind us is Texas, you know, followed by California and [00:08:00] Illinois.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">You know, and again, all this data is in the paper. I think it's interesting though, when you look at the Northern Virginia case, because we do argue in the paper that there are various reasons why data centers are needed and one of those applications or reasons that we see this plethora of data centers has a lot to do with, military and intelligence gathering outside of the just general need to have, situated concentration of infrastructure to manage the compute power that is operating across these platforms. But we also talk about these edge centers where it's sort of a requirement that they're close to, their. service, consumers or customers primarily because it reduces some of the lag that may occur, between the computation and the networking facilities. And I find that to be interesting as a person who has studied telecom policy for many, many years and the growth of mobile. Some of these same challenges still exist when it comes to ensuring that there's a better connection. So, you know, for Northern Virginia Darrell, you know, it's no secret that we're near the, federal government, right? Northern Virginia itself is a, huge client of federal government resources, and the federal government is a huge client to, many of these data centers and tech companies that are powering their everyday functions for the most classified to those that are more, you know, consumer facing. And so I think that's one of the reasons why we continue to see a plethora of growth of data centers in and of itself. that doesn't come without any type of, pushback from state legislators or communities. And we can talk about that a little later in terms of how we begin to look at that conversation in the future. But yeah, clearly, you know, these edge centers as well as those that are going to be designed for more military and intelligence operations are gonna continue to grow within this DMV area because of its proximity to the federal government.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: So we also look internationally at data [00:10:00] center locations and in our paper report that two thirds of the world's data centers are in the United States, Europe, and China. Much of the rest of the world actually has few data centers and potentially. Could be left behind in the whole AI revolution. So Nicol, I was wondering if you could discuss the global south and why it is so important that Africa, Asia, and Latin America develop their own data centers so that they are not left behind in the digital revolution.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Residents in ways that also align with their infrastructure development. And that Darrell, you know, as a person, again, who has studied mobile [00:12:00] technology in 5G, the global south has always been somewhat collateralized in these debates. Meaning, primarily, you know, suppliers for them tend to come from China, where I think there's an opportunity to really figure out ways in which we create the same type of compute infrastructure for those regions. I think that's also important because we really do not wanna see this chasm of an AI compute divide based on where infrastructure resides. And so I think it's particularly important to sort of weigh out those equities, particularly for, American companies, tech companies in particular that want to do more business outside of the United States, in terms of land space and capacity, to, be built around, water systems or lakes or oceans. Obviously global south regions like Latin America, African Union, Southeast Asia, some instances India provide those opportunities. So, I would love to see more work on that. I think, Darrell, one of the things that we promised ourself in this paper that we wanna tell people is that we were not gonna make it into a dissertation length paper, but we would be able to sort of build off of many of these topics, in future blog post or research. But Darrell it's so interesting to me, right? Because China, on the other hand, it's at a comparative growth rate in data center development like the us, but like what makes them different as well?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: Well, it's interesting that you mentioned China because as, I just came back from a trip to China. I spoke at a technology conference there. China is investing heavily in AI in general and data centers in particular because they know this compute, power is just going to be so important, and right now, the two leading countries on AI are the United States and China. The rest of the world is lagging far behind. And the thing that is interesting about the data center thing is just how important it is for every region of the [00:14:00] world to have data centers because, for example, as edge computing applications start to become more prevalent, like autonomous vehicles are starting to take off, you wanna make sure there's low latency. You don't want a lag between the data center and the application, with things like autonomous vehicles, like they need to make decisions in an instant second. You don't want to have a substantial lag there. And every region is going to need data centers in their home country in order to take advantage of all the cool new things, that are, taking place.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Now, the other thing that we did in our paper, Nicol, was to discuss the various factors that are limiting the construction and operations of data centers. And two things in particular that we identified are, one, the need for copper, steel, and aluminum in order to build the data centers. I mean the, in the chores that I have done, like there's a lot of copper, steel, and aluminum that goes into, these, products, in these, facilities. And so, with the new tariffs on, some of these. commodities, it's, increased the costs of the construction, of the data centers, and, that's been a problem. And then secondly, on the workforce side, just the need for electricians to wire them. There's a tremendous amount of electrical wiring that goes into these, data centers. Kind of connecting the file servers and the networking equipment, and there is a shortage of electricians. So what are the problems, Nicol, that, you are seeing in these areas that's, slowing the development of these data centers?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: Well, I mean, I am no expert on this in any means, but I do think it's part of the conversations that I've been in recently when it comes to data centers. When you start to look at copper, steel, and aluminum, it's just impossible to look at these, main raw materials without thinking about export controls, and tariffs, right? there is going to be a lot of conversation going forward, [00:16:00] and it's already happened primarily in the chip space around the ways in which you have the appropriate export controls and hardware and software and other technologies, that will be needed to build data centers and to do them in a capacity that protects national security. And I, do think that right now among people who follow this issue more specifically, that this is still something that has to be worked out between the various stakeholders that are working on the export control space.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">And I think the tariff situation in terms of, you know, the way it. Appears to not have the type of certainty that is needed when it comes to these particular raw materials will have an impact as well. I mean, I really want people to remember, right, that data centers are not necessarily like retail stores, right? You just don't walk in and all of a sudden you're like, hey, give me a juice up, you know, on my generative AR or my laptop because I'm about to do some more complicated, complex processing and computational models. I mean, we're talking about spaces that have to be built. So what you're talking about, Darrell, and what we talk about in the paper, copper, steel, and aluminum are part of the components of building quality data centers. And then you're also about talking about getting electricians and trades people to do so. Right. And that has been a conversation for many years that has gone under the radar with regards to the trades and the opportunities that have been available to them in this emerging economy. And now when we have this opportunity to employ more trades.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Men and women, we don't necessarily have them in the queue, and we still have some of the stringent requirements that we talk in the paper about, which makes it harder for electricians, for example, to work between the states of Florida and Texas. So Darrell, I think, I don't wanna say it's a perfect storm. It's probably the perfect time to be talking about what we talk about in the paper, because at some point it is going to converge. It will become a 2026 agenda item, it's obviously one of significant importance to the White [00:18:00] House as well, but the key thing is. We have to create this environment, which makes, the, barriers much lower to be able to construct these facilities if we're trying to meet the increasing demand of AI use. Which as you know, and I think you've got a piece that's come out on this, on Tech Tank blog, AI has become the top, the talk of the town and it's also the talk of the wallets and it's a speculative bet by many that this will be the future of technology. Again, most people do not realize that it does require the essential data out, data centers to have the essential electrical components and power and water as well as electricity to be, to make them much more effective and successful and resilient.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: I mean, one of the things we do in our paper is to try and think about possible remedies for these issues. So you mentioned these, workforce, shortages and the need for, more electricians. there actually are some policy, steps that can be undertaken that would help to address this issue. So for example, in the trades area, a lot of the licensing requirements for plumbers, electricians, and so on are at the state level. You can be certified as an electrician in Florida and then have difficulty working in Texas or a vice versa. And so we suggest in our paper, the need for more flexible licensing of workers in various trades areas, just to encourage more mobility across particular states. There are, job retraining and vocational education programs that need to be expanded.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">In this rush towards the digital economy, people seem to be seem to be forgetting we still need people with good trade skills, the electricians, the plumbers, and the, construction, workers. We need, as we kind of think about the future of our digital economy to emphasize the training programs, that's actually going to help.[00:20:00] And then the other thing that has popped up is just the housing problems of the workers that are needed to build these data centers. Housing costs have skyrocketed in many places around the country. Trade workers need affordable and reasonable accommodations, especially in the areas where the data centers are being built. So housing is actually also a constraint, on the construction of these, data centers. So there are lots of problems and obstacles and issues that we identify in our paper. But the good news is there are some policy measures that we could undertake, that would actually, make a difference.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">The other problem area that we highlight is some of the permitting requirements. So companies need permits to build data centers, and right now there are a number of community zoning and environmental issues that can slow permitting. And we know that in some communities, like especially in Northern Virginia where there are so many data centers, there are some communities that are actually starting to rebel. They're worried about electric, price increases, the impact on, water, in their localities and, so on kind of the noise and light pollution that, sometimes is associated, with, data centers. So Nicol, how are these issues affecting data centers and what can be done about them?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: Well, I think what's so interesting about, you know, all the things that you've mentioned is that these have been considerations again, that happen when we're trying to vest new infrastructure, wherever people live, and in particular, in areas that sort of intersect with, power and water systems. Permitting becomes quite complicated. Again, I can only keep suggesting the time that I spent in the 5G space and just thinking about the poll, right? And all of the licenses and certifications and, permits and zoning requirements that came with [00:22:00] how many, utilities could essentially, hang their stack on the everyday utility pole because many people do not realize it's hosting your cable, your telephone, your electrical grid, and so maybe your, security system. There's so many things that come with permitting that make this a very complicated process. What's interesting here on this topic, which is why it has become such a buzz conversation, is that the White House has really expressed, immediate interest in building more data centers.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">The July 2025 AI Action Plan is quite clear that there will be the removal of these regulatory burdens, expedited permitting processes, expedited environmental remediation, if at all sort of pushing out the door, the burdens that come with trying to get these data centers built. Now, whether or not that's gonna be a good thing or bad thing, I don't know, Darrell, right? Because we're dealing with electricity and we're dealing with water. And I think those are two areas which tend to have, some, pushback or resistance from communities when you do things too quickly under the guise of permissionless innovation, right? Build fast, break it down, fix it later kind of methodology, because we've seen across the country where certain communities have dealt with the after effects of that type of expeditious build out, mainly polluted water systems, polluted soil, non abated or remediated areas when it comes to, human concern and human safety, or the safety of agriculture, et cetera. So I think that's gonna be an area where there may be more conversation on just how fast the permitting process can be done on data centers, and the extent to which it's done with some community benefit in mind, which I'm not sure.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">When I talk to people and we talk about, [00:24:00] we, haven't talked about it here, but we talk about it in the paper. Nuclear energy is obviously one of the areas that has been recently discussed. I recently testified before a committee on Congress where there was a mention that we should be able to turn the switch on today on many of these, decommissioned nuclear reactor sites. But they were, decommissioned for a purpose and for a reason. And I think it's important, again, as we think about permitting and removing some of the zoning requirements, we also should think about the extent to which we are going to build these mini reactor sites, which, honestly are going on right now in areas we're just not aware of how many, everyday people aren't at least. But I think it's important that we sort of consider the permitting process still within the context of, environmental remediation and community benefit.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: And it's interesting. In Trump's AI Action Plan, he does propose, expedited permitting in order to reduce some of the roadblocks and make it easier for companies to acquire building permits. One of the proposals is to exempt data center projects from certain review requirements, dictated by the National Environmental Policy Act, the Clean Water Act, and the Clean Air Act. There's also been a suggestion about having national permits for data centers as opposed to locally required ones. Trump also suggested allowing the construction of data centers on designated federal lands in order to free up more land for data centers. So there are a number of proposals on the table, in the permitting area that's designed to kind of speed up the current process so that we don't lose time on this. The other area where I think everybody is in agreement is the need to update our electric grid system and our electric transmission lines, like many parts of this system were built decades ago and is in desperate need of modernization. So how can we make progress here?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: Well, I mean, I think [00:26:00] that's really the million dollar question, right?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Which is we've had these aging legacy energy grid systems, and some people don't know this. When I was in my prior life at another think tank, I was actually interested in the energy grid, believe it or not. Many of, people that I know, were at the Department of Energy at the time, and I think I wrote a paper about this actually. You know, for those of you that know Nicol Turner, Lee, there's no topic that goes unexplored. But what's so interesting about the energy grid today, those legacy systems are really not, capable of carrying the type of energy requirements that we're actually seeing with data centers. In fact, in some communities where data centers are currently running, there's some concern that there's an increase in costs due to the strain on the current grid that is powering, residential houses, businesses, et cetera. I live in Alexandria and for years, can I tell you, years I lived on the part of the grid, that any type of wind would just knock out our power and we would be out, you know, for maybe 30, 40 minutes before the power would come back on. And that occurred in my entire town home community. It wasn't just my home. And so that was the fragility of the grid and its existing form, you know, just a few years ago. My point is, tech companies are now beginning to see that they are up against these legacy modernization efforts, which in many respects aren't going fast enough. Maybe they should have done, been done prior to this evolution of data centers. Maybe not. Maybe they didn't anticipate that this was gonna happen. Who knows? The bottom line is, we're seeing a lot of tech companies build out their own electrical infrastructure.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">As I mentioned previously, recommission some nuclear reactors or go towards micro nuclear reactor sites to power the data centers themselves. If they're building them closer to the data centers, which also presents. Possibly, some challenge to the community who is [00:28:00] experiencing some of the things that I experienced in Alexandria. My point is we definitely need this to be an integrated policy concern. I would love to see more coordination between the Department of Energy and what we're seeing on the data center front as the White House has sort of purported their support of this. You know, maybe we should be doing the same when it comes to the energy grid as well, because I don't think it's gonna go away. And I do think we'll create, and I've said this on, on different discussions potentially two parallel energy systems that also can create a have and have not scenario for people who are enriched, are being enriched in those areas. Does that make sense, Darrell? Like I, I just keep like in my mind thinking like. We have so much work to do on the energy grid itself. we have a variety of, you know, until recently, those sun, many of those were rolled back, but we had a variety of options and alternatives to be able to power energy in the country. But now we're adding on a different layer that is going to have some speed bumps that happen just because the two industries work on different timelines.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: No, I think you are a hundred percent right on this the electric area is one of the limiting factors right now in the construction and operations of these, data centers. And if we don't get a better handle on that, it's gonna be hard to get all the advantages of the new AI applications that are coming online because they need a lot of energy. And you mentioned the Department of Energy, that department is estimated that the United States needs to add more than 100,000 miles of new electric transmission lines just in the coming decade. So we're gonna need to invest there. Sometimes, at least under the current rules, it takes as long as 10 years to build new transmission lines that, move electricity from region to region.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">So, we need to think about how to do that, how to do that, faster and better than, we currently are doing. And it's also interesting that, there are some ways in which technology may actually become part of [00:30:00] the solution to this problem. Because, for example, there are new tools coming online that could make transmission lines more efficiently. So rather than losing power, as electricity gets moved around geographically, AI can actually improve the operations and facilitate a more efficient and sustainable electrical system. There's some new carbon fibers that are being developed, that, are lighter and potentially can move larger amounts of electricity. So, some of the areas are starting to experiment. with that, the data centers are starting to develop what they call closed cooling systems that require less water and can still keep file servers at the low temperatures required for effective operations. There are actually new computer chips coming online that operate more efficiently and do not heat up as much. And so technology could ironically become part of the solution, that helps us deal with, the issues that we have been, talking about. So Nicol, we also know there are issues in terms of who pays for data centers. And also who gets, the benefits. So I'd, be interested in hearing your thoughts on the who pays and who benefits aspects of data centers.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST NICOL TURNER LEE: This goes back to this conversation of like how we actually replace, you know, both the transmission and distribution infrastructure of electricity. Again, that's very old, you know, quite frankly, and honestly, consumers pay for that. I mean, we've seen in some research that it's not across the entire country where consumer pricing, when it comes to electricity is spiking. And a lot of it has to do with, areas in which there's a high propensity of data centers just because it's also feeding off of that grid. I mean, I think at the end of the day, here's my like big, hairy, audacious goal, right? That we find ways that perhaps community [00:32:00] benefit for data center expansion, given the fact that people are not giving up their AI right?</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">At this point, at least they're still gonna use their AI, is that we figure out like how can a company, a big tech AI developer that is trying to ensure that they have the power. How can we think about, you know, a, AI company partnering with a utility company like in the area of electricity or an irrigation system, company, to think about ways in which to improve the entire community in which it's actually placed. Let me tell you what I mean by that. We're seeing data centers in areas that do need better irrigation systems. The water quality is pollutant and there are ways in which. Tech companies who have the need for more power could essentially support that community in ways in which they can develop much more efficient, probably low cost water irrigation systems. The same thing with energy. I don't know about this one, Darrell, I'm just gonna say I'm not saying this with a huge degree of confidence because there is like these sectoral differences and we're dealing with highly regulated utility companies like electricity. I'm not sure how ready utility companies are ready to give in because I didn't see them give in during the telecom boom.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">But my point is perhaps, one way to actually shift the cost and make them lower is to figure out ways in which AI developers can work closely with community zoning boards and utilities commissions throughout the United States to contribute to an updated grid as opposed to developing parallel grids. I also think, going back to your point about the trades, you know, we've talked about tech companies investment in communities when it comes to like STEM careers and getting more data scientists. Well, it seems to me that tech companies could also invest in apprenticeships and trades people who are actually building these facilities.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">I mean, people do not realize, when these data centers hit [00:34:00] communities, most of the jobs are generated in construction. there's probably a hundred to 150 people that sit within the building on a daily basis. To monitor, the cooling systems to make sure the, infrastructure is running and operable. It's the construction where the most of the money is going to be made. And I think the benefit to communities is by investing in the people that live in the corridors of these expanded data centers and giving them an opportunity to get more apprenticeships or expand their trade skills to be much more statewide and, cross licensed or to figure out ways to encourage more students to go into the trades. that's a different community benefit that we have historically spoken about when it comes to community, mitigating what they think are, future risk associated with any type of infrastructure, build or zoning flexibility. but I think those are really interesting ideas that we talk about in the paper that I'm sure we're gonna talk about more as this paper series expands beyond this first project.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">CO-HOST DARRELL WEST: No, I think you're right. companies do need to talk more about the benefits, that the data centers in AI in general bring to particular communities and it can be in terms of job training, improved internet access, closing the digital divide and other types of things. But, this whole topic of who pays and who benefits is actually becoming a bigger part of the national conversations surrounding, data centers. There are lots of different proposals out there, on each of those, fronts, but particularly the who pays for data centers issues because they're the companies obviously are paying for the construction of the data center.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Where the issue is coming is on the electricity side. Since we need much greater electrical capability than we have right now, there's a big debate over who pays for that building out that electrical capability. [00:36:00] And right now in a number of states, we are seeing a substantial increases in electric rates, that consumers are paying and consumers are getting upset about that. In Ohio, for example, the Public Utility Commission has been debating a proposal that firms with data centers larger than one gigawatt should pay 85% of the new need for electrical usage up from the current 60%. So in Ohio, basically the discussion is, you know, can we shift more of the financing to the tech companies, that the states feel have the financial means to actually pay for this.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">So that's, one proposal. there are other, areas where some of the companies are actually floating bonds, so that they can get the money up front. To pay for this new, infrastructure with the expected revenues, coming over time that would then pay for those, bonds. So there are lots of different proposals out there. Our paper kind of outlines some of those things. And on the benefits side, we really need to help consumers understand that the data centers are just so crucial to the future of AI, that all of the benefits of AI. Really depend on building out the data centers. If we don't do a better job, building out state-of-the-art data centers, it's gonna be much harder for the AI revolution to spread and for people to get the benefits of the new applications that are coming online.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">So, Nicol, I think, that pretty much covers a number of the things that we talk about in our paper. As you just mentioned, this is the first of several papers and events that we will be holding on data centers. It's a very important, topic we're gonna be covering this in the coming year. So Nicol, I want to thank you for joining this conversation. It's always great to get your perspective. And for our listeners, you can read our data center paper and follow our work on our [00:38:00] tech tank blog, on technology innovation in general, and you can find both of those things at brookings.edu.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">So thank you very much for tuning in.</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+        <div class="paragraph-block">
+            <p class="english-text">Read in Cubox</p>
+            
+        </div>
+        <div class="paragraph-block">
+            
+            
+        </div>
+    </div>
+
+    <!-- Translation Tooltip HTML -->
+    <div class="translation-tooltip" id="translationTooltip" style="display: none; position: fixed; max-width: 400px; background-color: rgba(255, 255, 255, 0.98); border: 2px solid #5a3e2b; border-radius: 8px; padding: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); z-index: 1000; font-family: 'Microsoft YaHei', sans-serif;">
+        <div class="tooltip-translation" style="color: #5a3e2b; font-size: 1rem; font-weight: 500; line-height: 1.6;">翻译中...</div>
+    </div>
+    <!-- Translation Script -->
+    <script>
+        // Article Translation Features
+        // Features: Click-to-translate near cursor
+        
+        // Global variables
+        let selectedParagraph = null;
+        
+        // Translation API (using free MyMemory API)
+        const TRANSLATION_API = 'https://api.mymemory.translated.net/get';
+        
+        // DOM elements
+        let translationTooltip;
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get DOM elements
+            translationTooltip = document.getElementById('translationTooltip');
+            
+            // Add click listener to close tooltip when clicking outside
+            document.addEventListener('click', function(e) {
+                // Check if click is outside tooltip and not on a selectable paragraph
+                if (translationTooltip && 
+                    !translationTooltip.contains(e.target) && 
+                    !e.target.classList.contains('selectable')) {
+                    hideTranslation();
+                }
+            });
+            
+            // Add selectable class to all English text paragraphs in articles
+            const englishParagraphs = document.querySelectorAll('.english-text');
+            englishParagraphs.forEach(paragraph => {
+                // Only make English text selectable
+                if (paragraph.textContent.trim()) {
+                    paragraph.classList.add('selectable');
+                    
+                    // Add click listener for translation
+                    paragraph.addEventListener('click', function(e) {
+                        e.stopPropagation(); // Prevent document click from firing
+                        handleParagraphClick(this, e);
+                    });
+                }
+            });
+        });
+        
+        // Handle paragraph click for translation
+        function handleParagraphClick(element, event) {
+            // Remove previous selection
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+            }
+            
+            // Mark as selected
+            element.classList.add('selected');
+            selectedParagraph = element;
+            
+            // Get the text to translate
+            const textToTranslate = element.textContent;
+            
+            // Position tooltip near the click
+            positionTooltip(event);
+            
+            // Show tooltip with loading state
+            showTranslation(textToTranslate);
+            
+            // Fetch translation
+            translateText(textToTranslate);
+        }
+        
+        // Position tooltip near cursor but ensure it stays on screen
+        function positionTooltip(event) {
+            const tooltip = translationTooltip;
+            const offset = 15; // Offset from cursor
+            
+            // Get viewport dimensions
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            
+            // Initial position near cursor
+            let left = event.pageX + offset;
+            let top = event.pageY + offset;
+            
+            // Show tooltip temporarily to get its dimensions
+            tooltip.style.display = 'block';
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+            
+            // Get tooltip dimensions
+            const tooltipRect = tooltip.getBoundingClientRect();
+            const tooltipWidth = tooltipRect.width;
+            const tooltipHeight = tooltipRect.height;
+            
+            // Adjust if tooltip goes off right edge
+            if (event.clientX + tooltipWidth + offset > viewportWidth) {
+                left = event.pageX - tooltipWidth - offset;
+            }
+            
+            // Adjust if tooltip goes off bottom edge
+            if (event.clientY + tooltipHeight + offset > viewportHeight) {
+                top = event.pageY - tooltipHeight - offset;
+            }
+            
+            // Ensure tooltip doesn't go off left or top edges
+            if (left < 10) left = 10;
+            if (top < 80) top = 80; // Account for top nav
+            
+            // Set final position
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+        
+        // Show translation tooltip
+        function showTranslation(originalText) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Show loading state
+            translationDiv.textContent = '翻译中...';
+            translationDiv.style.color = '#999';
+            
+            // Show tooltip
+            translationTooltip.style.display = 'block';
+        }
+        
+        // Hide translation tooltip
+        function hideTranslation() {
+            translationTooltip.style.display = 'none';
+            if (selectedParagraph) {
+                selectedParagraph.classList.remove('selected');
+                selectedParagraph = null;
+            }
+        }
+        
+        // Translate text using free API
+        async function translateText(text) {
+            const translationDiv = translationTooltip.querySelector('.tooltip-translation');
+            
+            // Limit text length for API (MyMemory has a 500 character limit)
+            const textToTranslate = text.length > 500 ? text.substring(0, 500) : text;
+            
+            // If text is too long, split it into chunks
+            const maxChunkLength = 500; // MyMemory API limit
+            
+            if (text.length <= maxChunkLength) {
+                // Short text - translate directly
+                try {
+                    const url = `${TRANSLATION_API}?q=${encodeURIComponent(text)}&langpair=en|zh-CN`;
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    if (data.responseStatus === 200 && data.responseData) {
+                        const translation = data.responseData.translatedText;
+                        translationDiv.textContent = translation;
+                        translationDiv.style.color = '#5a3e2b';
+                    } else {
+                        translationDiv.textContent = '翻译失败,请稍后重试';
+                        translationDiv.style.color = '#d9534f';
+                    }
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            } else {
+                // Long text - split into chunks
+                try {
+                    // Split text into chunks of maxChunkLength, trying to break at sentence boundaries
+                    const chunks = [];
+                    let currentChunk = '';
+                    
+                    // First, try to split by sentence endings
+                    const sentences = text.match(/[^.!?。！？]+[.!?。！？]*/g) || [text];
+                    
+                    for (const sentence of sentences) {
+                        if ((currentChunk + sentence).length <= maxChunkLength) {
+                            currentChunk += sentence;
+                        } else {
+                            if (currentChunk) {
+                                chunks.push(currentChunk);
+                            }
+                            // If single sentence is too long, force split by maxChunkLength
+                            if (sentence.length > maxChunkLength) {
+                                for (let i = 0; i < sentence.length; i += maxChunkLength) {
+                                    chunks.push(sentence.substring(i, i + maxChunkLength));
+                                }
+                                currentChunk = '';
+                            } else {
+                                currentChunk = sentence;
+                            }
+                        }
+                    }
+                    
+                    if (currentChunk) {
+                        chunks.push(currentChunk);
+                    }
+                    
+                    // Translate each chunk
+                    let fullTranslation = '';
+                    for (let i = 0; i < chunks.length; i++) {
+                        const chunk = chunks[i];
+                        const url = `${TRANSLATION_API}?q=${encodeURIComponent(chunk)}&langpair=en|zh-CN`;
+                        const response = await fetch(url);
+                        const data = await response.json();
+                        
+                        if (data.responseStatus === 200 && data.responseData) {
+                            fullTranslation += data.responseData.translatedText;
+                            // Update display with progress
+                            translationDiv.textContent = fullTranslation + ' [翻译中...]';
+                        } else {
+                            fullTranslation += '[翻译失败]';
+                        }
+                        
+                        // Add small delay to avoid rate limiting
+                        if (i < chunks.length - 1) {
+                            await new Promise(resolve => setTimeout(resolve, 200));
+                        }
+                    }
+                    
+                    translationDiv.textContent = fullTranslation;
+                    translationDiv.style.color = '#5a3e2b';
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    translationDiv.textContent = '翻译服务暂时不可用';
+                    translationDiv.style.color = '#d9534f';
+                }
+            }
+        }
+        
+        // Add CSS for selected state
+        const style = document.createElement('style');
+        style.textContent = `
+            .selectable {
+                cursor: pointer;
+                transition: background-color 0.2s ease;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            
+            .selectable:hover {
+                background-color: rgba(212, 167, 106, 0.2);
+            }
+            
+            .selectable.selected {
+                background-color: rgba(212, 167, 106, 0.4);
+            }
+            
+            .translation-tooltip {
+                animation: fadeIn 0.2s ease;
+            }
+            
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-5px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+    </body>
+</html>

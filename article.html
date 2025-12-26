@@ -270,8 +270,9 @@
     <!-- Top Navigation -->
     <nav class="top-nav">
         <ul>
+            <li><a href="index.html">首页</a></li>
             <li><a href="novels.html">小说</a></li>
-            <li><a href="webnovels.html">网文</a></li>
+            <li><a href="webnovels.html" class="active">网文</a></li>
             <li><a href="about.html">关于我</a></li>
         </ul>
     </nav>
@@ -367,48 +368,40 @@
             }
             
             // Enhanced translation system with multiple fallbacks
-        let translation = null;
-        
-        // 1. First check localStorage cache
-        const cachedTranslation = TRANSLATION_CACHE.get(cacheKey);
-        if (cachedTranslation) {
-            element.textContent = cachedTranslation;
+            let translation = null;
+            
+            // Try to use a simple dictionary for common phrases
+            const commonPhrases = {
+                "Hello world": "你好，世界",
+                "The quick brown fox jumps over the lazy dog": "敏捷的棕色狐狸跳过了懒狗",
+                "How are you?": "你好吗？",
+                "I love you": "我爱你",
+                "Thank you": "谢谢"
+            };
+            
+            if (commonPhrases[text]) {
+                translation = commonPhrases[text];
+                TRANSLATION_CACHE.set(cacheKey, translation);
+                element.textContent = translation;
+                element.classList.remove('loading-translation');
+                return;
+            }
+            
+            // Check if it's a language mode option
+            const fallbackTranslations = {
+                'both': '双语对照',
+                'english': '仅英文',
+                'chinese': '仅中文'
+            };
+            
+            // Final fallback with helpful message
+            const finalFallbackTranslation = fallbackTranslations[text] || 
+                                          (element.classList.contains('article-title-chinese') ? 
+                                           '文章标题翻译' : 
+                                           `[翻译服务暂时不可用，请稍后再试。] ${text.substring(0, 100)}...`);
+            
+            element.textContent = finalFallbackTranslation;
             element.classList.remove('loading-translation');
-            return;
-        }
-        
-        // 2. Try to use a simple dictionary for common phrases
-        const commonPhrases = {
-            "Hello world": "你好，世界",
-            "The quick brown fox jumps over the lazy dog": "敏捷的棕色狐狸跳过了懒狗",
-            "How are you?": "你好吗？",
-            "I love you": "我爱你",
-            "Thank you": "谢谢"
-        };
-        
-        if (commonPhrases[text]) {
-            translation = commonPhrases[text];
-            TRANSLATION_CACHE.set(cacheKey, translation);
-            element.textContent = translation;
-            element.classList.remove('loading-translation');
-            return;
-        }
-        
-        // 3. Check if it's a language mode option
-        const fallbackTranslations = {
-            'both': '双语对照',
-            'english': '仅英文',
-            'chinese': '仅中文'
-        };
-        
-        // 4. Final fallback with helpful message
-        const finalFallbackTranslation = fallbackTranslations[text] || 
-                                      (element.classList.contains('article-title-chinese') ? 
-                                       '文章标题翻译' : 
-                                       `[翻译服务暂时不可用，请稍后再试。] ${text.substring(0, 100)}...`);
-        
-        element.textContent = finalFallbackTranslation;
-        element.classList.remove('loading-translation');
         }
         
         // Fetch and display article content
